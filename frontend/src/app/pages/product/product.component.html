@@ -38,15 +38,6 @@
       <p class="price">${{ product()?.price }}</p>
       <p class="description">{{ product()?.description }}</p>
 
-      <div class="size-selection">
-        <label>Size:</label>
-        <select [(ngModel)]="selectedSize">
-          @for (size of sizes; track size) {
-            <option [value]="size">{{ size }}</option>
-          }
-        </select>
-      </div>
-
       <ul class="details">
         <li>100% COTTON</li>
         <li>STYLISH DESIGN</li>
