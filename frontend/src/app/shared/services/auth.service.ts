@@ -1,7 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { User, AuthResponse, LoginRequest, RegisterRequest } from '../interfaces/user.interface';
 import { ToastrService } from 'ngx-toastr';
-import { ApiService } from './api.service';
 import { LocalUserService } from './local-user.service';
 import { BehaviorSubject, Observable, catchError, map, of, tap, throwError, from } from 'rxjs';
 import { Router } from '@angular/router';
@@ -17,7 +16,6 @@ export class AuthService {
   currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(
-    private apiService: ApiService,
     private localUserService: LocalUserService,
     private router: Router,
     private toastr: ToastrService
@@ -59,7 +57,7 @@ export class AuthService {
           if (user) {
             // Generate a simple token for consistency
             const token = 'local_token_' + Date.now();
-            
+
             // Store token and user data
             localStorage.setItem('access_token', token);
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -90,7 +88,7 @@ export class AuthService {
           if (user) {
             // Generate a simple token for consistency
             const token = 'local_token_' + Date.now();
-            
+
             // Store token and user data
             localStorage.setItem('access_token', token);
             localStorage.setItem('currentUser', JSON.stringify(user));

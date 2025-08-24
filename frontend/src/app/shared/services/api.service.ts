@@ -1,52 +1,51 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = environment.apiUrl;
+  // DEPRECATED: Backend integration disabled - using LocalStorage instead
+  // All data is now managed locally through services like:
+  // - ProductService (LocalStorage)
+  // - CategoryService (LocalStorage)
+  // - AuthService (LocalUserService)
+  // - CartService (LocalCartService)
+  // - AddressService (LocalUserService)
 
   constructor(private http: HttpClient) {}
 
-  // Generic methods for CRUD operations
+  // All backend API methods disabled - use LocalStorage services instead
   public get<T>(endpoint: string): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${endpoint}`);
+    throw new Error('Backend API disabled - use LocalStorage services instead');
   }
 
   public getById<T>(endpoint: string, id: number): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${endpoint}/${id}`);
+    throw new Error('Backend API disabled - use LocalStorage services instead');
   }
 
   public post<T>(endpoint: string, data: any): Observable<T> {
-    return this.http.post<T>(`${this.apiUrl}/${endpoint}`, data);
+    throw new Error('Backend API disabled - use LocalStorage services instead');
   }
 
   public put<T>(endpoint: string, id: number, data: any): Observable<T> {
-    return this.http.put<T>(`${this.apiUrl}/${endpoint}/${id}`, data);
+    throw new Error('Backend API disabled - use LocalStorage services instead');
   }
 
   public patch<T>(endpoint: string, id: number, data: any): Observable<T> {
-    return this.http.patch<T>(`${this.apiUrl}/${endpoint}/${id}`, data);
+    throw new Error('Backend API disabled - use LocalStorage services instead');
   }
 
-  // Patch method without ID for endpoints that don't require it
   public patchWithoutId<T>(endpoint: string, data: any): Observable<T> {
-    return this.http.patch<T>(`${this.apiUrl}/${endpoint}`, data);
+    throw new Error('Backend API disabled - use LocalStorage services instead');
   }
 
-  // Put method without ID for endpoints that don't require it
   public putWithoutId<T>(endpoint: string, data: any): Observable<T> {
-    return this.http.put<T>(`${this.apiUrl}/${endpoint}`, data);
+    throw new Error('Backend API disabled - use LocalStorage services instead');
   }
 
-  // Delete method with optional id
   public delete<T>(endpoint: string, id?: number): Observable<T> {
-    const url = id !== undefined
-      ? `${this.apiUrl}/${endpoint}/${id}`
-      : `${this.apiUrl}/${endpoint}`;
-    return this.http.delete<T>(url);
+    throw new Error('Backend API disabled - use LocalStorage services instead');
   }
 }

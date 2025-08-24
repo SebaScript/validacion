@@ -1,6 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: '/api',
   oauth: {
     google: {
       clientId: '709306551500-2ad9db76j4riiuhl2p65gq1rbhsdlthi.apps.googleusercontent.com'

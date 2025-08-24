@@ -2,7 +2,6 @@ import { Injectable, computed, signal } from '@angular/core';
 import { Observable, BehaviorSubject, of, throwError, from } from 'rxjs';
 import { catchError, tap, map, switchMap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { ApiService } from './api.service';
 import { LocalCartService } from './local-cart.service';
 import { AuthService } from './auth.service';
 import { Product } from '../interfaces/product.interface';
@@ -26,7 +25,6 @@ export class CartService {
   loading = this.isLoading.asReadonly();
 
   constructor(
-    private apiService: ApiService,
     private localCartService: LocalCartService,
     private authService: AuthService,
     private toastr: ToastrService
@@ -48,11 +46,11 @@ export class CartService {
     }
 
     this.isLoading.set(true);
-    
+
     try {
       const cart = this.localCartService.findCartByUserId(currentUser.userId);
       this.isLoading.set(false);
-      
+
       if (cart) {
         this.cartId.set(cart.cartId);
         this.cartItems.set(cart.items || []);
@@ -81,7 +79,7 @@ export class CartService {
     };
 
     this.isLoading.set(true);
-    
+
     return from(this.localCartService.addItemByUserId(currentUser.userId, addItemRequest)).pipe(
       tap(cartItem => {
         this.isLoading.set(false);
@@ -107,7 +105,7 @@ export class CartService {
     }
 
     this.isLoading.set(true);
-    
+
     return from(this.localCartService.updateItemQuantity(this.cartId()!, itemId, quantity)).pipe(
       tap(() => {
         this.isLoading.set(false);
@@ -130,7 +128,7 @@ export class CartService {
     }
 
     this.isLoading.set(true);
-    
+
     try {
       this.localCartService.removeItem(this.cartId()!, itemId);
       this.isLoading.set(false);
@@ -151,7 +149,7 @@ export class CartService {
     }
 
     this.isLoading.set(true);
-    
+
     try {
       this.localCartService.clearCart(this.cartId()!);
       this.isLoading.set(false);

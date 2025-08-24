@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, from, throwError } from 'rxjs';
-import { ApiService } from './api.service';
 import { LocalUserService } from './local-user.service';
 import { AuthService } from './auth.service';
 import { Address, CreateAddressRequest, UpdateAddressRequest } from '../interfaces/address.interface';
@@ -12,7 +11,6 @@ export class AddressService {
   private readonly endpoint = 'users/profile/addresses';
 
   constructor(
-    private apiService: ApiService,
     private localUserService: LocalUserService,
     private authService: AuthService
   ) {}
