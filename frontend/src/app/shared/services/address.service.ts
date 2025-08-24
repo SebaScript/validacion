@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from, throwError } from 'rxjs';
 import { ApiService } from './api.service';
+import { LocalUserService } from './local-user.service';
+import { AuthService } from './auth.service';
 import { Address, CreateAddressRequest, UpdateAddressRequest } from '../interfaces/address.interface';
 
 @Injectable({
@@ -9,29 +11,88 @@ import { Address, CreateAddressRequest, UpdateAddressRequest } from '../interfac
 export class AddressService {
   private readonly endpoint = 'users/profile/addresses';
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private localUserService: LocalUserService,
+    private authService: AuthService
+  ) {}
 
   getUserAddresses(): Observable<Address[]> {
-    return this.apiService.get<Address[]>(this.endpoint);
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
+      return throwError(() => new Error('No authenticated user'));
+    }
+
+    const addresses = this.localUserService.getUserAddresses(currentUser.userId);
+    return from(Promise.resolve(addresses));
   }
 
   getAddress(id: number): Observable<Address> {
-    return this.apiService.getById<Address>(this.endpoint, id);
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
+      return throwError(() => new Error('No authenticated user'));
+    }
+
+    const address = this.localUserService.getAddress(id, currentUser.userId);
+    if (!address) {
+      return throwError(() => new Error(`Address with ID ${id} not found`));
+    }
+    return from(Promise.resolve(address));
   }
 
   createAddress(address: CreateAddressRequest): Observable<Address> {
-    return this.apiService.post<Address>(this.endpoint, address);
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
+      return throwError(() => new Error('No authenticated user'));
+    }
+
+    try {
+      const newAddress = this.localUserService.createAddress(currentUser.userId, address);
+      return from(Promise.resolve(newAddress));
+    } catch (error: any) {
+      return throwError(() => error);
+    }
   }
 
   updateAddress(id: number, address: UpdateAddressRequest): Observable<Address> {
-    return this.apiService.patch<Address>(this.endpoint, id, address);
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
+      return throwError(() => new Error('No authenticated user'));
+    }
+
+    try {
+      const updatedAddress = this.localUserService.updateAddress(id, currentUser.userId, address);
+      return from(Promise.resolve(updatedAddress));
+    } catch (error: any) {
+      return throwError(() => error);
+    }
   }
 
   setDefaultAddress(id: number): Observable<Address> {
-    return this.apiService.patchWithoutId<Address>(`${this.endpoint}/${id}/default`, {});
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
+      return throwError(() => new Error('No authenticated user'));
+    }
+
+    try {
+      const defaultAddress = this.localUserService.setDefaultAddress(id, currentUser.userId);
+      return from(Promise.resolve(defaultAddress));
+    } catch (error: any) {
+      return throwError(() => error);
+    }
   }
 
   deleteAddress(id: number): Observable<void> {
-    return this.apiService.delete<void>(this.endpoint, id);
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
+      return throwError(() => new Error('No authenticated user'));
+    }
+
+    try {
+      this.localUserService.removeAddress(id, currentUser.userId);
+      return from(Promise.resolve());
+    } catch (error: any) {
+      return throwError(() => error);
+    }
   }
 }

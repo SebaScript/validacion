@@ -2,7 +2,8 @@ import { Injectable, signal } from '@angular/core';
 import { User, AuthResponse, LoginRequest, RegisterRequest } from '../interfaces/user.interface';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from './api.service';
-import { BehaviorSubject, Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { LocalUserService } from './local-user.service';
+import { BehaviorSubject, Observable, catchError, map, of, tap, throwError, from } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -17,6 +18,7 @@ export class AuthService {
 
   constructor(
     private apiService: ApiService,
+    private localUserService: LocalUserService,
     private router: Router,
     private toastr: ToastrService
   ) {
@@ -51,43 +53,51 @@ export class AuthService {
   }
 
   login(loginData: LoginRequest): Observable<boolean> {
-    return this.apiService.post<AuthResponse>('auth/login', loginData)
+    return from(this.localUserService.authenticateUser(loginData.email, loginData.password))
       .pipe(
-        map(response => {
-          if (response && response.access_token && response.user) {
+        map(user => {
+          if (user) {
+            // Generate a simple token for consistency
+            const token = 'local_token_' + Date.now();
+            
             // Store token and user data
-            localStorage.setItem('access_token', response.access_token);
-            localStorage.setItem('currentUser', JSON.stringify(response.user));
+            localStorage.setItem('access_token', token);
+            localStorage.setItem('currentUser', JSON.stringify(user));
 
-            this.currentUserSubject.next(response.user);
+            this.currentUserSubject.next(user);
             this.isUserLogged.set(true);
-            this.isAdminLogged.set(response.user.role === 'admin');
+            this.isAdminLogged.set(user.role === 'admin');
 
             this.toastr.success('Welcome back!', 'Login Successful');
             return true;
+          } else {
+            this.toastr.error('Invalid credentials', 'Login Failed');
+            return false;
           }
-          return false;
         }),
         catchError(error => {
           console.error('Login error:', error);
-          this.toastr.error(error.error?.message || 'Invalid credentials', 'Login Failed');
+          this.toastr.error(error.message || 'Invalid credentials', 'Login Failed');
           return of(false);
         })
       );
   }
 
   register(registerData: RegisterRequest): Observable<boolean> {
-    return this.apiService.post<AuthResponse>('auth/register', registerData)
+    return from(this.localUserService.createUser(registerData))
       .pipe(
-        map(response => {
-          if (response && response.access_token && response.user) {
+        map(user => {
+          if (user) {
+            // Generate a simple token for consistency
+            const token = 'local_token_' + Date.now();
+            
             // Store token and user data
-            localStorage.setItem('access_token', response.access_token);
-            localStorage.setItem('currentUser', JSON.stringify(response.user));
+            localStorage.setItem('access_token', token);
+            localStorage.setItem('currentUser', JSON.stringify(user));
 
-            this.currentUserSubject.next(response.user);
+            this.currentUserSubject.next(user);
             this.isUserLogged.set(true);
-            this.isAdminLogged.set(response.user.role === 'admin');
+            this.isAdminLogged.set(user.role === 'admin');
 
             this.toastr.success('Account created successfully!', 'Registration Successful');
             return true;
@@ -96,7 +106,7 @@ export class AuthService {
         }),
         catchError(error => {
           console.error('Registration error:', error);
-          this.toastr.error(error.error?.message || 'User registration failed', 'Registration Failed');
+          this.toastr.error(error.message || 'User registration failed', 'Registration Failed');
           return of(false);
         })
       );
@@ -127,35 +137,43 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
-  // Get current user profile from backend
+  // Get current user profile from localStorage
   getProfile(): Observable<User> {
-    return this.apiService.get<User>('auth/profile').pipe(
-      tap(user => {
-        if (user) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-        }
-      }),
-      catchError(error => {
-        console.error('Error getting profile:', error);
-        this.logout();
-        return throwError(() => error);
-      })
-    );
+    const currentUser = this.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
+      this.logout();
+      return throwError(() => new Error('No authenticated user'));
+    }
+
+    const user = this.localUserService.findUserById(currentUser.userId);
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.currentUserSubject.next(user);
+      return of(user);
+    } else {
+      this.logout();
+      return throwError(() => new Error('User not found'));
+    }
   }
 
   // Update user profile
   updateProfile(userData: Partial<User>): Observable<User> {
-    return this.apiService.patchWithoutId<User>('users/profile', userData).pipe(
+    const currentUser = this.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
+      return throwError(() => new Error('No authenticated user'));
+    }
+
+    return from(this.localUserService.updateUser(currentUser.userId, userData)).pipe(
       tap(user => {
         if (user) {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
+          this.toastr.success('Profile updated successfully!', 'Update Successful');
         }
       }),
       catchError(error => {
         console.error('Error updating profile:', error);
-        this.toastr.error(error.error?.message || 'Failed to update profile', 'Update Failed');
+        this.toastr.error(error.message || 'Failed to update profile', 'Update Failed');
         return throwError(() => error);
       })
     );
