@@ -54,7 +54,7 @@
       </ul>
 
       <div class="links">
-        <a href="#">SIZE GUIDE</a> | <a href="#">SHIPPING POLICY</a>
+        <a href (click)="$event.preventDefault(); openModal('size')">SIZE GUIDE</a><a href (click)="$event.preventDefault(); openModal('shipping')">SHIPPING POLICY</a>
       </div>
 
       @if ((product()?.stock ?? 0) > 0) {
@@ -65,6 +65,21 @@
       } @else {
         <button class="sold-out" disabled>SOLD OUT</button>
       }
+    </div>
+  </div>
+}
+
+<!-- Modal -->
+@if (isModalOpen()) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">{{ modalTitle() }}</h3>
+        <button class="modal-close" (click)="closeModal()">Close</button>
+      </div>
+      <div class="modal-body">
+        <p>{{ modalBody() }}</p>
+      </div>
     </div>
   </div>
 }

@@ -19,6 +19,9 @@ export class ProductDetailComponent implements OnInit {
   loading: WritableSignal<boolean> = signal(true);
   error: WritableSignal<string | null> = signal(null);
   selectedSize = 'M';
+  isModalOpen: WritableSignal<boolean> = signal(false);
+  modalTitle: WritableSignal<string> = signal('');
+  modalBody: WritableSignal<string> = signal('');
 
   readonly sizes: string[] = ['XS', 'S', 'M', 'L', 'XL'];
 
@@ -91,5 +94,24 @@ export class ProductDetailComponent implements OnInit {
         console.error('Error adding product to cart', err);
       }
     });
+  }
+
+  openModal(topic: 'size' | 'shipping') {
+    if (topic === 'size') {
+      this.modalTitle.set('Size Guide');
+      this.modalBody.set(
+        'Find your perfect fit. Tees are a regular fit. If you are between sizes, size up for a relaxed look. Approx measurements: XS (Chest 46-48 cm), S (49-51 cm), M (52-54 cm), L (55-57 cm), XL (58-60 cm). Measure a favorite tee flat across the chest and compare.'
+      );
+    } else if (topic === 'shipping') {
+      this.modalTitle.set('Shipping & Returns');
+      this.modalBody.set(
+        'Orders are processed within 1–2 business days. Standard delivery: 3–7 business days. Express options available at checkout. Free returns within 30 days on unworn items with original tags. International shipping times vary by destination.'
+      );
+    }
+    this.isModalOpen.set(true);
+  }
+
+  closeModal() {
+    this.isModalOpen.set(false);
   }
 }
