@@ -72,13 +72,13 @@ export class HeaderComponent implements OnInit {
     this.results = this.allProducts
       .filter(product =>
         product.name.toLowerCase().includes(searchTerm) ||
-        product.description.toLowerCase().includes(searchTerm)
+        product.description!.toLowerCase().includes(searchTerm)
       )
       .slice(0, 5)
       .map(product => ({
         id: product.id,
         name: product.name,
-        imageUrl: product.imageUrl
+        imageUrl: product.imageUrl || ''
       }));
   }
 

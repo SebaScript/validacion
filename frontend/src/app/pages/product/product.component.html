@@ -9,13 +9,13 @@
   </div>
 } @else {
   <div class="product-detail">
-    @if (product()?.carouselUrl?.length) {
+    @if (product()?.carouselUrl?.length || product()?.imageUrl) {
       <div class="image-section">
         <div class="main-image">
           <button class="carousel-arrow left" (click)="changeImage('prev')" *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" aria-label="Anterior">
             <i class="material-icons">chevron_left</i>
           </button>
-          <img [src]="product()?.carouselUrl?.[currentImageIndex()]" alt="Product Image">
+          <img [src]="getCurrentImageUrl()" alt="Product Image">
           <button class="carousel-arrow right" (click)="changeImage('next')" *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" aria-label="Siguiente">
             <i class="material-icons">chevron_right</i>
           </button>

@@ -595,8 +595,8 @@ export class AdminComponent implements OnInit {
     const query = this.searchQuery.toLowerCase().trim();
     this.filteredProducts = this.allProducts.filter(product =>
       product.name.toLowerCase().includes(query) ||
-      product.description.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query)
+      (product.description?.toLowerCase() || '').includes(query) ||
+      (product.category?.toLowerCase() || '').includes(query)
     );
     this.products = [...this.filteredProducts];
   }

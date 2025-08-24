@@ -53,6 +53,17 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  getCurrentImageUrl(): string {
+    const prod = this.product();
+    if (!prod) return '';
+
+    if (prod.carouselUrl && prod.carouselUrl.length > 0) {
+      return prod.carouselUrl[this.currentImageIndex()] || prod.imageUrl || '';
+    }
+
+    return prod.imageUrl || '';
+  }
+
   changeImage(direction: 'prev' | 'next') {
     const prod = this.product();
     if (!prod || !prod.carouselUrl || prod.carouselUrl.length <= 1) return;

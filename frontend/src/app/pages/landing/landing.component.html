@@ -1,7 +1,7 @@
 <section class="landing">
   <app-product-card
     *ngFor="let product of filteredProducts()"
-    [imageUrl]="product.imageUrl"
+    [imageUrl]="product.imageUrl || ''"
     [title]="product.name"
     [price]="product.price"
     [productId]="product.id"
