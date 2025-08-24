@@ -65,6 +65,17 @@ export class AuthCallbackComponent implements OnInit {
 
   private handleCallback() {
     try {
+      // Check if user is already authenticated (from new OAuth flow)
+      if (this.authService.isAuthenticated()) {
+        const user = this.authService.getCurrentUser();
+        if (user) {
+          this.toastr.success(`Welcome back ${user.name}!`, 'Already Logged In');
+          this.navigateBasedOnRole(user);
+          return;
+        }
+      }
+
+      // Try legacy OAuth callback flow
       const { token, user } = this.oauthService.parseCallbackParams();
 
       if (token && user) {
@@ -80,21 +91,25 @@ export class AuthCallbackComponent implements OnInit {
         // Show success message
         this.toastr.success(`Welcome ${user.name}!`, 'Login Successful');
 
-        // Navigate based on user role
-        if (user.role === 'admin') {
-          this.router.navigate(['/admin']);
-        } else {
-          this.router.navigate(['/profile']);
-        }
+        this.navigateBasedOnRole(user);
       } else {
         // No token or user data, redirect to login with error
-        this.toastr.error('Authentication failed', 'Login Error');
+        this.toastr.error('Authentication failed - no credentials found', 'Login Error');
         this.router.navigate(['/login']);
       }
     } catch (error) {
       console.error('Error handling OAuth callback:', error);
       this.toastr.error('Authentication failed', 'Login Error');
       this.router.navigate(['/login']);
+    }
+  }
+
+  private navigateBasedOnRole(user: any): void {
+    // Navigate based on user role
+    if (user.role === 'admin') {
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/profile']);
     }
   }
 }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../shared/services/auth.service';
 import { AddressService } from '../../shared/services/address.service';
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
   showAddressModal = signal(false);
 
   constructor(
+    private router: Router,
     private toastr: ToastrService,
     private authService: AuthService,
     private addressService: AddressService,
@@ -201,6 +203,10 @@ export class ProfileComponent implements OnInit {
         }
       });
     }
+  }
+
+  goToHome() {
+    this.router.navigate(['/']);
   }
 
   logout() {

@@ -1,50 +1,15 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { Observable, BehaviorSubject, of, throwError } from 'rxjs';
+import { Observable, BehaviorSubject, of, throwError, from } from 'rxjs';
 import { catchError, tap, map, switchMap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from './api.service';
+import { LocalCartService } from './local-cart.service';
 import { AuthService } from './auth.service';
 import { Product } from '../interfaces/product.interface';
+import { CartItem, Cart, CartTotal } from '../interfaces/cart.interface';
 
-// Backend product interface (as it comes from the API)
-interface BackendProduct {
-  productId: number;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  image: string;
-  carouselImages: string[];
-  category?: { name: string };
-}
-
-// Backend cart item interface
-interface BackendCartItem {
-  cartItemId: number;
-  productId: number;
-  quantity: number;
-  product: BackendProduct;
-}
-
-// Backend cart interface
-interface BackendCart {
-  cartId: number;
-  userId: number;
-  items: BackendCartItem[];
-}
-
-export interface CartItem {
-  cartItemId: number;
-  productId: number;
-  quantity: number;
-  product: Product;
-}
-
-export interface Cart {
-  cartId: number;
-  userId: number;
-  items: CartItem[];
-}
+// Re-export interfaces for backward compatibility
+export type { CartItem, Cart, CartTotal } from '../interfaces/cart.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +27,7 @@ export class CartService {
 
   constructor(
     private apiService: ApiService,
+    private localCartService: LocalCartService,
     private authService: AuthService,
     private toastr: ToastrService
   ) {
@@ -76,56 +42,47 @@ export class CartService {
   }
 
   private loadCart(): void {
-    if (!this.authService.isUserLogged()) {
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
       return;
     }
 
     this.isLoading.set(true);
-    this.apiService.get<BackendCart>('cart/my-cart').pipe(
-      catchError(error => {
-        console.error('Error loading cart:', error);
-        this.toastr.error('Error loading cart', 'Cart Error');
-        this.isLoading.set(false);
-        return of(null);
-      })
-    ).subscribe(cart => {
+    
+    try {
+      const cart = this.localCartService.findCartByUserId(currentUser.userId);
       this.isLoading.set(false);
+      
       if (cart) {
         this.cartId.set(cart.cartId);
-                // Map backend product data to frontend format
-        const mappedItems = cart.items?.map(item => ({
-          ...item,
-          product: {
-            id: item.product.productId,
-            name: item.product.name,
-            description: item.product.description,
-            price: item.product.price,
-            stock: item.product.stock,
-            imageUrl: item.product.image,
-            carouselUrl: Array.isArray(item.product.carouselImages)
-              ? item.product.carouselImages
-              : [item.product.image],
-            category: item.product.category?.name || 'Unknown'
-          }
-        })) || [];
-        this.cartItems.set(mappedItems);
+        this.cartItems.set(cart.items || []);
+      } else {
+        // No cart found, will be created when first item is added
+        this.cartId.set(null);
+        this.cartItems.set([]);
       }
-    });
+    } catch (error) {
+      console.error('Error loading cart:', error);
+      this.toastr.error('Error loading cart', 'Cart Error');
+      this.isLoading.set(false);
+    }
   }
 
   addToCart(product: Product, quantity: number = 1): Observable<CartItem | void> {
-    if (!this.authService.isUserLogged()) {
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser || !currentUser.userId) {
       this.toastr.error('Please log in to add items to cart', 'Authentication Required');
       return throwError(() => new Error('User not logged in'));
     }
 
-    const addItemDto = {
+    const addItemRequest = {
       productId: product.id,
       quantity: quantity
     };
 
     this.isLoading.set(true);
-    return this.apiService.post<CartItem>('cart/add-item', addItemDto).pipe(
+    
+    return from(this.localCartService.addItemByUserId(currentUser.userId, addItemRequest)).pipe(
       tap(cartItem => {
         this.isLoading.set(false);
         this.loadCart(); // Reload cart to get updated data
@@ -133,7 +90,7 @@ export class CartService {
       }),
       catchError(error => {
         this.isLoading.set(false);
-        const errorMessage = error.error?.message || 'Failed to add item to cart';
+        const errorMessage = error.message || 'Failed to add item to cart';
         this.toastr.error(errorMessage, 'Cart Error');
         return throwError(() => error);
       })
@@ -150,7 +107,8 @@ export class CartService {
     }
 
     this.isLoading.set(true);
-    return this.apiService.putWithoutId<CartItem>(`cart/${this.cartId()}/items/${itemId}/quantity`, { quantity }).pipe(
+    
+    return from(this.localCartService.updateItemQuantity(this.cartId()!, itemId, quantity)).pipe(
       tap(() => {
         this.isLoading.set(false);
         this.loadCart(); // Reload cart to get updated data
@@ -159,7 +117,7 @@ export class CartService {
       map(() => void 0),
       catchError(error => {
         this.isLoading.set(false);
-        const errorMessage = error.error?.message || 'Failed to update cart';
+        const errorMessage = error.message || 'Failed to update cart';
         this.toastr.error(errorMessage, 'Cart Error');
         return throwError(() => error);
       })
@@ -172,19 +130,19 @@ export class CartService {
     }
 
     this.isLoading.set(true);
-    return this.apiService.delete<void>(`cart/${this.cartId()}/items/${itemId}`).pipe(
-      tap(() => {
-        this.isLoading.set(false);
-        this.loadCart(); // Reload cart to get updated data
-        this.toastr.success('Item removed from cart', 'Cart Updated');
-      }),
-      catchError(error => {
-        this.isLoading.set(false);
-        const errorMessage = error.error?.message || 'Failed to remove item from cart';
-        this.toastr.error(errorMessage, 'Cart Error');
-        return throwError(() => error);
-      })
-    );
+    
+    try {
+      this.localCartService.removeItem(this.cartId()!, itemId);
+      this.isLoading.set(false);
+      this.loadCart(); // Reload cart to get updated data
+      this.toastr.success('Item removed from cart', 'Cart Updated');
+      return of(void 0);
+    } catch (error: any) {
+      this.isLoading.set(false);
+      const errorMessage = error.message || 'Failed to remove item from cart';
+      this.toastr.error(errorMessage, 'Cart Error');
+      return throwError(() => error);
+    }
   }
 
   clearCart(): Observable<void> {
@@ -193,19 +151,19 @@ export class CartService {
     }
 
     this.isLoading.set(true);
-    return this.apiService.delete<void>(`cart/${this.cartId()}/clear`).pipe(
-      tap(() => {
-        this.isLoading.set(false);
-        this.cartItems.set([]);
-        this.toastr.success('Cart cleared successfully', 'Cart Updated');
-      }),
-      catchError(error => {
-        this.isLoading.set(false);
-        const errorMessage = error.error?.message || 'Failed to clear cart';
-        this.toastr.error(errorMessage, 'Cart Error');
-        return throwError(() => error);
-      })
-    );
+    
+    try {
+      this.localCartService.clearCart(this.cartId()!);
+      this.isLoading.set(false);
+      this.cartItems.set([]);
+      this.toastr.success('Cart cleared successfully', 'Cart Updated');
+      return of(void 0);
+    } catch (error: any) {
+      this.isLoading.set(false);
+      const errorMessage = error.message || 'Failed to clear cart';
+      this.toastr.error(errorMessage, 'Cart Error');
+      return throwError(() => error);
+    }
   }
 
   getCartTotal(): Observable<{ itemCount: number; total: number }> {
@@ -213,7 +171,8 @@ export class CartService {
       return of({ itemCount: 0, total: 0 });
     }
 
-    return this.apiService.get<{ itemCount: number; total: number }>(`cart/${this.cartId()}/total`);
+    const total = this.localCartService.getCartTotal(this.cartId()!);
+    return of(total);
   }
 
   private clearCartData(): void {

@@ -15,7 +15,37 @@ export class LocalUserService {
   constructor(
     private toastr: ToastrService,
     private cryptoService: CryptoService
-  ) {}
+  ) {
+    this.initializeDemoUsers();
+  }
+
+  // Initialize demo users for testing
+  private async initializeDemoUsers(): Promise<void> {
+    const existingUsers = this.getAllUsers();
+    if (existingUsers.length === 0) {
+      try {
+        // Create demo admin user
+        await this.createUser({
+          name: 'Admin Demo',
+          email: 'admin@vallmere.com',
+          password: 'admin123',
+          role: 'admin'
+        });
+
+        // Create demo client user
+        await this.createUser({
+          name: 'Cliente Demo',
+          email: 'cliente@vallmere.com',
+          password: 'cliente123',
+          role: 'client'
+        });
+
+        console.log('Demo users created successfully');
+      } catch (error) {
+        console.error('Error creating demo users:', error);
+      }
+    }
+  }
 
   // User Management Methods
   async createUser(createUserData: RegisterRequest): Promise<User> {
