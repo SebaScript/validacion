@@ -12,7 +12,20 @@ export class ProductService {
   private readonly COUNTER_KEY = 'product_counter';
 
   constructor(private categoryService: CategoryService) {
+    this.cleanupDuplicateStorage();
     this.initializeStorage();
+  }
+
+  private cleanupDuplicateStorage(): void {
+    // Remove old duplicate storage keys if they exist
+    const oldProducts = localStorage.getItem('vallmere_products');
+    const oldCounter = localStorage.getItem('vallmere_product_id_counter');
+
+    if (oldProducts) {
+      console.log('Cleaning up duplicate product storage...');
+      localStorage.removeItem('vallmere_products');
+      localStorage.removeItem('vallmere_product_id_counter');
+    }
   }
 
   private initializeStorage(): void {
@@ -241,6 +254,24 @@ export class ProductService {
   resetToInitialData(): void {
     localStorage.removeItem(this.STORAGE_KEY);
     localStorage.removeItem(this.COUNTER_KEY);
+    this.cleanupDuplicateStorage();
     this.initializeStorage();
+  }
+
+  // Helper method to fix localStorage issues
+  fixLocalStorageIssues(): void {
+    console.log('Fixing localStorage issues...');
+
+    // Clean up all product-related storage
+    localStorage.removeItem(this.STORAGE_KEY);
+    localStorage.removeItem(this.COUNTER_KEY);
+    localStorage.removeItem('vallmere_products');
+    localStorage.removeItem('vallmere_product_id_counter');
+
+    // Reinitialize with fresh data
+    this.initializeStorage();
+
+    console.log('LocalStorage issues fixed. Refreshing page...');
+    window.location.reload();
   }
 }

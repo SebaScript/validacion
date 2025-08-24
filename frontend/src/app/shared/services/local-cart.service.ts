@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Cart, CartItem, AddCartItemRequest, CartTotal } from '../interfaces/cart.interface';
 import { Product } from '../interfaces/product.interface';
-import { LocalProductService } from './local-product.service';
+import { ProductService } from './product.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class LocalCartService {
   private readonly CART_ITEM_ID_COUNTER_KEY = 'vallmere_cart_item_id_counter';
 
   constructor(
-    private localProductService: LocalProductService,
+    private productService: ProductService,
     private toastr: ToastrService
   ) {}
 
@@ -22,7 +22,7 @@ export class LocalCartService {
   async createCart(userId: number): Promise<Cart> {
     const carts = this.getAllCarts();
     const cartId = this.getNextCartId();
-    
+
     const newCart: Cart = {
       cartId,
       userId,
@@ -38,34 +38,34 @@ export class LocalCartService {
   findCartByUserId(userId: number): Cart | null {
     const carts = this.getAllCarts();
     const cart = carts.find(cart => cart.userId === userId);
-    
+
     if (cart) {
       // Load cart items
       cart.items = this.getCartItems(cart.cartId);
     }
-    
+
     return cart || null;
   }
 
   async getOrCreateCart(userId: number): Promise<Cart> {
     let cart = this.findCartByUserId(userId);
-    
+
     if (!cart) {
       cart = await this.createCart(userId);
     }
-    
+
     return cart;
   }
 
   findCartById(cartId: number): Cart | null {
     const carts = this.getAllCarts();
     const cart = carts.find(cart => cart.cartId === cartId);
-    
+
     if (cart) {
       // Load cart items with product details
       cart.items = this.getCartItems(cart.cartId);
     }
-    
+
     return cart || null;
   }
 
@@ -88,9 +88,9 @@ export class LocalCartService {
     }
 
     const cartItems = this.getAllCartItems();
-    
+
     // Check if item already exists in cart
-    const existingItemIndex = cartItems.findIndex(item => 
+    const existingItemIndex = cartItems.findIndex(item =>
       item.cartId === cartId && item.productId === addItemRequest.productId
     );
 
@@ -98,14 +98,14 @@ export class LocalCartService {
       // Update existing item
       const existingItem = cartItems[existingItemIndex];
       const totalQuantity = existingItem.quantity + addItemRequest.quantity;
-      
+
       if (totalQuantity > product.stock) {
         throw new Error(`Not enough stock. Available: ${product.stock}, requested: ${totalQuantity}`);
       }
-      
+
       existingItem.quantity = totalQuantity;
       this.saveCartItems(cartItems);
-      
+
       return existingItem;
     } else {
       // Create new item
@@ -117,10 +117,10 @@ export class LocalCartService {
         quantity: addItemRequest.quantity,
         product
       };
-      
+
       cartItems.push(newItem);
       this.saveCartItems(cartItems);
-      
+
       return newItem;
     }
   }
@@ -136,7 +136,7 @@ export class LocalCartService {
     }
 
     const cartItems = this.getAllCartItems();
-    const itemIndex = cartItems.findIndex(item => 
+    const itemIndex = cartItems.findIndex(item =>
       item.cartId === cartId && item.cartItemId === itemId
     );
 
@@ -145,7 +145,7 @@ export class LocalCartService {
     }
 
     const item = cartItems[itemIndex];
-    
+
     // Get updated product details to check stock
     const product = await this.getProductById(item.productId);
     if (!product) {
@@ -159,22 +159,22 @@ export class LocalCartService {
 
     item.quantity = quantity;
     item.product = product; // Update product details
-    
+
     this.saveCartItems(cartItems);
-    
+
     return item;
   }
 
   removeItem(cartId: number, itemId: number): void {
     const cartItems = this.getAllCartItems();
-    const filteredItems = cartItems.filter(item => 
+    const filteredItems = cartItems.filter(item =>
       !(item.cartId === cartId && item.cartItemId === itemId)
     );
-    
+
     if (filteredItems.length === cartItems.length) {
       throw new Error(`Cart item with ID ${itemId} not found in cart ${cartId}`);
     }
-    
+
     this.saveCartItems(filteredItems);
   }
 
@@ -188,14 +188,14 @@ export class LocalCartService {
     // Remove cart
     const carts = this.getAllCarts();
     const filteredCarts = carts.filter(cart => cart.cartId !== cartId);
-    
+
     if (filteredCarts.length === carts.length) {
       throw new Error(`Cart with ID ${cartId} not found`);
     }
-    
+
     // Remove all cart items
     this.clearCart(cartId);
-    
+
     this.saveCarts(filteredCarts);
   }
 
@@ -204,15 +204,15 @@ export class LocalCartService {
     if (!cart) {
       return { itemCount: 0, total: 0 };
     }
-    
+
     let itemCount = 0;
     let total = 0;
-    
+
     for (const item of cart.items) {
       itemCount += item.quantity;
       total += item.quantity * item.product.price;
     }
-    
+
     return { itemCount, total };
   }
 
@@ -256,7 +256,16 @@ export class LocalCartService {
 
   private async getProductById(productId: number): Promise<Product | null> {
     try {
-      return this.localProductService.getProductById(productId);
+      // Convert Observable to Promise using firstValueFrom or similar
+      return new Promise((resolve, reject) => {
+        this.productService.getProductById(productId).subscribe({
+          next: (product) => resolve(product),
+          error: (error) => {
+            console.error('Error getting product by ID:', error);
+            resolve(null);
+          }
+        });
+      });
     } catch (error) {
       console.error('Error getting product by ID:', error);
       return null;
