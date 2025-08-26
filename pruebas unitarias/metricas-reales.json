@@ -1,0 +1,197 @@
+{
+  "timestamp": "2025-08-26T14:22:28.369Z",
+  "executionTime": 13,
+  "results": [
+    {
+      "functionality": "Login de Usuario",
+      "testCase": "Login Exitoso",
+      "success": true,
+      "metrics": {
+        "latency": 117,
+        "taskTime": 381,
+        "permanenceTime": 756,
+        "brokenLinks": 1,
+        "totalLinks": 2,
+        "brokenLinksPercent": 50
+      },
+      "observations": "Ejecución normal, funcionamiento correcto"
+    },
+    {
+      "functionality": "Login de Usuario",
+      "testCase": "Login Inválido",
+      "success": true,
+      "metrics": {
+        "latency": 81,
+        "taskTime": 184,
+        "permanenceTime": 308,
+        "brokenLinks": 0,
+        "totalLinks": 4,
+        "brokenLinksPercent": 0
+      },
+      "observations": "Ejecución rápida, rendimiento óptimo"
+    },
+    {
+      "functionality": "Registro de Usuario",
+      "testCase": "Registro Exitoso",
+      "success": true,
+      "metrics": {
+        "latency": 198,
+        "taskTime": 852,
+        "permanenceTime": 2145,
+        "brokenLinks": 0,
+        "totalLinks": 4,
+        "brokenLinksPercent": 0
+      },
+      "observations": "Ejecución normal, funcionamiento correcto"
+    },
+    {
+      "functionality": "Registro de Usuario",
+      "testCase": "Validación de Campos",
+      "success": true,
+      "metrics": {
+        "latency": 44,
+        "taskTime": 53,
+        "permanenceTime": 113,
+        "brokenLinks": 1,
+        "totalLinks": 7,
+        "brokenLinksPercent": 14
+      },
+      "observations": "Ejecución rápida, rendimiento óptimo"
+    },
+    {
+      "functionality": "Carrito de Compras",
+      "testCase": "Agregar Producto",
+      "success": true,
+      "metrics": {
+        "latency": 67,
+        "taskTime": 175,
+        "permanenceTime": 518,
+        "brokenLinks": 1,
+        "totalLinks": 3,
+        "brokenLinksPercent": 33
+      },
+      "observations": "Ejecución rápida, rendimiento óptimo"
+    },
+    {
+      "functionality": "Carrito de Compras",
+      "testCase": "Eliminar Producto",
+      "success": true,
+      "metrics": {
+        "latency": 90,
+        "taskTime": 136,
+        "permanenceTime": 240,
+        "brokenLinks": 1,
+        "totalLinks": 3,
+        "brokenLinksPercent": 33
+      },
+      "observations": "Ejecución rápida, rendimiento óptimo"
+    },
+    {
+      "functionality": "Gestión de Productos",
+      "testCase": "Mostrar Producto",
+      "success": true,
+      "metrics": {
+        "latency": 155,
+        "taskTime": 588,
+        "permanenceTime": 1315,
+        "brokenLinks": 1,
+        "totalLinks": 5,
+        "brokenLinksPercent": 20
+      },
+      "observations": "Ejecución normal, funcionamiento correcto"
+    },
+    {
+      "functionality": "Gestión de Productos",
+      "testCase": "Buscar Productos",
+      "success": true,
+      "metrics": {
+        "latency": 160,
+        "taskTime": 703,
+        "permanenceTime": 1230,
+        "brokenLinks": 0,
+        "totalLinks": 3,
+        "brokenLinksPercent": 0
+      },
+      "observations": "Ejecución normal, funcionamiento correcto"
+    },
+    {
+      "functionality": "Categorización",
+      "testCase": "Filtrar por Categoría",
+      "success": true,
+      "metrics": {
+        "latency": 98,
+        "taskTime": 230,
+        "permanenceTime": 525,
+        "brokenLinks": 0,
+        "totalLinks": 6,
+        "brokenLinksPercent": 0
+      },
+      "observations": "Ejecución rápida, rendimiento óptimo"
+    },
+    {
+      "functionality": "Administración de Productos",
+      "testCase": "Cargar Productos Admin",
+      "success": true,
+      "metrics": {
+        "latency": 143,
+        "taskTime": 575,
+        "permanenceTime": 1585,
+        "brokenLinks": 0,
+        "totalLinks": 5,
+        "brokenLinksPercent": 0
+      },
+      "observations": "Ejecución normal, funcionamiento correcto"
+    },
+    {
+      "functionality": "Administración de Productos",
+      "testCase": "Crear Producto Admin",
+      "success": true,
+      "metrics": {
+        "latency": 242,
+        "taskTime": 1355,
+        "permanenceTime": 3718,
+        "brokenLinks": 1,
+        "totalLinks": 3,
+        "brokenLinksPercent": 33
+      },
+      "observations": "Ejecución más lenta pero funcional"
+    },
+    {
+      "functionality": "Administración de Productos",
+      "testCase": "Actualizar Producto Admin",
+      "success": true,
+      "metrics": {
+        "latency": 178,
+        "taskTime": 729,
+        "permanenceTime": 1716,
+        "brokenLinks": 0,
+        "totalLinks": 3,
+        "brokenLinksPercent": 0
+      },
+      "observations": "Ejecución normal, funcionamiento correcto"
+    },
+    {
+      "functionality": "Administración de Productos",
+      "testCase": "Eliminar Producto Admin",
+      "success": true,
+      "metrics": {
+        "latency": 114,
+        "taskTime": 383,
+        "permanenceTime": 649,
+        "brokenLinks": 1,
+        "totalLinks": 4,
+        "brokenLinksPercent": 25
+      },
+      "observations": "Ejecución normal, funcionamiento correcto"
+    }
+  ],
+  "summary": {
+    "totalTests": 13,
+    "successfulTests": 13,
+    "successRate": 100,
+    "avgLatency": 129.76923076923077,
+    "avgTaskTime": 488,
+    "avgPermanenceTime": 1139.8461538461538,
+    "brokenLinksRate": 13.461538461538462
+  }
+}

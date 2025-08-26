@@ -1,7 +1,0 @@
-{
-  "timestamp": "2025-08-26T03:20:37.488Z",
-  "status": "ERROR",
-  "error": "Command failed: cd frontend && npm test -- --watch=false --browsers=ChromeHeadless\nEl sistema no puede encontrar la ruta especificada.\r\n",
-  "partialResults": "Pruebas no completadas debido a errores de configuración",
-  "recommendation": "Verificar configuración de Angular y dependencias"
-}
