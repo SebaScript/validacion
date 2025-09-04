@@ -6,10 +6,7 @@ import { LoginDto } from './dto/login.dto';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { AuthErrorHandler } from './utils/error-handler.util';
 import { 
-  InvalidCredentialsException, 
-  UserNotFoundException,
-  EmailAlreadyExistsException,
-  OAuthUserCreationException 
+  InvalidCredentialsException,
 } from './exceptions/auth.exceptions';
 
 @Injectable()
