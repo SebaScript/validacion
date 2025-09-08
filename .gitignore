@@ -21,6 +21,7 @@ lerna-debug.log*
 
 # IDEs and editors
 /.idea
+/.bazinga
 .project
 .classpath
 .c9/
