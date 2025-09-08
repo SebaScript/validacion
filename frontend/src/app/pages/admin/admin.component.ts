@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../../shared/interfaces/product.interface';
 import { ProductService } from '../../shared/services/product.service';
@@ -36,13 +35,13 @@ export class AdminComponent implements OnInit {
   filteredProducts: Product[] = [];
 
   constructor(
-    private fb: FormBuilder,
-    private productService: ProductService,
-    private categoryService: CategoryService,
-    private authService: AuthService,
-    private toastr: ToastrService,
-    private imageUploadService: ImageUploadService,
-    private router: Router
+    readonly fb: FormBuilder,
+    readonly productService: ProductService,
+    readonly categoryService: CategoryService,
+    readonly authService: AuthService,
+    readonly toastr: ToastrService,
+    readonly imageUploadService: ImageUploadService,
+    readonly router: Router
   ) {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
