@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vallmere-postgres
+    environment:
+      POSTGRES_DB: vallmere
+      POSTGRES_USER: vallmere_user
+      POSTGRES_PASSWORD: vallmere_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - vallmere-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vallmere_user -d vallmere_db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: vallmere-backend
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: vallmere_user
+      DB_PASSWORD: vallmere_password
+      DB_DATABASE: vallmere
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - vallmere-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: vallmere-frontend
+    environment:
+      BACKEND_URL: http://backend:3000
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - vallmere-network
+
+volumes:
+  postgres_data:
+
+networks:
+  vallmere-network:
+    driver: bridge 
