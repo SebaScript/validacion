@@ -35,11 +35,11 @@
     <div class="profile-content" *ngIf="!isEditingProfile(); else editProfileForm">
       <div class="info-grid">
         <div class="info-item">
-          <label>Full Name</label>
+          <div class="info-label">Full Name</div>
           <span>{{ user()?.name || 'Not set' }}</span>
         </div>
         <div class="info-item">
-          <label>Email Address</label>
+          <div class="info-label">Email Address</div>
           <span>{{ user()?.email || 'Not set' }}</span>
         </div>
       </div>
@@ -182,8 +182,8 @@
   </div>
 </div>
 
-<div class="modal-overlay" *ngIf="showAddressModal()" (click)="closeAddressModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
+<div class="modal-overlay" *ngIf="showAddressModal()" (click)="closeAddressModal()" (keydown.escape)="closeAddressModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
     <div class="modal-header">
       <h2>{{ editingAddressId() ? 'Edit Address' : 'Add New Address' }}</h2>
       <button class="btn-icon" (click)="closeAddressModal()">
