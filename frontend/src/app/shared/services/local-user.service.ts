@@ -16,7 +16,10 @@ export class LocalUserService {
     private toastr: ToastrService,
     private cryptoService: CryptoService
   ) {
-    this.initializeDemoUsers();
+    // Initialize demo users asynchronously after construction
+    this.initializeDemoUsers().catch(error => {
+      console.error('Error initializing demo users:', error);
+    });
   }
 
   // Initialize demo users for testing
