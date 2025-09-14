@@ -22,7 +22,7 @@ export class ProductService {
     const oldCounter = localStorage.getItem('vallmere_product_id_counter');
 
     if (oldProducts) {
-      // Cleaning up duplicate product storage
+      console.log('Cleaning up duplicate product storage...');
       localStorage.removeItem('vallmere_products');
       localStorage.removeItem('vallmere_product_id_counter');
     }
@@ -143,10 +143,7 @@ export class ProductService {
       const enrichedProducts = products.map(product => this.enrichProductWithCategory(product));
       return of(enrichedProducts);
     } catch (error) {
-          // Log error for debugging in development only
-          if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-            console.error('Error fetching products:', error);
-          }
+          console.error('Error fetching products:', error);
       return throwError(() => new Error('Failed to fetch products from storage'));
     }
   }
@@ -163,10 +160,7 @@ export class ProductService {
       const enrichedProduct = this.enrichProductWithCategory(product);
       return of(enrichedProduct);
     } catch (error) {
-          // Log error for debugging in development only
-          if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-            console.error('Error fetching product:', error);
-          }
+          console.error('Error fetching product:', error);
       return throwError(() => new Error('Failed to fetch product from storage'));
     }
   }
@@ -189,10 +183,7 @@ export class ProductService {
       const enrichedProduct = this.enrichProductWithCategory(newProduct);
       return of(enrichedProduct);
     } catch (error) {
-          // Log error for debugging in development only
-          if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-            console.error('Error creating product:', error);
-          }
+          console.error('Error creating product:', error);
       if (error instanceof ProductValidationError) {
           return throwError(() => error);
       }
@@ -226,10 +217,7 @@ export class ProductService {
       const enrichedProduct = this.enrichProductWithCategory(updatedProduct);
       return of(enrichedProduct);
     } catch (error) {
-          // Log error for debugging in development only
-          if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-            console.error('Error updating product:', error);
-          }
+          console.error('Error updating product:', error);
       if (error instanceof ProductValidationError) {
           return throwError(() => error);
       }
@@ -251,10 +239,7 @@ export class ProductService {
 
       return of(void 0);
     } catch (error) {
-          // Log error for debugging in development only
-          if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-            console.error('Error deleting product:', error);
-          }
+          console.error('Error deleting product:', error);
       return throwError(() => new Error('Failed to delete product'));
     }
   }
@@ -275,7 +260,7 @@ export class ProductService {
 
   // Helper method to fix localStorage issues
   fixLocalStorageIssues(): void {
-    // Fixing localStorage issues
+    console.log('Fixing localStorage issues...');
 
     // Clean up all product-related storage
     localStorage.removeItem(this.STORAGE_KEY);
@@ -286,7 +271,7 @@ export class ProductService {
     // Reinitialize with fresh data
     this.initializeStorage();
 
-    // LocalStorage issues fixed, refreshing page
+    console.log('LocalStorage issues fixed. Refreshing page...');
     window.location.reload();
   }
 }
