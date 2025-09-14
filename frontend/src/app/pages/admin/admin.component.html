@@ -10,20 +10,23 @@
       <h3>Navigation</h3>
       <ul>
         <li>
-          <div class="nav-item"
-               [class.active]="view === 'list'"
-               (click)="view = 'list'">
-            <i class="material-icons">inventory</i>
-            <span>View Products</span>
-          </div>
-        </li>
-        <li>
-          <div class="nav-item"
-               [class.active]="view === 'add'"
-               (click)="setAddView()">
-            <i class="material-icons">add_box</i>
-            <span>Add Product</span>
-          </div>
+          <div class="nav-item-container">
+            <button class="nav-item"
+                    [class.active]="view === 'list'"
+                    (click)="view = 'list'">
+                <i class="material-icons">inventory</i>
+                <span>View Products</span>
+            </button>
+        </div>
+        
+        <div class="nav-item-container">
+            <button class="nav-item"
+                    [class.active]="view === 'add'"
+                    (click)="setAddView()">
+                <i class="material-icons">add_box</i>
+                <span>Add Product</span>
+            </button>
+        </div>
         </li>
     </ul>
     </nav>
