@@ -49,11 +49,10 @@ export class SignUpComponent implements OnInit {
 
   onSignUp(): void {
     this.submitted = true;
-    console.log('Form submitted. Valid:', this.signUpForm.valid);
-    console.log('Form errors:', this.signUpForm.errors);
+    // Form validation in progress
 
     if (this.signUpForm.invalid) {
-      console.log('Form is invalid, showing errors...');
+      // Form is invalid, showing errors
       this.markFormGroupTouched();
       this.showValidationErrors();
       return;
@@ -82,7 +81,10 @@ export class SignUpComponent implements OnInit {
       },
       error: (error) => {
         this.isLoading = false;
-        console.error('Registration error:', error);
+        // Log error for debugging in development only
+        if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+          console.error('Registration error:', error);
+        }
       }
     });
   }
@@ -93,17 +95,20 @@ export class SignUpComponent implements OnInit {
       await this.oauthService.signInWithGoogle();
     } catch (error) {
       this.isGoogleLoading = false;
-      console.error('Google sign-up error:', error);
+      // Log error for debugging in development only
+      if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        console.error('Google sign-up error:', error);
+      }
       this.toastr.error('Google sign-up failed', 'Authentication Error');
     }
   }
 
   private showValidationErrors(): void {
-    console.log('showValidationErrors called');
+    // Showing validation errors
 
     // Check for password mismatch first (form-level error)
     if (this.signUpForm.errors?.['passwordsNotMatch']) {
-      console.log('Password mismatch error');
+      // Password mismatch error detected
       this.toastr.error('Passwords do not match', 'Validation Error');
       return;
     }
@@ -119,7 +124,7 @@ export class SignUpComponent implements OnInit {
     for (const field of fieldValidations) {
       const control = this.signUpForm.get(field.control);
       if (control?.invalid) {
-        console.log(`${field.control} control invalid:`, control.errors);
+        // Field control validation failed
         const errorType = this.getFirstErrorType(control.errors);
         if (errorType && field.messages[errorType]) {
           this.toastr.error(field.messages[errorType], 'Validation Error');
@@ -129,7 +134,7 @@ export class SignUpComponent implements OnInit {
     }
 
     // Generic fallback message
-    console.log('Showing generic error message');
+    // Showing generic error message
     this.toastr.error('Please fill in all required fields correctly', 'Validation Error');
   }
 

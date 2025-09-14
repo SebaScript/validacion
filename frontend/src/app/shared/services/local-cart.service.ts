@@ -261,13 +261,19 @@ export class LocalCartService {
         this.productService.getProductById(productId).subscribe({
           next: (product) => resolve(product),
           error: (error) => {
-            console.error('Error getting product by ID:', error);
+            // Log error for debugging in development only
+            if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+              console.error('Error getting product by ID:', error);
+            }
             resolve(null);
           }
         });
       });
     } catch (error) {
-      console.error('Error getting product by ID:', error);
+      // Log error for debugging in development only
+      if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        console.error('Error getting product by ID:', error);
+      }
       return null;
     }
   }

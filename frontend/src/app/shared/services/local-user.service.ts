@@ -25,7 +25,12 @@ export class LocalUserService {
     if (!this.initialized) {
       this.initialized = true;
       this.initializeDemoUsers()
-        .catch(error => console.error('Error initializing demo users:', error));
+        .catch(error => {
+          // Log error for debugging but don't expose to user
+          if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+            console.error('Error initializing demo users:', error);
+          }
+        });
     }
   }
 
@@ -50,9 +55,12 @@ export class LocalUserService {
           role: 'client'
         });
 
-        console.log('Demo users created successfully');
+        // Demo users initialized successfully
       } catch (error) {
-        console.error('Error creating demo users:', error);
+        // Log error for debugging in development only
+        if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+          console.error('Error creating demo users:', error);
+        }
       }
     }
   }
