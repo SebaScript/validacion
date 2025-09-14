@@ -6,17 +6,39 @@
     <div class="sidebar-content">
       <nav class="sidebar-nav">
         <ul>
-          <li (click)="selectCategory('New')"><a class="sidebar-link">New</a></li>
-          <li (click)="selectCategory('T-shirts')"><a class="sidebar-link">T-shirts</a></li>
-          <li (click)="selectCategory('Hoodies')"><a class="sidebar-link">Hoodies</a></li>
-          <li (click)="selectCategory('Hats')"><a class="sidebar-link">Hats</a></li>
-          <li (click)="selectCategory('Bags')"><a class="sidebar-link">Bags</a></li>
-          <li (click)="selectCategory('Accesories')"><a class="sidebar-link">Accessories</a></li>
-          <li (click)="selectCategory('Bottoms')"><a class="sidebar-link">Bottoms</a></li>
-          <li (click)="selectCategory('Sweatshirts')"><a class="sidebar-link">Sweatshirts</a></li>
-          <li (click)="selectCategory('Tops/Jerseys')"><a class="sidebar-link">Tops/Jerseys</a></li>
-          <li (click)="selectCategory('Denim')"><a class="sidebar-link" >Denim</a></li>
-          <li (click)="selectCategory('Womens')"><a class="sidebar-link">Womens</a></li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('New')" (keydown.enter)="selectCategory('New')">New</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('T-shirts')" (keydown.enter)="selectCategory('T-shirts')">T-shirts</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('Hoodies')" (keydown.enter)="selectCategory('Hoodies')">Hoodies</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('Hats')" (keydown.enter)="selectCategory('Hats')">Hats</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('Bags')" (keydown.enter)="selectCategory('Bags')">Bags</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('Accesories')" (keydown.enter)="selectCategory('Accesories')">Accessories</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('Bottoms')" (keydown.enter)="selectCategory('Bottoms')">Bottoms</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('Sweatshirts')" (keydown.enter)="selectCategory('Sweatshirts')">Sweatshirts</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('Tops/Jerseys')" (keydown.enter)="selectCategory('Tops/Jerseys')">Tops/Jerseys</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('Denim')" (keydown.enter)="selectCategory('Denim')">Denim</a>
+          </li>
+          <li>
+            <a class="sidebar-link" (click)="selectCategory('Womens')" (keydown.enter)="selectCategory('Womens')">Womens</a>
+          </li>
         </ul>
       </nav>
     </div>
