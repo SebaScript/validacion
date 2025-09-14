@@ -178,7 +178,8 @@ export class OAuthService {
 
       return JSON.parse(jsonPayload);
     } catch (error) {
-      throw new Error('Invalid JWT token');
+      console.error("Error al analizar la carga útil de JWT", error);
+      throw new Error('Token JWT no válido: no se pudo decodificar la carga útil JSON.');
     }
   }
 
