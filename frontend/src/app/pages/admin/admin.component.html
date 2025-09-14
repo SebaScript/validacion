@@ -264,9 +264,9 @@
                 <!-- Image Preview for Carousel with controls -->
                 <div class="carousel-image-preview" *ngIf="url.value">
                   <img [src]="url.value"
-                       alt="Carousel image preview"
-                       (error)="hideImage($event)"
-                       (load)="showImage($event)">
+                    alt="Carousel preview"
+                    (error)="hideImage($event)"
+                    (load)="showImage($event)">
                   <div class="carousel-image-controls">
                     <span class="carousel-image-name">{{ getImageFileName(url.value) }}</span>
                     <button type="button" class="btn-icon delete" (click)="clearCarouselImage(i)" title="Remove image">
