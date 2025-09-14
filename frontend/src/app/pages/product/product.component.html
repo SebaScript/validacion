@@ -15,7 +15,7 @@
           <button class="carousel-arrow left" (click)="changeImage('prev')" *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" aria-label="Anterior">
             <i class="material-icons">chevron_left</i>
           </button>
-          <img [src]="getCurrentImageUrl()" alt="Product Image">
+          <img [src]="getCurrentImageUrl()" alt="Product">
           <button class="carousel-arrow right" (click)="changeImage('next')" *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" aria-label="Siguiente">
             <i class="material-icons">chevron_right</i>
           </button>
