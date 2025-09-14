@@ -23,13 +23,16 @@
         <!-- Miniaturas -->
         <div *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" class="thumbnails">
           <img
-            *ngFor="let img of product()?.carouselUrl; let idx = index"
-            [src]="img"
-            [alt]="'Thumbnail ' + (idx+1)"
-            class="thumbnail"
-            [class.selected]="currentImageIndex() === idx"
-            (click)="currentImageIndex.set(idx)"
-          />
+          *ngFor="let img of product()?.carouselUrl; let idx = index"
+          [src]="img"
+          [alt]="'Thumbnail ' + (idx+1)"
+          class="thumbnail"
+          [class.selected]="currentImageIndex() === idx"
+          (click)="currentImageIndex.set(idx)"
+          tabindex="0"
+          (keyup.enter)="currentImageIndex.set(idx)"
+        />
+          
         </div>
       </div>
     }
