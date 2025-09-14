@@ -12,11 +12,21 @@ export class LocalUserService {
   private readonly USER_ID_COUNTER_KEY = 'vallmere_user_id_counter';
   private readonly ADDRESS_ID_COUNTER_KEY = 'vallmere_address_id_counter';
 
+  private initialized = false;
+
   constructor(
     private toastr: ToastrService,
     private cryptoService: CryptoService
   ) {
-    this.initializeDemoUsers();
+    this.init();
+  }
+
+  private init(): void {
+    if (!this.initialized) {
+      this.initialized = true;
+      this.initializeDemoUsers()
+        .catch(error => console.error('Error initializing demo users:', error));
+    }
   }
 
   // Initialize demo users for testing
@@ -50,7 +60,7 @@ export class LocalUserService {
   // User Management Methods
   async createUser(createUserData: RegisterRequest): Promise<User> {
     const users = this.getAllUsers();
-    
+
     // Check if email already exists
     const existingUser = users.find(user => user.email.toLowerCase() === createUserData.email.toLowerCase());
     if (existingUser) {
@@ -62,10 +72,10 @@ export class LocalUserService {
 
     // Hash password
     const hashedPassword = await this.cryptoService.hashPassword(createUserData.password);
-    
+
     // Generate new user ID
     const userId = this.getNextUserId();
-    
+
     // Create user object
     const newUser: User = {
       userId,
@@ -114,7 +124,7 @@ export class LocalUserService {
   async updateUser(id: number, updateData: Partial<User>): Promise<User> {
     const users = this.getAllUsers();
     const userIndex = users.findIndex(user => user.userId === id);
-    
+
     if (userIndex === -1) {
       throw new Error(`User with ID ${id} not found`);
     }
@@ -128,7 +138,7 @@ export class LocalUserService {
 
     // Update user data
     Object.assign(user, updateData);
-    
+
     // Save updated users
     this.saveUsers(users);
 
@@ -140,11 +150,11 @@ export class LocalUserService {
   removeUser(id: number): void {
     const users = this.getAllUsers();
     const filteredUsers = users.filter(user => user.userId !== id);
-    
+
     if (filteredUsers.length === users.length) {
       throw new Error(`User with ID ${id} not found`);
     }
-    
+
     this.saveUsers(filteredUsers);
   }
 
@@ -155,7 +165,7 @@ export class LocalUserService {
   async authenticateUser(email: string, password: string): Promise<User | null> {
     const users = this.getAllUsers();
     const user = users.find(user => user.email.toLowerCase() === email.toLowerCase());
-    
+
     if (!user) {
       return null;
     }
@@ -183,7 +193,7 @@ export class LocalUserService {
 
     const addresses = this.getAllAddresses();
     const addressId = this.getNextAddressId();
-    
+
     // If this is the first address for the user, make it default
     const userAddresses = addresses.filter(addr => addr.userId === userId);
     const isFirstAddress = userAddresses.length === 0;
@@ -224,7 +234,7 @@ export class LocalUserService {
   updateAddress(addressId: number, userId: number, updateData: Partial<CreateAddressRequest>): Address {
     const addresses = this.getAllAddresses();
     const addressIndex = addresses.findIndex(addr => addr.addressId === addressId && addr.userId === userId);
-    
+
     if (addressIndex === -1) {
       throw new Error(`Address with ID ${addressId} not found`);
     }
@@ -240,7 +250,7 @@ export class LocalUserService {
 
     // Update address data
     Object.assign(addresses[addressIndex], updateData);
-    
+
     this.saveAddresses(addresses);
     return addresses[addressIndex];
   }
@@ -248,7 +258,7 @@ export class LocalUserService {
   setDefaultAddress(addressId: number, userId: number): Address {
     const addresses = this.getAllAddresses();
     const address = addresses.find(addr => addr.addressId === addressId && addr.userId === userId);
-    
+
     if (!address) {
       throw new Error(`Address with ID ${addressId} not found`);
     }
@@ -262,7 +272,7 @@ export class LocalUserService {
 
     // Set this address as default
     address.isDefault = true;
-    
+
     this.saveAddresses(addresses);
     return address;
   }
@@ -270,11 +280,11 @@ export class LocalUserService {
   removeAddress(addressId: number, userId: number): void {
     const addresses = this.getAllAddresses();
     const filteredAddresses = addresses.filter(addr => !(addr.addressId === addressId && addr.userId === userId));
-    
+
     if (filteredAddresses.length === addresses.length) {
       throw new Error(`Address with ID ${addressId} not found`);
     }
-    
+
     this.saveAddresses(filteredAddresses);
   }
 

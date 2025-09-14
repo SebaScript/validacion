@@ -44,7 +44,6 @@ a:hover {
 #toast-container .ngx-toastr,
 .ngx-toastr {
   background-color: var(--background-color) !important;
-  background: var(--background-color) !important;
   border: 2px solid var(--hover-color) !important;
   color: var(--font-color) !important;
   font-family: var(--font-family) !important;

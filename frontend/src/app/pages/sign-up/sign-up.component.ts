@@ -108,58 +108,34 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    // Check individual field errors (remove touched check since we're in submit context)
-    const nameControl = this.signUpForm.get('name');
-    if (nameControl?.invalid) {
-      console.log('Name control invalid:', nameControl.errors);
-      if (nameControl.errors?.['required']) {
-        this.toastr.error('Name is required', 'Validation Error');
-        return;
-      }
-      if (nameControl.errors?.['minlength']) {
-        this.toastr.error('Name must be at least 3 characters', 'Validation Error');
-        return;
-      }
-    }
+    // Check individual field errors
+    const fieldValidations = [
+      { control: 'name', messages: { required: 'Name is required', minlength: 'Name must be at least 3 characters' } },
+      { control: 'email', messages: { required: 'Email is required', email: 'Please enter a valid email address' } },
+      { control: 'password', messages: { required: 'Password is required', minlength: 'Password must be at least 6 characters' } },
+      { control: 'rePassword', messages: { required: 'Please repeat your password' } }
+    ];
 
-    const emailControl = this.signUpForm.get('email');
-    if (emailControl?.invalid) {
-      console.log('Email control invalid:', emailControl.errors);
-      if (emailControl.errors?.['required']) {
-        this.toastr.error('Email is required', 'Validation Error');
-        return;
-      }
-      if (emailControl.errors?.['email']) {
-        this.toastr.error('Please enter a valid email address', 'Validation Error');
-        return;
-      }
-    }
-
-    const passwordControl = this.signUpForm.get('password');
-    if (passwordControl?.invalid) {
-      console.log('Password control invalid:', passwordControl.errors);
-      if (passwordControl.errors?.['required']) {
-        this.toastr.error('Password is required', 'Validation Error');
-        return;
-      }
-      if (passwordControl.errors?.['minlength']) {
-        this.toastr.error('Password must be at least 6 characters', 'Validation Error');
-        return;
-      }
-    }
-
-    const rePasswordControl = this.signUpForm.get('rePassword');
-    if (rePasswordControl?.invalid) {
-      console.log('RePassword control invalid:', rePasswordControl.errors);
-      if (rePasswordControl.errors?.['required']) {
-        this.toastr.error('Please repeat your password', 'Validation Error');
-        return;
+    for (const field of fieldValidations) {
+      const control = this.signUpForm.get(field.control);
+      if (control?.invalid) {
+        console.log(`${field.control} control invalid:`, control.errors);
+        const errorType = this.getFirstErrorType(control.errors);
+        if (errorType && field.messages[errorType]) {
+          this.toastr.error(field.messages[errorType], 'Validation Error');
+          return;
+        }
       }
     }
 
     // Generic fallback message
     console.log('Showing generic error message');
     this.toastr.error('Please fill in all required fields correctly', 'Validation Error');
+  }
+
+  private getFirstErrorType(errors: any): string | null {
+    if (!errors) return null;
+    return Object.keys(errors)[0] || null;
   }
 
   private markFormGroupTouched() {
