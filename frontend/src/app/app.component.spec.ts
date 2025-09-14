@@ -308,7 +308,7 @@ describe('AppComponent', () => {
       mockRouter.url = testUrl;
 
       // Access the getter to trigger router.url access
-      const result = component.isLoginRoute;
+      component.isLoginRoute;
 
       // Verify the router.url was accessed
       expect(component.router.url).toBe(testUrl);
