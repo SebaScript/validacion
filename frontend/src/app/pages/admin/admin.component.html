@@ -213,9 +213,10 @@
                 <!-- Image Preview with controls -->
                 <div class="image-preview" *ngIf="productForm.get('imageUrl')?.value">
                   <img [src]="productForm.get('imageUrl')?.value"
-                       alt="Main image preview"
+                       alt="Main preview"
                        (error)="hideImage($event)"
                        (load)="showImage($event)">
+                </div>
                   <div class="image-controls">
                     <span class="image-name">{{ getImageFileName(productForm.get('imageUrl')?.value) }}</span>
                     <button type="button" class="btn-icon delete" (click)="clearMainImage()" title="Remove image">
