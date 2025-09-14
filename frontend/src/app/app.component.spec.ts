@@ -326,11 +326,13 @@ describe('AppComponent', () => {
       // Test with different URL values
       const urls = ['/', '/login', '/home', '/auth/callback/test'];
 
-      urls.forEach(url => {
+      const testUrl = (url: string) => {
         mockRouter.url = url;
         expect(() => component.isLoginRoute).not.toThrow();
         expect(typeof component.isLoginRoute).toBe('boolean');
-      });
+      };
+
+      urls.forEach(testUrl);
     });
   });
 
@@ -358,10 +360,12 @@ describe('AppComponent', () => {
         '////auth/callback'
       ];
 
-      malformedUrls.forEach(url => {
+      const testMalformedUrl = (url: string) => {
         mockRouter.url = url;
         expect(() => component.isLoginRoute).not.toThrow();
-      });
+      };
+
+      malformedUrls.forEach(testMalformedUrl);
     });
 
     it('should handle unicode characters in URLs', () => {
@@ -373,11 +377,13 @@ describe('AppComponent', () => {
         '/auth/回调'
       ];
 
-      unicodeUrls.forEach(url => {
+      const testUnicodeUrl = (url: string) => {
         mockRouter.url = url;
         expect(() => component.isLoginRoute).not.toThrow();
         expect(typeof component.isLoginRoute).toBe('boolean');
-      });
+      };
+
+      unicodeUrls.forEach(testUnicodeUrl);
     });
   });
 
