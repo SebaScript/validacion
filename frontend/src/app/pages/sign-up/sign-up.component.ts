@@ -109,7 +109,7 @@ export class SignUpComponent implements OnInit {
     }
 
     // Check individual field errors
-    const fieldValidations = [
+    const fieldValidations: Array<{ control: string; messages: Record<string, string> }> = [
       { control: 'name', messages: { required: 'Name is required', minlength: 'Name must be at least 3 characters' } },
       { control: 'email', messages: { required: 'Email is required', email: 'Please enter a valid email address' } },
       { control: 'password', messages: { required: 'Password is required', minlength: 'Password must be at least 6 characters' } },
@@ -121,8 +121,8 @@ export class SignUpComponent implements OnInit {
       if (control?.invalid) {
         console.log(`${field.control} control invalid:`, control.errors);
         const errorType = this.getFirstErrorType(control.errors);
-        if (errorType && field.messages[errorType]) {
-          this.toastr.error(field.messages[errorType], 'Validation Error');
+        if (errorType && (field.messages as Record<string, string>)[errorType]) {
+          this.toastr.error((field.messages as Record<string, string>)[errorType], 'Validation Error');
           return;
         }
       }
