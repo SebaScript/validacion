@@ -42,32 +42,32 @@ describe('AppComponent', () => {
 
   describe('isLoginRoute getter - Login Routes Detection', () => {
     it('should return true for /login route', () => {
-      mockRouter.url = '/login';
+      (mockRouter as any).url = '/login';
       expect(component.isLoginRoute).toBe(true);
     });
 
     it('should return true for /admin-login route', () => {
-      mockRouter.url = '/admin-login';
+      (mockRouter as any).url = '/admin-login';
       expect(component.isLoginRoute).toBe(true);
     });
 
     it('should return true for /admin route', () => {
-      mockRouter.url = '/admin';
+      (mockRouter as any).url = '/admin';
       expect(component.isLoginRoute).toBe(true);
     });
 
     it('should return true for /profile route', () => {
-      mockRouter.url = '/profile';
+      (mockRouter as any).url = '/profile';
       expect(component.isLoginRoute).toBe(true);
     });
 
     it('should return true for /sign-up route', () => {
-      mockRouter.url = '/sign-up';
+      (mockRouter as any).url = '/sign-up';
       expect(component.isLoginRoute).toBe(true);
     });
 
     it('should return true for /checkout route', () => {
-      mockRouter.url = '/checkout';
+      (mockRouter as any).url = '/checkout';
       expect(component.isLoginRoute).toBe(true);
     });
 
@@ -82,7 +82,7 @@ describe('AppComponent', () => {
       ];
 
       authRoutes.forEach(route => {
-        mockRouter.url = route;
+        (mockRouter as any).url = route;
         expect(component.isLoginRoute).toBe(true);
       });
     });
@@ -101,7 +101,7 @@ describe('AppComponent', () => {
       ];
 
       nonLoginRoutes.forEach(route => {
-        mockRouter.url = route;
+        (mockRouter as any).url = route;
         expect(component.isLoginRoute).toBe(false);
       });
     });
@@ -125,7 +125,7 @@ describe('AppComponent', () => {
       ];
 
       similarRoutes.forEach(route => {
-        mockRouter.url = route;
+        (mockRouter as any).url = route;
         expect(component.isLoginRoute).toBe(false);
       });
     });
@@ -142,7 +142,7 @@ describe('AppComponent', () => {
       ];
 
       routesWithParams.forEach(route => {
-        mockRouter.url = route;
+        (mockRouter as any).url = route;
         expect(component.isLoginRoute).toBe(true);
       });
     });
@@ -159,13 +159,13 @@ describe('AppComponent', () => {
       ];
 
       routesWithFragments.forEach(route => {
-        mockRouter.url = route;
+        (mockRouter as any).url = route;
         expect(component.isLoginRoute).toBe(true);
       });
     });
 
     it('should handle empty and undefined router url', () => {
-      mockRouter.url = '';
+      (mockRouter as any).url = '';
       expect(component.isLoginRoute).toBe(false);
 
       (mockRouter as any).url = undefined;
@@ -190,7 +190,7 @@ describe('AppComponent', () => {
       ];
 
       caseVariations.forEach(route => {
-        mockRouter.url = route;
+        (mockRouter as any).url = route;
         expect(component.isLoginRoute).toBe(false);
       });
     });
@@ -207,14 +207,14 @@ describe('AppComponent', () => {
       ];
 
       specialRoutes.forEach(route => {
-        mockRouter.url = route;
+        (mockRouter as any).url = route;
         expect(component.isLoginRoute).toBe(false);
       });
     });
 
     it('should handle very long URLs', () => {
       const longUrl = '/auth/callback' + 'a'.repeat(1000);
-      mockRouter.url = longUrl;
+      (mockRouter as any).url = longUrl;
       expect(component.isLoginRoute).toBe(true);
     });
 
@@ -232,7 +232,7 @@ describe('AppComponent', () => {
       ];
 
       testRoutes.forEach(route => {
-        mockRouter.url = route;
+        (mockRouter as any).url = route;
         expect(typeof component.isLoginRoute).toBe('boolean');
       });
     });
@@ -241,44 +241,44 @@ describe('AppComponent', () => {
   describe('Route Logic Validation', () => {
     it('should use exact string matching for non-auth routes', () => {
       // Test exact matches
-      mockRouter.url = '/login';
+      (mockRouter as any).url = '/login';
       expect(component.isLoginRoute).toBe(true);
 
       // Test partial matches should fail
-      mockRouter.url = '/logintest';
+      (mockRouter as any).url = '/logintest';
       expect(component.isLoginRoute).toBe(false);
 
-      mockRouter.url = 'test/login';
+      (mockRouter as any).url = 'test/login';
       expect(component.isLoginRoute).toBe(false);
     });
 
     it('should use startsWith for auth/callback routes', () => {
       // Should work for any route starting with /auth/callback
-      mockRouter.url = '/auth/callback';
+      (mockRouter as any).url = '/auth/callback';
       expect(component.isLoginRoute).toBe(true);
 
-      mockRouter.url = '/auth/callback/google';
+      (mockRouter as any).url = '/auth/callback/google';
       expect(component.isLoginRoute).toBe(true);
 
-      mockRouter.url = '/auth/callback/test/deep/path';
+      (mockRouter as any).url = '/auth/callback/test/deep/path';
       expect(component.isLoginRoute).toBe(true);
 
       // Should not match partial strings
-      mockRouter.url = '/test/auth/callback';
+      (mockRouter as any).url = '/test/auth/callback';
       expect(component.isLoginRoute).toBe(false);
 
-      mockRouter.url = '/auth-callback';
+      (mockRouter as any).url = '/auth-callback';
       expect(component.isLoginRoute).toBe(false);
     });
 
     it('should handle multiple consecutive calls', () => {
       // Test that the getter works consistently
-      mockRouter.url = '/login';
+      (mockRouter as any).url = '/login';
       expect(component.isLoginRoute).toBe(true);
       expect(component.isLoginRoute).toBe(true);
       expect(component.isLoginRoute).toBe(true);
 
-      mockRouter.url = '/home';
+      (mockRouter as any).url = '/home';
       expect(component.isLoginRoute).toBe(false);
       expect(component.isLoginRoute).toBe(false);
       expect(component.isLoginRoute).toBe(false);
@@ -296,7 +296,7 @@ describe('AppComponent', () => {
       ];
 
       routes.forEach(route => {
-        mockRouter.url = route;
+        (mockRouter as any).url = route;
         const isLogin = component.isLoginRoute;
         expect(typeof isLogin).toBe('boolean');
       });
@@ -306,7 +306,7 @@ describe('AppComponent', () => {
   describe('Integration with Router', () => {
     it('should read url property from router correctly', () => {
       const testUrl = '/test-route';
-      mockRouter.url = testUrl;
+      (mockRouter as any).url = testUrl;
 
       // Access the getter to trigger router.url access
       component.isLoginRoute;
@@ -328,7 +328,7 @@ describe('AppComponent', () => {
       const urls = ['/', '/login', '/home', '/auth/callback/test'];
 
       const testUrl = (url: string) => {
-        mockRouter.url = url;
+        (mockRouter as any).url = url;
         expect(() => component.isLoginRoute).not.toThrow();
         expect(typeof component.isLoginRoute).toBe('boolean');
       };
@@ -340,15 +340,15 @@ describe('AppComponent', () => {
   describe('Edge Cases and Error Handling', () => {
     it('should handle router url being changed after component initialization', () => {
       // Initial state
-      mockRouter.url = '/home';
+      (mockRouter as any).url = '/home';
       expect(component.isLoginRoute).toBe(false);
 
       // Change router url
-      mockRouter.url = '/login';
+      (mockRouter as any).url = '/login';
       expect(component.isLoginRoute).toBe(true);
 
       // Change again
-      mockRouter.url = '/admin';
+      (mockRouter as any).url = '/admin';
       expect(component.isLoginRoute).toBe(true);
     });
 
@@ -362,7 +362,7 @@ describe('AppComponent', () => {
       ];
 
       const testMalformedUrl = (url: string) => {
-        mockRouter.url = url;
+        (mockRouter as any).url = url;
         expect(() => component.isLoginRoute).not.toThrow();
       };
 
@@ -379,7 +379,7 @@ describe('AppComponent', () => {
       ];
 
       const testUnicodeUrl = (url: string) => {
-        mockRouter.url = url;
+        (mockRouter as any).url = url;
         expect(() => component.isLoginRoute).not.toThrow();
         expect(typeof component.isLoginRoute).toBe('boolean');
       };
@@ -390,7 +390,7 @@ describe('AppComponent', () => {
 
   describe('Performance and Memory', () => {
     it('should not create new objects on each call', () => {
-      mockRouter.url = '/login';
+      (mockRouter as any).url = '/login';
 
       // Call multiple times and ensure no memory leaks
       for (let i = 0; i < 100; i++) {
@@ -403,7 +403,7 @@ describe('AppComponent', () => {
       const startTime = performance.now();
 
       for (let i = 0; i < 1000; i++) {
-        mockRouter.url = i % 2 === 0 ? '/login' : '/home';
+        (mockRouter as any).url = i % 2 === 0 ? '/login' : '/home';
         component.isLoginRoute;
       }
 
