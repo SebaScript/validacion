@@ -5,12 +5,13 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let mockRouter: jasmine.SpyObj<Router>;
+  let mockRouter: any;
 
   beforeEach(async () => {
-    mockRouter = jasmine.createSpyObj('Router', ['navigate'], {
+    mockRouter = {
+      navigate: jasmine.createSpy('navigate'),
       url: '/'
-    });
+    } as any;
 
     await TestBed.configureTestingModule({
       imports: [AppComponent],

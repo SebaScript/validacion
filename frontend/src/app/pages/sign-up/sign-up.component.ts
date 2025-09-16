@@ -121,8 +121,8 @@ export class SignUpComponent implements OnInit {
       if (control?.invalid) {
         console.log(`${field.control} control invalid:`, control.errors);
         const errorType = this.getFirstErrorType(control.errors);
-        if (errorType && field.messages[errorType]) {
-          this.toastr.error(field.messages[errorType], 'Validation Error');
+        if (errorType && field.messages[errorType as keyof typeof field.messages]) {
+          this.toastr.error(field.messages[errorType as keyof typeof field.messages], 'Validation Error');
           return;
         }
       }

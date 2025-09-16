@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
-import { of, throwError, BehaviorSubject, signal, from } from 'rxjs';
+import { Component, Input, signal } from '@angular/core';
+import { of, throwError, BehaviorSubject, from } from 'rxjs';
 
 import { LandingComponent } from './landing.component';
 import { ProductService } from '../../shared/services/product.service';
@@ -267,7 +267,7 @@ describe('LandingComponent', () => {
       const filtered = component.filteredProducts();
 
       // Should exclude product with id 3 (stock: 0)
-      expect(filtered).toHaveLength(4);
+      expect(filtered.length).toBe(4);
       expect(filtered.find(p => p.id === 3)).toBeUndefined();
       expect(filtered.every(p => p.stock > 0)).toBe(true);
     });
@@ -277,7 +277,7 @@ describe('LandingComponent', () => {
 
       const filtered = component.filteredProducts();
 
-      expect(filtered).toHaveLength(4); // All except out of stock
+      expect(filtered.length).toBe(4); // All except out of stock
       expect(filtered.map(p => p.id)).toEqual([1, 2, 4, 5]);
     });
 
@@ -287,7 +287,7 @@ describe('LandingComponent', () => {
       const filtered = component.filteredProducts();
 
       // Should show T-shirts with stock > 0 (products 1 and 5, but not 3 due to stock = 0)
-      expect(filtered).toHaveLength(2);
+      expect(filtered.length).toBe(2);
       expect(filtered.every(p => p.category === 'T-shirts')).toBe(true);
       expect(filtered.every(p => p.stock > 0)).toBe(true);
       expect(filtered.map(p => p.id)).toEqual([1, 5]);
@@ -298,7 +298,7 @@ describe('LandingComponent', () => {
 
       const filtered = component.filteredProducts();
 
-      expect(filtered).toHaveLength(1);
+      expect(filtered.length).toBe(1);
       expect(filtered[0].category).toBe('Hoodies');
       expect(filtered[0].id).toBe(2);
     });
@@ -308,7 +308,7 @@ describe('LandingComponent', () => {
 
       const filtered = component.filteredProducts();
 
-      expect(filtered).toHaveLength(1);
+      expect(filtered.length).toBe(1);
       expect(filtered[0].category).toBe('Bottoms');
       expect(filtered[0].id).toBe(4);
     });
@@ -327,7 +327,7 @@ describe('LandingComponent', () => {
       const filtered = component.filteredProducts();
 
       // Should show all in-stock products when category is null
-      expect(filtered).toHaveLength(4);
+      expect(filtered.length).toBe(4);
       expect(filtered.every(p => p.stock > 0)).toBe(true);
     });
 
@@ -337,7 +337,7 @@ describe('LandingComponent', () => {
       const filtered = component.filteredProducts();
 
       // Should show all in-stock products when category is undefined
-      expect(filtered).toHaveLength(4);
+      expect(filtered.length).toBe(4);
       expect(filtered.every(p => p.stock > 0)).toBe(true);
     });
 
@@ -347,36 +347,36 @@ describe('LandingComponent', () => {
       const filtered = component.filteredProducts();
 
       // Should show all in-stock products when category is empty string
-      expect(filtered).toHaveLength(4);
+      expect(filtered.length).toBe(4);
       expect(filtered.every(p => p.stock > 0)).toBe(true);
     });
 
     it('should update when category selection changes', () => {
       // Start with all products
       selectedCategorySignal.set('New');
-      expect(component.filteredProducts()).toHaveLength(4);
+      expect(component.filteredProducts().length).toBe(4);
 
       // Switch to T-shirts
       selectedCategorySignal.set('T-shirts');
-      expect(component.filteredProducts()).toHaveLength(2);
+      expect(component.filteredProducts().length).toBe(2);
 
       // Switch to Hoodies
       selectedCategorySignal.set('Hoodies');
-      expect(component.filteredProducts()).toHaveLength(1);
+      expect(component.filteredProducts().length).toBe(1);
 
       // Back to all
       selectedCategorySignal.set('New');
-      expect(component.filteredProducts()).toHaveLength(4);
+      expect(component.filteredProducts().length).toBe(4);
     });
 
     it('should update when products change', () => {
       // Initial state
-      expect(component.filteredProducts()).toHaveLength(4);
+      expect(component.filteredProducts().length).toBe(4);
 
       // Change products to all out of stock
       (component as any).allProducts.set(mockProductsAllOutOfStock);
 
-      expect(component.filteredProducts()).toHaveLength(0);
+      expect(component.filteredProducts().length).toBe(0);
     });
 
     it('should be case sensitive for category matching', () => {
@@ -421,7 +421,7 @@ describe('LandingComponent', () => {
 
       const filtered = component.filteredProducts();
 
-      expect(filtered).toHaveLength(1);
+      expect(filtered.length).toBe(1);
       expect(filtered[0].id).toBe(1);
     });
 
