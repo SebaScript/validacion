@@ -53,8 +53,8 @@ export class ProductValidators {
     if (value !== undefined && value !== null) {
       if (typeof value !== 'number' || isNaN(value)) {
         errors.push(`${fieldName} must be a valid number`);
-      } else if (options.min !== undefined && value <= options.min) {
-        const minValue = options.min === 0 ? 'zero' : 'positive';
+      } else if (options.min !== undefined && value < options.min) {
+        const minValue = options.min === 0 ? 'greater than or equal to zero' : `greater than or equal to ${options.min}`;
         errors.push(`${fieldName} must be ${minValue}`);
       } else if (options.integer && !Number.isInteger(value)) {
         errors.push(`${fieldName} must be an integer`);

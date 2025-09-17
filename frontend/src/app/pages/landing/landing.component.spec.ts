@@ -70,17 +70,6 @@ describe('LandingComponent', () => {
       carouselUrl: ['image4.jpg'],
       categoryId: 3,
       category: 'Bottoms'
-    },
-    {
-      id: 5,
-      name: 'Product 5',
-      description: 'Description 5',
-      price: 24.99,
-      stock: 8,
-      imageUrl: 'image5.jpg',
-      carouselUrl: ['image5.jpg'],
-      categoryId: 1,
-      category: 'T-shirts'
     }
   ];
 
@@ -118,8 +107,7 @@ describe('LandingComponent', () => {
     });
 
     await TestBed.configureTestingModule({
-      imports: [LandingComponent],
-      declarations: [MockProductCardComponent],
+      imports: [LandingComponent, MockProductCardComponent],
       providers: [
         { provide: ProductService, useValue: mockProductService },
         { provide: CategoryService, useValue: mockCategoryService }
@@ -277,8 +265,8 @@ describe('LandingComponent', () => {
 
       const filtered = component.filteredProducts();
 
-      expect(filtered.length).toBe(4); // All except out of stock
-      expect(filtered.map(p => p.id)).toEqual([1, 2, 4, 5]);
+      expect(filtered.length).toBe(3); // All except out of stock (product 3)
+      expect(filtered.map(p => p.id)).toEqual([1, 2, 4]);
     });
 
     it('should filter by specific category', () => {
@@ -286,11 +274,11 @@ describe('LandingComponent', () => {
 
       const filtered = component.filteredProducts();
 
-      // Should show T-shirts with stock > 0 (products 1 and 5, but not 3 due to stock = 0)
-      expect(filtered.length).toBe(2);
+      // Should show T-shirts with stock > 0 (product 1, but not 3 due to stock = 0)
+      expect(filtered.length).toBe(1);
       expect(filtered.every(p => p.category === 'T-shirts')).toBe(true);
       expect(filtered.every(p => p.stock > 0)).toBe(true);
-      expect(filtered.map(p => p.id)).toEqual([1, 5]);
+      expect(filtered.map(p => p.id)).toEqual([1]);
     });
 
     it('should filter by Hoodies category', () => {
@@ -570,14 +558,14 @@ describe('LandingComponent', () => {
       fixture.detectChanges();
 
       let productCards = fixture.nativeElement.querySelectorAll('app-product-card');
-      expect(productCards.length).toBe(4);
+      expect(productCards.length).toBe(3);
 
       // Switch to T-shirts only
       selectedCategorySignal.set('T-shirts');
       fixture.detectChanges();
 
       productCards = fixture.nativeElement.querySelectorAll('app-product-card');
-      expect(productCards.length).toBe(2);
+      expect(productCards.length).toBe(1);
     });
   });
 

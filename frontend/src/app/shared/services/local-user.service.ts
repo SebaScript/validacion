@@ -338,7 +338,11 @@ export class LocalUserService {
   }
 
   private isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Check for consecutive dots which are invalid
+    if (email.includes('..')) {
+      return false;
+    }
     return emailRegex.test(email);
   }
 
@@ -356,14 +360,14 @@ export class LocalUserService {
   }
 
   private getNextUserId(): number {
-    const currentId = parseInt(localStorage.getItem(this.USER_ID_COUNTER_KEY) || '0');
+    const currentId = parseInt(localStorage.getItem(this.USER_ID_COUNTER_KEY) || '0') || 0;
     const nextId = currentId + 1;
     localStorage.setItem(this.USER_ID_COUNTER_KEY, nextId.toString());
     return nextId;
   }
 
   private getNextAddressId(): number {
-    const currentId = parseInt(localStorage.getItem(this.ADDRESS_ID_COUNTER_KEY) || '0');
+    const currentId = parseInt(localStorage.getItem(this.ADDRESS_ID_COUNTER_KEY) || '0') || 0;
     const nextId = currentId + 1;
     localStorage.setItem(this.ADDRESS_ID_COUNTER_KEY, nextId.toString());
     return nextId;
