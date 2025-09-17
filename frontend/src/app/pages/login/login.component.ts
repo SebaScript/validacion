@@ -19,11 +19,11 @@ export class LoginComponent {
   isGoogleLoading = false;
 
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private oauthService: OAuthService,
-    private router: Router,
-    private toastr: ToastrService
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly oauthService: OAuthService,
+    private readonly router: Router,
+    private readonly toastr: ToastrService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

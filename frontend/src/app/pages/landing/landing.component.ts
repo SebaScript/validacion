@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, OnInit } from '@angular/core';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../shared/interfaces/product.interface';
@@ -11,8 +11,8 @@ import { ProductService } from '../../shared/services/product.service';
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })
-export class LandingComponent {
-  private allProducts = signal<Product[]>([]);
+export class LandingComponent implements OnInit {
+  private readonly allProducts = signal<Product[]>([]);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
 
@@ -24,8 +24,8 @@ export class LandingComponent {
   });
 
   constructor(
-    private catSvc: CategoryService,
-    private productService: ProductService
+    private readonly catSvc: CategoryService,
+    private readonly productService: ProductService
   ) {}
 
   ngOnInit() {
