@@ -17,10 +17,10 @@ export class CheckoutComponent implements OnInit {
   isProcessing = false;
 
   constructor(
-    private fb: FormBuilder,
-    private location: Location,
-    private router: Router,
-    private toastr: ToastrService,
+    private readonly fb: FormBuilder,
+    private readonly location: Location,
+    private readonly router: Router,
+    private readonly toastr: ToastrService,
     public cartService: CartService
   ) {
     this.checkoutForm = this.fb.group({

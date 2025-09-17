@@ -18,8 +18,8 @@ export class OAuthService {
   private readonly GOOGLE_CLIENT_ID = environment.oauth?.google?.clientId || '';
 
   constructor(
-    private router: Router,
-    private authService: AuthService,
+    private readonly router: Router,
+    private readonly authService: AuthService,
     private localUserService: LocalUserService,
     private toastr: ToastrService
   ) {}

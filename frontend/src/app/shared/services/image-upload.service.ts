@@ -58,7 +58,7 @@ export class ImageUploadService {
       console.log('Uploading image:', fileName);
 
       // Upload file to Supabase Storage
-      const { data, error } = await this.supabase.storage
+      const { error } = await this.supabase.storage
         .from('images')
         .upload(filePath, file, {
           cacheControl: '3600',
