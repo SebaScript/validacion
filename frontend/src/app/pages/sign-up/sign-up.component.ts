@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly oauthService: OAuthService,
     private readonly toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -121,8 +121,8 @@ export class SignUpComponent implements OnInit {
       if (control?.invalid) {
         console.log(`${field.control} control invalid:`, control.errors);
         const errorType = this.getFirstErrorType(control.errors);
-        if (errorType && (field.messages as Record<string, string>)[errorType]) {
-          this.toastr.error((field.messages as Record<string, string>)[errorType], 'Validation Error');
+        if (errorType && field.messages[errorType]) {
+          this.toastr.error(field.messages[errorType], 'Validation Error');
           return;
         }
       }

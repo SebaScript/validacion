@@ -22,7 +22,7 @@ export class OAuthService {
     private readonly authService: AuthService,
     private localUserService: LocalUserService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   // Initialize Google OAuth
   initializeGoogleSignIn(): Promise<void> {
@@ -99,7 +99,7 @@ export class OAuthService {
 
       // Decode JWT token (basic decode for demo - in production use proper JWT library)
       const payload = this.decodeJWT(response.credential);
-      
+
       const googleUser = {
         email: payload.email,
         name: payload.name,
@@ -129,7 +129,7 @@ export class OAuthService {
     try {
       // Try to find existing user
       let user = this.localUserService.findUserByEmail(googleUser.email);
-      
+
       if (!user) {
         // Create new user
         const newUserData = {
@@ -138,7 +138,7 @@ export class OAuthService {
           password: this.generateRandomPassword(), // Random password for OAuth users
           role: 'client' as const
         };
-        
+
         user = await this.localUserService.createUser(newUserData);
         this.toastr.success('Account created successfully!', 'Welcome');
       }
@@ -172,7 +172,7 @@ export class OAuthService {
     try {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       }).join(''));
 
@@ -189,12 +189,12 @@ export class OAuthService {
   }
 
   // Parse OAuth callback parameters (legacy support)
-  parseCallbackParams(): { token: string | null, user: any | null } {
+  parseCallbackParams(): { token: string | null, user: unknown | null } {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const userParam = urlParams.get('user');
 
-    let user = null;
+    let user: unknown = null;
     if (userParam) {
       try {
         user = JSON.parse(decodeURIComponent(userParam));

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class CryptoService {
 
-  constructor() {}
+  constructor() { }
 
   async hashPassword(password: string): Promise<string> {
     const encoder = new TextEncoder();
@@ -40,6 +40,6 @@ export class CryptoService {
 
   // Generate a random ID for entities
   generateId(): string {
-    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    return Date.now().toString(36) + Math.random().toString(36).slice(2);
   }
 }

@@ -1,11 +1,11 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { Observable, BehaviorSubject, of, throwError, from } from 'rxjs';
-import { catchError, tap, map, switchMap } from 'rxjs/operators';
+import { Observable, of, throwError, from } from 'rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { LocalCartService } from './local-cart.service';
 import { AuthService } from './auth.service';
 import { Product } from '../interfaces/product.interface';
-import { CartItem, Cart, CartTotal } from '../interfaces/cart.interface';
+import { CartItem} from '../interfaces/cart.interface';
 
 // Re-export interfaces for backward compatibility
 export type { CartItem, Cart, CartTotal } from '../interfaces/cart.interface';
@@ -106,7 +106,7 @@ export class CartService {
 
     this.isLoading.set(true);
 
-    return from(this.localCartService.updateItemQuantity(this.cartId()!, itemId, quantity)).pipe(
+    return from(this.localCartService.updateItemQuantity(this.cartId(), itemId, quantity)).pipe(
       tap(() => {
         this.isLoading.set(false);
         this.loadCart(); // Reload cart to get updated data
@@ -130,7 +130,7 @@ export class CartService {
     this.isLoading.set(true);
 
     try {
-      this.localCartService.removeItem(this.cartId()!, itemId);
+      this.localCartService.removeItem(this.cartId(), itemId);
       this.isLoading.set(false);
       this.loadCart(); // Reload cart to get updated data
       this.toastr.success('Item removed from cart', 'Cart Updated');
@@ -151,7 +151,7 @@ export class CartService {
     this.isLoading.set(true);
 
     try {
-      this.localCartService.clearCart(this.cartId()!);
+      this.localCartService.clearCart(this.cartId());
       this.isLoading.set(false);
       this.cartItems.set([]);
       this.toastr.success('Cart cleared successfully', 'Cart Updated');
@@ -169,7 +169,7 @@ export class CartService {
       return of({ itemCount: 0, total: 0 });
     }
 
-    const total = this.localCartService.getCartTotal(this.cartId()!);
+    const total = this.localCartService.getCartTotal(this.cartId());
     return of(total);
   }
 

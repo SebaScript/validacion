@@ -208,7 +208,7 @@ export class LocalUserService {
       zipCode: createAddressData.zipCode.trim(),
       country: createAddressData.country.trim(),
       type: createAddressData.type || 'both',
-      isDefault: createAddressData.isDefault !== undefined ? createAddressData.isDefault : isFirstAddress
+      isDefault: createAddressData.isDefault ?? isFirstAddress
     };
 
     // If setting as default, unset other defaults for this user

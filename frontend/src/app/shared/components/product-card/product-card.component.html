@@ -1,4 +1,4 @@
-<div class="product-card" (click)="goToDetails()">
+<div class="product-card" (click)="goToDetails()" (keydown.enter)="goToDetails()">
   <img [src]="imageUrl" [alt]="title" class="product-image" />
   <h3 class="product-title">{{ title }}</h3>
   <p class="product-price">{{ price | currency }}</p>
