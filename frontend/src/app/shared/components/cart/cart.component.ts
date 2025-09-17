@@ -17,8 +17,8 @@ export class CartComponent {
 
   constructor(
     public cartService: CartService,
-    private router: Router,
-    private toastr: ToastrService
+    private readonly router: Router,
+    private readonly toastr: ToastrService
   ) {}
 
   closeCart(): void {

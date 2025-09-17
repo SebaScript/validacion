@@ -11,8 +11,8 @@ export class AddressService {
   private readonly endpoint = 'users/profile/addresses';
 
   constructor(
-    private localUserService: LocalUserService,
-    private authService: AuthService
+    private readonly localUserService: LocalUserService,
+    private readonly authService: AuthService
   ) {}
 
   getUserAddresses(): Observable<Address[]> {

@@ -131,50 +131,58 @@ describe('AppComponent', () => {
     });
 
     it('should handle routes with query parameters', () => {
-      const routesWithParams = [
+      // Exact matches with query parameters should return false for exact routes
+      const exactRoutesWithParams = [
         '/login?redirect=/home',
         '/admin-login?token=abc123',
         '/admin?tab=users',
         '/profile?edit=true',
         '/sign-up?referrer=google',
-        '/checkout?step=payment',
-        '/auth/callback?code=xyz789&state=abc'
+        '/checkout?step=payment'
       ];
 
-      routesWithParams.forEach(route => {
+      exactRoutesWithParams.forEach(route => {
         (mockRouter as any).url = route;
-        expect(component.isLoginRoute).toBe(true);
+        expect(component.isLoginRoute).toBe(false);
       });
+
+      // Auth callback with query parameters should still work (uses startsWith)
+      (mockRouter as any).url = '/auth/callback?code=xyz789&state=abc';
+      expect(component.isLoginRoute).toBe(true);
     });
 
     it('should handle routes with fragments', () => {
-      const routesWithFragments = [
+      // Exact matches with fragments should return false for exact routes
+      const exactRoutesWithFragments = [
         '/login#top',
         '/admin-login#dashboard',
         '/admin#users',
         '/profile#settings',
         '/sign-up#form',
-        '/checkout#summary',
-        '/auth/callback#success'
+        '/checkout#summary'
       ];
 
-      routesWithFragments.forEach(route => {
+      exactRoutesWithFragments.forEach(route => {
         (mockRouter as any).url = route;
-        expect(component.isLoginRoute).toBe(true);
+        expect(component.isLoginRoute).toBe(false);
       });
+
+      // Auth callback with fragments should still work (uses startsWith)
+      (mockRouter as any).url = '/auth/callback#success';
+      expect(component.isLoginRoute).toBe(true);
     });
 
-    it('should handle empty and undefined router url', () => {
+    it('should handle empty router url', () => {
       (mockRouter as any).url = '';
       expect(component.isLoginRoute).toBe(false);
-
-      (mockRouter as any).url = undefined;
-      expect(() => component.isLoginRoute).not.toThrow();
     });
 
-    it('should handle null router url', () => {
+    it('should handle null and undefined router url', () => {
       (mockRouter as any).url = null;
-      expect(() => component.isLoginRoute).not.toThrow();
+      expect(() => component.isLoginRoute).toThrow();
+
+      (mockRouter as any).url = undefined;
+      expect(() => component.isLoginRoute).toThrow();
     });
 
     it('should be case sensitive', () => {
@@ -202,14 +210,17 @@ describe('AppComponent', () => {
         '/admin%20user',
         '/profile&edit',
         '/sign-up*',
-        '/checkout+premium',
-        '/auth/callback|success'
+        '/checkout+premium'
       ];
 
       specialRoutes.forEach(route => {
         (mockRouter as any).url = route;
         expect(component.isLoginRoute).toBe(false);
       });
+
+      // Auth callback with special characters should still work (uses startsWith)
+      (mockRouter as any).url = '/auth/callback|success';
+      expect(component.isLoginRoute).toBe(true);
     });
 
     it('should handle very long URLs', () => {

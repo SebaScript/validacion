@@ -32,11 +32,11 @@ export class ProfileComponent implements OnInit {
   showAddressModal = signal(false);
 
   constructor(
-    private router: Router,
-    private toastr: ToastrService,
-    private authService: AuthService,
-    private addressService: AddressService,
-    private fb: FormBuilder
+    private readonly router: Router,
+    private readonly toastr: ToastrService,
+    private readonly authService: AuthService,
+    private readonly addressService: AddressService,
+    private readonly fb: FormBuilder
   ) {
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],

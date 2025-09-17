@@ -10,7 +10,7 @@ import { CategoryService } from '../../services/category.service';
 })
 export class SidebarComponent {
   constructor(
-    private catSvc: CategoryService,
+    private readonly catSvc: CategoryService,
     public router: Router) {}
 
   selectCategory(cat: string) {
