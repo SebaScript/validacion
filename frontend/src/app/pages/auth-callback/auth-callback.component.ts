@@ -53,10 +53,10 @@ import { OAuthService } from '../../shared/services/oauth.service';
 })
 export class AuthCallbackComponent implements OnInit {
   constructor(
-    private router: Router,
-    private authService: AuthService,
-    private oauthService: OAuthService,
-    private toastr: ToastrService
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly oauthService: OAuthService,
+    private readonly toastr: ToastrService
   ) {}
 
   ngOnInit() {
