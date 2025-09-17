@@ -11,7 +11,7 @@ import { ProductService } from '../../shared/services/product.service';
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })
-export class LandingComponent {
+export class LandingComponent implements OnInit{
   private readonly allProducts = signal<Product[]>([]);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
