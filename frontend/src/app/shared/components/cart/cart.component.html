@@ -1,5 +1,5 @@
 <div class="cart-container" [class.show]="isOpen">
-  <div class="cart-overlay" (click)="closeCart()"></div>
+  <div class="cart-overlay" (click)="closeCart()" (keydown.enter)="closeCart()"></div>
   <div class="cart-content">
     <div class="cart-header">
       <h3>Shopping Cart</h3>

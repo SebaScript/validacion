@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { User, AuthResponse, LoginRequest, RegisterRequest } from '../interfaces/user.interface';
+import { User, LoginRequest, RegisterRequest } from '../interfaces/user.interface';
 import { ToastrService } from 'ngx-toastr';
 import { LocalUserService } from './local-user.service';
 import { BehaviorSubject, Observable, catchError, map, of, tap, throwError, from } from 'rxjs';

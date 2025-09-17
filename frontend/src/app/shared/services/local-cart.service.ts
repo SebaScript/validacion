@@ -16,7 +16,7 @@ export class LocalCartService {
   constructor(
     private readonly productService: ProductService,
     private readonly toastr: ToastrService
-  ) {}
+  ) { }
 
   // Cart Management Methods
   async createCart(userId: number): Promise<Cart> {
@@ -50,9 +50,7 @@ export class LocalCartService {
   async getOrCreateCart(userId: number): Promise<Cart> {
     let cart = this.findCartByUserId(userId);
 
-    if (!cart) {
-      cart = await this.createCart(userId);
-    }
+    cart ??= await this.createCart(userId);
 
     return cart;
   }
