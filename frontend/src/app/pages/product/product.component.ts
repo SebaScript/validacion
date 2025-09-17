@@ -26,10 +26,10 @@ export class ProductDetailComponent implements OnInit {
   readonly sizes: string[] = ['XS', 'S', 'M', 'L', 'XL'];
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private productService: ProductService,
-    private cartService: CartService
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly productService: ProductService,
+    private readonly cartService: CartService
   ) { }
 
   ngOnInit(): void {

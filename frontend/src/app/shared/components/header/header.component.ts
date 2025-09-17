@@ -34,11 +34,11 @@ export class HeaderComponent implements OnInit {
   private allProducts: Product[] = [];
 
   constructor(
-    private router: Router,
-    private authService: AuthService,
-    private productService: ProductService,
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly productService: ProductService,
     public cartService: CartService,
-    private toastr: ToastrService
+    private readonly toastr: ToastrService
   ) { }
 
   ngOnInit() {

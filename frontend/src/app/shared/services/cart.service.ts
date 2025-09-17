@@ -14,9 +14,9 @@ export type { CartItem, Cart, CartTotal } from '../interfaces/cart.interface';
   providedIn: 'root'
 })
 export class CartService {
-  private cartItems = signal<CartItem[]>([]);
-  private cartId = signal<number | null>(null);
-  private isLoading = signal<boolean>(false);
+  private readonly cartItems = signal<CartItem[]>([]);
+  private readonly cartId = signal<number | null>(null);
+  private readonly isLoading = signal<boolean>(false);
 
   totalItems = computed(() => this.cartItems().reduce((total, item) => total + item.quantity, 0));
   totalAmount = computed(() => this.cartItems().reduce((total, item) => total + (item.quantity * item.product.price), 0));
@@ -25,9 +25,9 @@ export class CartService {
   loading = this.isLoading.asReadonly();
 
   constructor(
-    private localCartService: LocalCartService,
-    private authService: AuthService,
-    private toastr: ToastrService
+    private readonly localCartService: LocalCartService,
+    private readonly authService: AuthService,
+    private readonly toastr: ToastrService
   ) {
     // Initialize cart when user logs in
     this.authService.currentUser$.subscribe((user: any) => {

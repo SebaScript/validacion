@@ -15,8 +15,8 @@ export class LocalUserService {
   private initialized = false;
 
   constructor(
-    private toastr: ToastrService,
-    private cryptoService: CryptoService
+    private readonly toastr: ToastrService,
+    private readonly cryptoService: CryptoService
   ) {
     this.init();
   }
