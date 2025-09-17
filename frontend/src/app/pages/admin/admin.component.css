@@ -319,6 +319,17 @@ span.material-icons:hover {
   color: var(--font-color);
 }
 
+
+.section-title {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--font-color);
+}
+
+
 .form-group input,
 .form-group select,
 .form-group textarea {
