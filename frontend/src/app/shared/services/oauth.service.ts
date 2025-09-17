@@ -189,7 +189,7 @@ export class OAuthService {
   }
 
   // Parse OAuth callback parameters (legacy support)
-  parseCallbackParams(): { token: string | null, user: unknown | null } {
+  parseCallbackParams(): { token: string | null, user: unknown } {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const userParam = urlParams.get('user');
