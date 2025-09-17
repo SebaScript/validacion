@@ -30,7 +30,40 @@ module.exports = function (config) {
       reporters: [
         { type: 'html' },
         { type: 'text-summary' },
-        { type: 'lcov' }
+        { type: 'lcovonly' }
+      ],
+      check: {
+        global: {
+          statements: 90,
+          branches: 85,
+          functions: 90,
+          lines: 90
+        }
+      },
+      // Exclude files from coverage
+      exclude: [
+        // Interfaces - No testable logic
+        '**/interfaces/**/*.ts',
+
+        // Validators - Simple validation logic, covered by service tests
+        '**/validators/**/*.ts',
+
+        // Environment files - Configuration only
+        '**/environments/**/*.ts',
+
+        // Constants and utilities - Simple exports
+        '**/utils/constants.ts',
+
+        // Test files themselves
+        '**/*.spec.ts',
+        '**/test/**/*.ts',
+
+        // Main entry points
+        '**/main.ts',
+        '**/polyfills.ts',
+
+        // Angular generated files
+        '**/*.d.ts'
       ]
     },
     reporters: ['progress', 'kjhtml', 'coverage'],

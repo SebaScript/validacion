@@ -96,7 +96,13 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "codeCoverageExclude": [
+              "src/app/shared/interfaces/**/*",
+              "src/app/shared/validators/**/*",
+              "src/environments/**/*",
+              "src/app/shared/utils/constants.ts"
+            ]
           }
         }
       }
