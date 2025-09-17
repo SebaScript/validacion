@@ -14,8 +14,8 @@ export class LocalCartService {
   private readonly CART_ITEM_ID_COUNTER_KEY = 'vallmere_cart_item_id_counter';
 
   constructor(
-    private productService: ProductService,
-    private toastr: ToastrService
+    private readonly productService: ProductService,
+    private readonly toastr: ToastrService
   ) {}
 
   // Cart Management Methods

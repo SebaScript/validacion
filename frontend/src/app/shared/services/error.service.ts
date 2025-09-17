@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ErrorService {
 
-  constructor(private toastr: ToastrService) {}
+  constructor(private readonly toastr: ToastrService) {}
 
   handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -7,12 +7,11 @@ import { CategoryValidators, CategoryValidationError } from '../validators/categ
 export class CategoryService {
   private readonly STORAGE_KEY = 'categories';
   private readonly COUNTER_KEY = 'category_counter';
-
-  private _selected = signal<string>('New');
-  selectedCategory = this._selected.asReadonly();
-
-  private categoriesSubject = new BehaviorSubject<Category[]>([]);
+  private readonly _selected = signal<string>('New');
+  private readonly categoriesSubject = new BehaviorSubject<Category[]>([]);
+  
   categories$ = this.categoriesSubject.asObservable();
+  selectedCategory = this._selected.asReadonly();
 
   constructor() {
     this.initializeStorage();

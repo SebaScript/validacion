@@ -21,11 +21,11 @@ export class SignUpComponent implements OnInit {
   isGoogleLoading = false;
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private authService: AuthService,
-    private oauthService: OAuthService,
-    private toastr: ToastrService
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly oauthService: OAuthService,
+    private readonly toastr: ToastrService
   ) {}
 
   ngOnInit(): void {

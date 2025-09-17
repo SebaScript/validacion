@@ -12,7 +12,7 @@ import { ProductService } from '../../shared/services/product.service';
   styleUrl: './landing.component.css'
 })
 export class LandingComponent {
-  private allProducts = signal<Product[]>([]);
+  private readonly allProducts = signal<Product[]>([]);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
 
@@ -24,8 +24,8 @@ export class LandingComponent {
   });
 
   constructor(
-    private catSvc: CategoryService,
-    private productService: ProductService
+    private readonly catSvc: CategoryService,
+    private readonly productService: ProductService
   ) {}
 
   ngOnInit() {

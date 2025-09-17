@@ -16,9 +16,9 @@ export class AuthService {
   currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(
-    private localUserService: LocalUserService,
-    private router: Router,
-    private toastr: ToastrService
+    private readonly localUserService: LocalUserService,
+    private readonly router: Router,
+    private readonly toastr: ToastrService
   ) {
     // Check if we have a stored token and user
     this.checkLocalStorage();
