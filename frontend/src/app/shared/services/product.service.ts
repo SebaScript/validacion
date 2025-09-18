@@ -19,7 +19,6 @@ export class ProductService {
   private cleanupDuplicateStorage(): void {
     // Remove old duplicate storage keys if they exist
     const oldProducts = localStorage.getItem('vallmere_products');
-    // const oldCounter = localStorage.getItem('vallmere_product_id_counter');
 
     if (oldProducts) {
       console.log('Cleaning up duplicate product storage...');
