@@ -13,11 +13,11 @@ export class AddressService {
   constructor(
     private readonly localUserService: LocalUserService,
     private readonly authService: AuthService
-  ) {}
+  ) { }
 
   getUserAddresses(): Observable<Address[]> {
     const currentUser = this.authService.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 
@@ -27,7 +27,7 @@ export class AddressService {
 
   getAddress(id: number): Observable<Address> {
     const currentUser = this.authService.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 
@@ -40,7 +40,7 @@ export class AddressService {
 
   createAddress(address: CreateAddressRequest): Observable<Address> {
     const currentUser = this.authService.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 
@@ -54,7 +54,7 @@ export class AddressService {
 
   updateAddress(id: number, address: UpdateAddressRequest): Observable<Address> {
     const currentUser = this.authService.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 
@@ -68,7 +68,7 @@ export class AddressService {
 
   setDefaultAddress(id: number): Observable<Address> {
     const currentUser = this.authService.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 
@@ -82,7 +82,7 @@ export class AddressService {
 
   deleteAddress(id: number): Observable<void> {
     const currentUser = this.authService.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 

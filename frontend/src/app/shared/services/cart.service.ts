@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LocalCartService } from './local-cart.service';
 import { AuthService } from './auth.service';
 import { Product } from '../interfaces/product.interface';
-import { CartItem} from '../interfaces/cart.interface';
+import { CartItem } from '../interfaces/cart.interface';
 
 // Re-export interfaces for backward compatibility
 export type { CartItem, Cart, CartTotal } from '../interfaces/cart.interface';
@@ -41,8 +41,8 @@ export class CartService {
 
   private loadCart(): void {
     const currentUser = this.authService.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
-      return;
+    if (!currentUser?.userId) {
+      return throwError(() => new Error('No authenticated user'));
     }
 
     this.isLoading.set(true);
@@ -68,9 +68,8 @@ export class CartService {
 
   addToCart(product: Product, quantity: number = 1): Observable<CartItem | void> {
     const currentUser = this.authService.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
-      this.toastr.error('Please log in to add items to cart', 'Authentication Required');
-      return throwError(() => new Error('User not logged in'));
+    if (!currentUser?.userId) {
+      return throwError(() => new Error('No authenticated user'));
     }
 
     const addItemRequest = {

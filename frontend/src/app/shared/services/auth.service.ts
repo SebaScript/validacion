@@ -138,8 +138,7 @@ export class AuthService {
   // Get current user profile from localStorage
   getProfile(): Observable<User> {
     const currentUser = this.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
-      this.logout();
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 
@@ -157,7 +156,7 @@ export class AuthService {
   // Update user profile
   updateProfile(userData: Partial<User>): Observable<User> {
     const currentUser = this.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 

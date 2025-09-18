@@ -69,10 +69,11 @@ export class ProductDetailComponent implements OnInit {
 
   changeImage(direction: 'prev' | 'next') {
     const prod = this.product();
-    if (!prod || !prod.carouselUrl || prod.carouselUrl.length <= 1) return;
+    const total = prod?.carouselUrl?.length ?? 0;
+
+    if (total <= 1) return;
 
     const current = this.currentImageIndex();
-    const total = prod.carouselUrl.length;
 
     if (direction === 'prev') {
       this.currentImageIndex.set((current + total - 1) % total);
