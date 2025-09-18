@@ -11,7 +11,7 @@ export class ProductService {
   private readonly STORAGE_KEY = 'products';
   private readonly COUNTER_KEY = 'product_counter';
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private readonly categoryService: CategoryService) {
     this.cleanupDuplicateStorage();
     this.initializeStorage();
   }
@@ -19,7 +19,7 @@ export class ProductService {
   private cleanupDuplicateStorage(): void {
     // Remove old duplicate storage keys if they exist
     const oldProducts = localStorage.getItem('vallmere_products');
-    const oldCounter = localStorage.getItem('vallmere_product_id_counter');
+    // const oldCounter = localStorage.getItem('vallmere_product_id_counter');
 
     if (oldProducts) {
       console.log('Cleaning up duplicate product storage...');

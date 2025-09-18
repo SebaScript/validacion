@@ -20,8 +20,8 @@ export class OAuthService {
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private localUserService: LocalUserService,
-    private toastr: ToastrService
+    private readonly localUserService: LocalUserService,
+    private readonly toastr: ToastrService
   ) { }
 
   // Initialize Google OAuth
@@ -208,9 +208,8 @@ export class OAuthService {
 
   // Check if user is authenticated via OAuth
   isOAuthAuthenticated(): boolean {
-    const currentUser = this.authService.getCurrentUser();
     const token = localStorage.getItem('access_token');
-    return !!(currentUser && token && token.startsWith('local_token_'));
+    return !!(this.authService.getCurrentUser()?.userId && token?.startsWith('local_token_'));
   }
 
   // Clear OAuth session

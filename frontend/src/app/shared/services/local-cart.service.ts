@@ -3,6 +3,7 @@ import { Cart, CartItem, AddCartItemRequest, CartTotal } from '../interfaces/car
 import { Product } from '../interfaces/product.interface';
 import { ProductService } from './product.service';
 import { ToastrService } from 'ngx-toastr';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -254,16 +255,7 @@ export class LocalCartService {
 
   private async getProductById(productId: number): Promise<Product | null> {
     try {
-      // Convert Observable to Promise using firstValueFrom or similar
-      return new Promise((resolve, reject) => {
-        this.productService.getProductById(productId).subscribe({
-          next: (product) => resolve(product),
-          error: (error) => {
-            console.error('Error getting product by ID:', error);
-            resolve(null);
-          }
-        });
-      });
+      return await firstValueFrom(this.productService.getProductById(productId));
     } catch (error) {
       console.error('Error getting product by ID:', error);
       return null;
