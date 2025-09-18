@@ -61,7 +61,7 @@
 
 <!-- Modal -->
 @if (isModalOpen()) {
-<div class="modal-backdrop" (click)="closeModal()" (keydown.enter)="closeModal()" tabindex="0" role="button"
+<button class="modal-backdrop" (click)="closeModal()" (keydown.enter)="closeModal()"
   aria-label="Close modal with Enter">
   <dialog class="modal" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" open
     #modalContent>
@@ -73,5 +73,5 @@
       <p>{{ modalBody() }}</p>
     </div>
   </dialog>
-</div>
+</button>
 }
