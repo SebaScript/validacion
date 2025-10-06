@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../shared/services/auth.service';
 import { OAuthService } from '../../shared/services/oauth.service';
+import { User } from '../../shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-auth-callback',
@@ -79,19 +80,20 @@ export class AuthCallbackComponent implements OnInit {
       const { token, user } = this.oauthService.parseCallbackParams();
 
       if (token && user) {
+        const typedUser = user as User;
         // Store the token and user data
         localStorage.setItem('access_token', token);
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('currentUser', JSON.stringify(typedUser));
 
         // Update auth service state
-        this.authService.currentUserSubject.next(user);
+        this.authService.currentUserSubject.next(typedUser);
         this.authService.isUserLogged.set(true);
-        this.authService.isAdminLogged.set(user.role === 'admin');
+        this.authService.isAdminLogged.set(typedUser.role === 'admin');
 
         // Show success message
-        this.toastr.success(`Welcome ${user.name}!`, 'Login Successful');
+        this.toastr.success(`Welcome ${typedUser.name}!`, 'Login Successful');
 
-        this.navigateBasedOnRole(user);
+        this.navigateBasedOnRole(typedUser);
       } else {
         // No token or user data, redirect to login with error
         this.toastr.error('Authentication failed - no credentials found', 'Login Error');

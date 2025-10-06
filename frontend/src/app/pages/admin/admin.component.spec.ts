@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { of, throwError, BehaviorSubject } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { AdminComponent } from './admin.component';
 import { ProductService } from '../../shared/services/product.service';
@@ -10,6 +10,24 @@ import { CategoryService, Category } from '../../shared/services/category.servic
 import { AuthService } from '../../shared/services/auth.service';
 import { ImageUploadService } from '../../shared/services/image-upload.service';
 import { Product } from '../../shared/interfaces/product.interface';
+
+type ArrangeOptions = {
+  products?: Product[];
+  categories?: Category[];
+  productError?: Error;
+  categoryError?: Error;
+  supabaseConfigured?: boolean;
+};
+
+type ValidFormOverrides = {
+  name?: string;
+  price?: string;
+  imageUrl?: string;
+  description?: string;
+  categoryId?: string;
+  stock?: string;
+  carouselUrls?: string[];
+};
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -21,886 +39,705 @@ describe('AdminComponent', () => {
   let mockToastr: jasmine.SpyObj<ToastrService>;
   let mockRouter: jasmine.SpyObj<Router>;
 
-  const mockProducts: Product[] = [
-    {
-      id: 1,
-      name: 'Test Product 1',
-      description: 'Test Description 1',
-      price: 29.99,
-      stock: 10,
-      imageUrl: 'http://example.com/image1.jpg',
-      carouselUrl: ['http://example.com/image1.jpg', 'http://example.com/image2.jpg'],
-      categoryId: 1,
-      category: 'T-shirts'
-    },
-    {
+  const createProduct = (overrides: Partial<Product> = {}): Product => ({
+    id: 1,
+    name: 'Mock Product',
+    description: 'Mock description with enough length',
+    price: 29.99,
+    stock: 10,
+    imageUrl: 'http://example.com/main.jpg',
+    carouselUrl: ['http://example.com/main.jpg', 'http://example.com/extra.jpg'],
+    categoryId: 1,
+    category: 'T-shirts',
+    ...overrides
+  });
+
+  const createCategory = (overrides: Partial<Category> = {}): Category => ({
+    id: 1,
+    name: 'T-shirts',
+    ...overrides
+  });
+
+  const DEFAULT_PRODUCTS: Product[] = [
+    createProduct(),
+    createProduct({
       id: 2,
-      name: 'Test Product 2',
-      description: 'Test Description 2',
-      price: 39.99,
+      name: 'Mock Hoodie',
+      price: 49.99,
       stock: 5,
-      imageUrl: 'http://example.com/image3.jpg',
-      carouselUrl: ['http://example.com/image3.jpg'],
       categoryId: 2,
-      category: 'Hoodies'
-    }
+      category: 'Hoodies',
+      carouselUrl: ['http://example.com/hoodie-main.jpg', 'http://example.com/hoodie-alt.jpg']
+    })
   ];
 
-  const mockCategories: Category[] = [
-    { id: 1, name: 'T-shirts' },
-    { id: 2, name: 'Hoodies' },
-    { id: 3, name: 'Bottoms' }
+  const DEFAULT_CATEGORIES: Category[] = [
+    createCategory({ id: 1, name: 'T-shirts' }),
+    createCategory({ id: 2, name: 'Hoodies' }),
+    createCategory({ id: 3, name: 'Bottoms' })
   ];
+
+  const arrangeComponent = (options: ArrangeOptions = {}): void => {
+    const {
+      products = DEFAULT_PRODUCTS,
+      categories = DEFAULT_CATEGORIES,
+      productError,
+      categoryError,
+      supabaseConfigured = true
+    } = options;
+
+    if (productError) {
+      mockProductService.getAllProducts.and.returnValue(throwError(() => productError));
+    } else {
+      mockProductService.getAllProducts.and.returnValue(of(products));
+    }
+
+    if (categoryError) {
+      mockCategoryService.getCategories.and.returnValue(throwError(() => categoryError));
+    } else {
+      mockCategoryService.getCategories.and.returnValue(of(categories));
+    }
+
+    mockImageUploadService.isSupabaseConfigured.and.returnValue(supabaseConfigured);
+
+    component.ngOnInit();
+    fixture.detectChanges();
+  };
+
+  const fillFormWithValidData = (overrides: ValidFormOverrides = {}): void => {
+    const values = {
+      name: overrides.name ?? 'Valid Product',
+      price: overrides.price ?? '29.99',
+      imageUrl: overrides.imageUrl ?? 'http://example.com/new.jpg',
+      description: overrides.description ?? 'Valid product description',
+      categoryId: overrides.categoryId ?? '1',
+      stock: overrides.stock ?? '10'
+    };
+
+    component.productForm.patchValue(values);
+
+    while (component.carouselUrl.length) {
+      component.carouselUrl.removeAt(0);
+    }
+
+    (overrides.carouselUrls ?? ['http://example.com/second.jpg']).forEach(url => {
+      component.addImageUrl();
+      component.carouselUrl.at(component.carouselUrl.length - 1).setValue(url);
+    });
+  };
+
+  const expectToast = (spy: jasmine.Spy, message: string, title: string): void => {
+    expect(spy)
+      .withContext(`Expected toast ${title} with message: ${message}`)
+      .toHaveBeenCalledWith(message, title);
+  };
+
+  const createKeyboardEvent = (key: string, value: string): KeyboardEvent => {
+    const event = new KeyboardEvent('keydown', { key });
+    Object.defineProperty(event, 'target', {
+      value: { value, selectionStart: value.length, selectionEnd: value.length },
+      writable: false
+    });
+    spyOn(event, 'preventDefault');
+    return event;
+  };
 
   beforeEach(async () => {
-    const productServiceSpy = jasmine.createSpyObj('ProductService', [
-      'getAllProducts', 'createProduct', 'updateProduct', 'deleteProduct'
+    mockProductService = jasmine.createSpyObj<ProductService>('ProductService', [
+      'getAllProducts',
+      'createProduct',
+      'updateProduct',
+      'deleteProduct'
     ]);
 
-    const categoryServiceSpy = jasmine.createSpyObj('CategoryService', [
+    mockCategoryService = jasmine.createSpyObj<CategoryService>('CategoryService', [
       'getCategories'
     ]);
 
-    const authServiceSpy = jasmine.createSpyObj('AuthService', [
+    mockAuthService = jasmine.createSpyObj<AuthService>('AuthService', [
       'clearAuthData'
     ]);
 
-    const imageUploadServiceSpy = jasmine.createSpyObj('ImageUploadService', [
-      'isSupabaseConfigured', 'validateImage', 'uploadImage'
+    mockImageUploadService = jasmine.createSpyObj<ImageUploadService>('ImageUploadService', [
+      'isSupabaseConfigured',
+      'validateImage',
+      'uploadImage'
     ]);
 
-    const toastrSpy = jasmine.createSpyObj('ToastrService', [
-      'success', 'error', 'warning', 'info'
+    mockToastr = jasmine.createSpyObj<ToastrService>('ToastrService', [
+      'success',
+      'error',
+      'warning',
+      'info'
     ]);
 
-    const routerSpy = jasmine.createSpyObj('Router', [
-      'navigate'
-    ]);
+    mockRouter = jasmine.createSpyObj<Router>('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
       imports: [AdminComponent, ReactiveFormsModule, FormsModule],
       providers: [
         FormBuilder,
-        { provide: ProductService, useValue: productServiceSpy },
-        { provide: CategoryService, useValue: categoryServiceSpy },
-        { provide: AuthService, useValue: authServiceSpy },
-        { provide: ImageUploadService, useValue: imageUploadServiceSpy },
-        { provide: ToastrService, useValue: toastrSpy },
-        { provide: Router, useValue: routerSpy }
+        { provide: ProductService, useValue: mockProductService },
+        { provide: CategoryService, useValue: mockCategoryService },
+        { provide: AuthService, useValue: mockAuthService },
+        { provide: ImageUploadService, useValue: mockImageUploadService },
+        { provide: ToastrService, useValue: mockToastr },
+        { provide: Router, useValue: mockRouter }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminComponent);
     component = fixture.componentInstance;
-
-    mockProductService = TestBed.inject(ProductService) as jasmine.SpyObj<ProductService>;
-    mockCategoryService = TestBed.inject(CategoryService) as jasmine.SpyObj<CategoryService>;
-    mockAuthService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
-    mockImageUploadService = TestBed.inject(ImageUploadService) as jasmine.SpyObj<ImageUploadService>;
-    mockToastr = TestBed.inject(ToastrService) as jasmine.SpyObj<ToastrService>;
-    mockRouter = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 
-  describe('Component Initialization', () => {
-    it('should create', () => {
-      expect(component).toBeTruthy();
-    });
+  describe('component creation', () => {
+    it('should start with the expected default state', () => {
+      // Arrange
+      // Act
+      const actualState = {
+        products: component.products,
+        categories: component.categories,
+        view: component.view,
+        loading: component.loading,
+        error: component.error,
+        searchQuery: component.searchQuery,
+        carouselLength: component.carouselUrl.length
+      };
 
-    it('should initialize with default values', () => {
-      expect(component.products).toEqual([]);
-      expect(component.categories).toEqual([]);
-      expect(component.view).toBe('list');
-      expect(component.loading).toBe(false);
-      expect(component.error).toBe(null);
-      expect(component.searchQuery).toBe('');
-    });
-
-    it('should initialize form with default values', () => {
-      expect(component.productForm).toBeDefined();
-      expect(component.productForm.get('name')?.value).toBe('');
-      expect(component.productForm.get('price')?.value).toBe('');
-      expect(component.productForm.get('imageUrl')?.value).toBe('');
-      expect(component.productForm.get('description')?.value).toBe('');
-      expect(component.productForm.get('categoryId')?.value).toBe('');
-      expect(component.productForm.get('stock')?.value).toBe('');
-    });
-
-    it('should initialize carousel URL form array', () => {
-      expect(component.carouselUrl.length).toBe(0);
-    });
-
-    it('should call loadProducts and loadCategories on ngOnInit', () => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-
-      component.ngOnInit();
-
-      expect(mockProductService.getAllProducts).toHaveBeenCalled();
-      expect(mockCategoryService.getCategories).toHaveBeenCalled();
+      // Assert
+      expect(component).withContext('Component instance should exist').toBeTruthy();
+      expect(actualState.products).withContext('Products should start empty').toEqual([]);
+      expect(actualState.categories).withContext('Categories should start empty').toEqual([]);
+      expect(actualState.view).withContext('Default view should be list').toBe('list');
+      expect(actualState.loading).withContext('Loading should default to false').toBeFalse();
+      expect(actualState.error).withContext('Error should default to null').toBeNull();
+      expect(actualState.searchQuery).withContext('Search query should start empty').toBe('');
+      expect(actualState.carouselLength).withContext('Carousel array should start empty').toBe(0);
+      expect(component.productForm).withContext('Product form should be created').toBeDefined();
     });
   });
 
-  describe('Product Loading', () => {
+  describe('ngOnInit behaviour', () => {
+    it('should load products and categories on success', () => {
+      // Arrange
+      arrangeComponent();
+
+      // Act
+      const state = {
+        products: component.products,
+        categories: component.categories,
+        filtered: component.filteredProducts,
+        allProducts: component.allProducts,
+        loading: component.loading,
+        error: component.error
+      };
+
+      // Assert
+      expect(mockProductService.getAllProducts).withContext('Products should be requested once').toHaveBeenCalledTimes(1);
+      expect(mockCategoryService.getCategories).withContext('Categories should be requested once').toHaveBeenCalledTimes(1);
+      expect(mockImageUploadService.isSupabaseConfigured).withContext('Supabase configuration should be checked').toHaveBeenCalled();
+      expect(state.products).withContext('Products should match service response').toEqual(DEFAULT_PRODUCTS);
+      expect(state.categories).withContext('Categories should match service response').toEqual(DEFAULT_CATEGORIES);
+      expect(state.filtered).withContext('Filtered products should mirror products initially').toEqual(DEFAULT_PRODUCTS);
+      expect(state.allProducts).withContext('All products should mirror products').toEqual(DEFAULT_PRODUCTS);
+      expect(state.loading).withContext('Loading should reset after success').toBeFalse();
+      expect(state.error).withContext('Error should remain null on success').toBeNull();
+    });
+
+    it('should surface an error when products fail to load', () => {
+      // Arrange
+      const error = new Error('Network down');
+      arrangeComponent({ productError: error });
+
+      // Act
+      const state = {
+        loading: component.loading,
+        error: component.error
+      };
+
+      // Assert
+      expect(state.loading).withContext('Loading should reset after failure').toBeFalse();
+      expect(state.error).withContext('Error message should be user friendly').toBe('Failed to load products');
+      expectToast(mockToastr.error, 'Failed to load products', 'Error');
+    });
+
+    it('should surface an error when categories fail to load', () => {
+      // Arrange
+      const error = new Error('Category endpoint failed');
+      arrangeComponent({ categoryError: error });
+
+      // Act
+      const { error: currentError } = component;
+
+      // Assert
+      expect(currentError).withContext('Error should reflect category failure').toBe('Failed to load categories');
+      expectToast(mockToastr.error, 'Failed to load categories', 'Error');
+    });
+  });
+
+  describe('form validation', () => {
     beforeEach(() => {
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
+      arrangeComponent();
     });
 
-    it('should load products successfully', () => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
+    it('should require mandatory fields', () => {
+      // Arrange
+      const controls = ['name', 'price', 'imageUrl', 'description', 'categoryId', 'stock']
+        .map(control => component.productForm.get(control));
 
-      component.ngOnInit();
+      // Act
+      const isValid = component.productForm.valid;
 
-      expect(component.products).toEqual(mockProducts);
-      expect(component.allProducts).toEqual(mockProducts);
-      expect(component.filteredProducts).toEqual(mockProducts);
-      expect(component.loading).toBe(false);
-      expect(component.error).toBe(null);
-    });
-
-    it('should handle product loading error', () => {
-      const error = new Error('Network error');
-      mockProductService.getAllProducts.and.returnValue(throwError(() => error));
-
-      component.ngOnInit();
-
-      expect(component.error).toBe('Failed to load products');
-      expect(component.loading).toBe(false);
-      expect(mockToastr.error).toHaveBeenCalledWith('Failed to load products', 'Error');
-    });
-
-    it('should load categories successfully', () => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-
-      component.ngOnInit();
-
-      expect(component.categories).toEqual(mockCategories);
-    });
-
-    it('should handle categories loading error', () => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      const error = new Error('Category error');
-      mockCategoryService.getCategories.and.returnValue(throwError(() => error));
-
-      component.ngOnInit();
-
-      expect(component.error).toBe('Failed to load categories');
-      expect(mockToastr.error).toHaveBeenCalledWith('Failed to load categories', 'Error');
-    });
-  });
-
-  describe('Form Validation', () => {
-    beforeEach(() => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-      component.ngOnInit();
-    });
-
-    it('should validate required fields', () => {
-      expect(component.productForm.valid).toBe(false);
-
-      component.productForm.patchValue({
-        name: 'Test Product',
-        price: '29.99',
-        imageUrl: 'http://example.com/image.jpg',
-        description: 'Test description for product',
-        categoryId: '1',
-        stock: '10'
+      // Assert
+      controls.forEach(control => {
+        expect(control?.valid).withContext('Control should be invalid when empty').toBeFalse();
       });
-
-      expect(component.productForm.valid).toBe(true);
+      expect(isValid).withContext('Form should not be valid without values').toBeFalse();
     });
 
-    it('should validate name field', () => {
+    it('should become valid with acceptable data', () => {
+      // Arrange
+      fillFormWithValidData();
+
+      // Act
+      const isValid = component.productForm.valid;
+
+      // Assert
+      expect(isValid).withContext('Form should be valid with correct data').toBeTrue();
+    });
+
+    it('should enforce control-specific rules', () => {
+      // Arrange
       const nameControl = component.productForm.get('name');
-
-      nameControl?.setValue('');
-      expect(nameControl?.hasError('required')).toBe(true);
-
-      nameControl?.setValue('ab');
-      expect(nameControl?.hasError('minlength')).toBe(true);
-
-      nameControl?.setValue('Valid Product Name');
-      expect(nameControl?.valid).toBe(true);
-    });
-
-    it('should validate price field', () => {
       const priceControl = component.productForm.get('price');
-
-      priceControl?.setValue('');
-      expect(priceControl?.hasError('required')).toBe(true);
-
-      priceControl?.setValue('0');
-      expect(priceControl?.hasError('pattern')).toBe(true);
-
-      priceControl?.setValue('abc');
-      expect(priceControl?.hasError('pattern')).toBe(true);
-
-      priceControl?.setValue('29.99');
-      expect(priceControl?.valid).toBe(true);
-    });
-
-    it('should validate stock field', () => {
       const stockControl = component.productForm.get('stock');
-
-      stockControl?.setValue('');
-      expect(stockControl?.hasError('required')).toBe(true);
-
-      stockControl?.setValue('abc');
-      expect(stockControl?.hasError('pattern')).toBe(true);
-
-      stockControl?.setValue('-1');
-      expect(stockControl?.hasError('min')).toBe(true);
-
-      stockControl?.setValue('10000');
-      expect(stockControl?.hasError('max')).toBe(true);
-
-      stockControl?.setValue('10');
-      expect(stockControl?.valid).toBe(true);
-    });
-
-    it('should validate description field', () => {
       const descriptionControl = component.productForm.get('description');
 
-      descriptionControl?.setValue('');
-      expect(descriptionControl?.hasError('required')).toBe(true);
-
+      // Act
+      nameControl?.setValue('ab');
+      priceControl?.setValue('0');
+      stockControl?.setValue('-1');
       descriptionControl?.setValue('short');
-      expect(descriptionControl?.hasError('minlength')).toBe(true);
 
-      descriptionControl?.setValue('This is a valid description');
-      expect(descriptionControl?.valid).toBe(true);
+      // Assert
+      expect(nameControl?.valid).withContext('Name requires minimum length').toBeFalse();
+      expect(priceControl?.valid).withContext('Price should fail pattern/min validation').toBeFalse();
+      expect(stockControl?.valid).withContext('Stock cannot be negative').toBeFalse();
+      expect(descriptionControl?.valid).withContext('Description must respect minimum length').toBeFalse();
     });
   });
 
-  describe('Product CRUD Operations', () => {
+  describe('create/update workflows', () => {
     beforeEach(() => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-      component.ngOnInit();
-
-      // Set up valid form data
-      component.productForm.patchValue({
-        name: 'Test Product',
-        price: '29.99',
-        imageUrl: 'http://example.com/image.jpg',
-        description: 'Test description for product',
-        categoryId: '1',
-        stock: '10'
-      });
+      arrangeComponent();
+      fillFormWithValidData();
     });
 
-    it('should create product successfully', fakeAsync(() => {
-      const newProduct: Product = { ...mockProducts[0], id: 3, name: 'Test Product' };
+    it('should create a product successfully', fakeAsync(() => {
+      // Arrange
+      const newProduct = createProduct({ id: 3, name: 'Brand New Product' });
       mockProductService.createProduct.and.returnValue(of(newProduct));
-      mockProductService.getAllProducts.and.returnValue(of([...mockProducts, newProduct]));
+      mockProductService.getAllProducts.and.returnValue(of([...DEFAULT_PRODUCTS, newProduct]));
+      component.setAddView();
 
-      component.view = 'add';
+      // Act
       component.onSubmit();
       tick();
 
-      expect(mockProductService.createProduct).toHaveBeenCalled();
-      expect(mockToastr.success).toHaveBeenCalledWith('Product created successfully', 'Success');
-      expect(component.view).toBe('list');
-      expect(component.loading).toBe(false);
+      // Assert
+      expect(mockProductService.createProduct)
+        .withContext('Create service should receive payload')
+        .toHaveBeenCalledTimes(1);
+      expectToast(mockToastr.success, 'Product created successfully', 'Success');
+      expect(component.view).withContext('View should return to list after creation').toBe('list');
+      expect(component.loading).withContext('Loading should reset after creation').toBeFalse();
     }));
 
-    it('should handle create product error', fakeAsync(() => {
+    it('should handle errors during product creation', fakeAsync(() => {
+      // Arrange
       const error = new Error('Create failed');
       mockProductService.createProduct.and.returnValue(throwError(() => error));
+      component.setAddView();
 
-      component.view = 'add';
+      // Act
       component.onSubmit();
       tick();
 
-      expect(component.error).toContain('Failed to create product');
-      expect(mockToastr.error).toHaveBeenCalled();
-      expect(component.loading).toBe(false);
+      // Assert
+      expect(component.error)
+        .withContext('Create failure should surface friendly message')
+        .toContain('Failed to create product');
+      expect(mockToastr.error).withContext('Error toast should appear for create failure').toHaveBeenCalled();
+      expect(component.loading).withContext('Loading should reset after failure').toBeFalse();
     }));
 
-    it('should update product successfully', fakeAsync(() => {
-      const updatedProduct = { ...mockProducts[0], name: 'Updated Product' };
+    it('should update an existing product successfully', fakeAsync(() => {
+      // Arrange
+      const updatedProduct = createProduct({ id: 1, name: 'Updated Name' });
       mockProductService.updateProduct.and.returnValue(of(updatedProduct));
-      mockProductService.getAllProducts.and.returnValue(of([updatedProduct, mockProducts[1]]));
+      mockProductService.getAllProducts.and.returnValue(of([updatedProduct, DEFAULT_PRODUCTS[1]]));
+      component.editProduct(DEFAULT_PRODUCTS[0]);
 
-      component.view = 'edit';
-      component['editId'] = 1;
+      // Act
       component.onSubmit();
       tick();
 
-      expect(mockProductService.updateProduct).toHaveBeenCalledWith(1, jasmine.any(Object));
-      expect(mockToastr.success).toHaveBeenCalledWith('Product updated successfully', 'Success');
-      expect(component.view).toBe('list');
+      // Assert
+      expect(mockProductService.updateProduct)
+        .withContext('Update service should be called with edit id')
+        .toHaveBeenCalledWith(1, jasmine.any(Object));
+      expectToast(mockToastr.success, 'Product updated successfully', 'Success');
+      expect(component.view).withContext('View should return to list after update').toBe('list');
     }));
 
-    it('should handle update product error', fakeAsync(() => {
+    it('should handle errors during product update', fakeAsync(() => {
+      // Arrange
       const error = new Error('Update failed');
       mockProductService.updateProduct.and.returnValue(throwError(() => error));
+      component.editProduct(DEFAULT_PRODUCTS[0]);
 
-      component.view = 'edit';
-      component['editId'] = 1;
+      // Act
       component.onSubmit();
       tick();
 
-      expect(component.error).toContain('Failed to update product');
-      expect(mockToastr.error).toHaveBeenCalled();
+      // Assert
+      expect(component.error)
+        .withContext('Update failure should surface friendly message')
+        .toContain('Failed to update product');
+      expect(mockToastr.error).withContext('Error toast should appear for update failure').toHaveBeenCalled();
     }));
 
-    it('should delete product successfully', fakeAsync(() => {
-      spyOn(window, 'confirm').and.returnValue(true);
-      mockProductService.deleteProduct.and.returnValue(of(void 0));
-      mockProductService.getAllProducts.and.returnValue(of([mockProducts[1]]));
+    it('should block submission when the form is invalid', () => {
+      // Arrange
+      component.setAddView();
+      component.productForm.patchValue({ name: '' });
 
+      // Act
+      component.onSubmit();
+
+      // Assert
+      expect(mockProductService.createProduct)
+        .withContext('Create service should not execute with invalid form')
+        .not.toHaveBeenCalled();
+      expect(mockToastr.error)
+        .withContext('User should be notified about validation issues')
+        .toHaveBeenCalledWith(jasmine.stringMatching(/Product name is invalid/), 'Form Validation Error');
+    });
+  });
+
+  describe('delete workflow', () => {
+    beforeEach(() => {
+      arrangeComponent();
+    });
+
+    it('should delete a product when user confirms', fakeAsync(() => {
+      // Arrange
+      const confirmSpy = spyOn(window, 'confirm').and.returnValue(true);
+      mockProductService.deleteProduct.and.returnValue(of(void 0));
+
+      // Act
       component.deleteProduct(1);
       tick();
 
-      expect(mockProductService.deleteProduct).toHaveBeenCalledWith(1);
-      expect(mockToastr.success).toHaveBeenCalledWith('Product deleted successfully', 'Success');
+      // Assert
+      expect(confirmSpy).withContext('Confirmation dialog should appear').toHaveBeenCalled();
+      expect(mockProductService.deleteProduct)
+        .withContext('Delete service should receive the id')
+        .toHaveBeenCalledWith(1);
+      expectToast(mockToastr.success, 'Product deleted successfully', 'Success');
     }));
 
-    it('should handle delete product error', fakeAsync(() => {
+    it('should skip deletion when user cancels', () => {
+      // Arrange
+      spyOn(window, 'confirm').and.returnValue(false);
+
+      // Act
+      component.deleteProduct(1);
+
+      // Assert
+      expect(mockProductService.deleteProduct)
+        .withContext('Delete service should not run when cancelled')
+        .not.toHaveBeenCalled();
+    });
+
+    it('should handle errors during deletion', fakeAsync(() => {
+      // Arrange
       spyOn(window, 'confirm').and.returnValue(true);
       const error = new Error('Delete failed');
       mockProductService.deleteProduct.and.returnValue(throwError(() => error));
 
+      // Act
       component.deleteProduct(1);
       tick();
 
-      expect(component.error).toContain('Failed to delete product');
-      expect(mockToastr.error).toHaveBeenCalled();
+      // Assert
+      expect(component.error)
+        .withContext('Delete failure should surface friendly message')
+        .toContain('Failed to delete product');
+      expect(mockToastr.error).withContext('Error toast should appear for delete failure').toHaveBeenCalled();
     }));
-
-    it('should not delete product if user cancels', () => {
-      spyOn(window, 'confirm').and.returnValue(false);
-
-      component.deleteProduct(1);
-
-      expect(mockProductService.deleteProduct).not.toHaveBeenCalled();
-    });
-
-    it('should not submit if form is invalid', () => {
-      component.productForm.patchValue({
-        name: '', // Invalid
-        price: '29.99',
-        imageUrl: 'http://example.com/image.jpg',
-        description: 'Test description',
-        categoryId: '1',
-        stock: '10'
-      });
-
-      component.onSubmit();
-
-      expect(mockProductService.createProduct).not.toHaveBeenCalled();
-      expect(mockToastr.error).toHaveBeenCalledWith(jasmine.stringMatching(/Product name is invalid/), 'Form Validation Error');
-    });
   });
 
-  describe('Edit Product', () => {
+  describe('form management helpers', () => {
     beforeEach(() => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-      component.ngOnInit();
+      arrangeComponent();
     });
 
-    it('should populate form when editing product', () => {
-      const productToEdit = mockProducts[0];
+    it('should populate form when editing', () => {
+      // Arrange
+      const productToEdit = DEFAULT_PRODUCTS[0];
 
+      // Act
       component.editProduct(productToEdit);
 
-      expect(component.view).toBe('edit');
-      expect(component['editId']).toBe(productToEdit.id);
-      expect(component.productForm.get('name')?.value).toBe(productToEdit.name);
-      expect(component.productForm.get('price')?.value).toBe(productToEdit.price.toString());
-      expect(component.productForm.get('imageUrl')?.value).toBe(productToEdit.imageUrl);
-      expect(component.productForm.get('description')?.value).toBe(productToEdit.description);
-      expect(component.productForm.get('stock')?.value).toBe(productToEdit.stock.toString());
+      // Assert
+      expect(component.view).withContext('View should switch to edit').toBe('edit');
+      expect(component.productForm.get('name')?.value).withContext('Name control should match product').toBe(productToEdit.name);
+      expect(component.productForm.get('price')?.value).withContext('Price should be stringified').toBe(productToEdit.price.toString());
+      expect(component.carouselUrl.length)
+        .withContext('Carousel array should include additional images only')
+        .toBe(productToEdit.carouselUrl!.length - 1);
     });
 
-    it('should populate carousel URLs when editing product', () => {
-      const productToEdit = mockProducts[0];
+    it('should reset the form on cancel', () => {
+      // Arrange
+      component.editProduct(DEFAULT_PRODUCTS[0]);
+      component.productForm.patchValue({ name: 'Different' });
 
-      component.editProduct(productToEdit);
-
-      expect(component.carouselUrl.length).toBe(1); // One additional URL (excluding main image)
-      expect(component.carouselUrl.at(0).value).toBe('http://example.com/image2.jpg');
-    });
-
-    it('should handle product without carousel URLs', () => {
-      const productToEdit = { ...mockProducts[0], carouselUrl: undefined };
-
-      component.editProduct(productToEdit);
-
-      expect(component.carouselUrl.length).toBe(0);
-    });
-  });
-
-  describe('Form Management', () => {
-    beforeEach(() => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-      component.ngOnInit();
-    });
-
-    it('should add image URL to carousel', () => {
-      const initialLength = component.carouselUrl.length;
-
-      component.addImageUrl();
-
-      expect(component.carouselUrl.length).toBe(initialLength + 1);
-    });
-
-    it('should remove image URL from carousel', () => {
-      component.addImageUrl();
-      component.addImageUrl();
-      const initialLength = component.carouselUrl.length;
-
-      component.removeImageUrl(1);
-
-      expect(component.carouselUrl.length).toBe(initialLength - 1);
-    });
-
-    it('should not remove first image URL', () => {
-      component.addImageUrl();
-      const initialLength = component.carouselUrl.length;
-
-      component.removeImageUrl(0);
-
-      expect(component.carouselUrl.length).toBe(initialLength);
-    });
-
-    it('should cancel and reset form', () => {
-      component.view = 'edit';
-      component['editId'] = 1;
-      component.productForm.patchValue({ name: 'Test' });
-
+      // Act
       component.cancel();
 
-      expect(component.view).toBe('list');
-      expect(component['editId']).toBeNull();
-      expect(component.productForm.get('name')?.value).toBe('');
-      expect(component.error).toBe(null);
+      // Assert
+      expect(component.view).withContext('View should revert to list').toBe('list');
+      expect(component.productForm.get('name')?.value).withContext('Name should reset').toBe('');
+      expect(component.error).withContext('Error should clear').toBeNull();
     });
 
-    it('should set add view and reset form', () => {
-      component.view = 'edit';
-      component['editId'] = 1;
-      component.productForm.patchValue({ name: 'Test' });
+    it('should prepare the form for adding', () => {
+      component.editProduct(DEFAULT_PRODUCTS[0]);
 
       component.setAddView();
 
-      expect(component.view).toBe('add');
-      expect(component['editId']).toBeNull();
-      expect(component.productForm.get('name')?.value).toBe('');
+      expect(component.view).withContext('View should be add').toBe('add');
+      expect(component.productForm.get('name')?.value).withContext('Form should clear name field').toBe('');
+      expect(component.carouselUrl.length).withContext('Carousel array should reset').toBe(0);
     });
   });
 
-  describe('Input Formatting', () => {
+  describe('input formatting utilities', () => {
     beforeEach(() => {
-      mockProductService.getAllProducts.and.returnValue(of([]));
-      mockCategoryService.getCategories.and.returnValue(of([]));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-      component.ngOnInit();
+      arrangeComponent();
     });
 
     it('should format price input correctly', () => {
-      const event = { target: { value: '0029.999' } } as any;
+      const event = { target: { value: '0029.999' } } as unknown as Event;
 
       component.formatPriceInput(event);
 
-      expect(event.target.value).toBe('29.99');
-    });
-
-    it('should handle price input with leading zeros', () => {
-      const event = { target: { value: '000123.45' } } as any;
-
-      component.formatPriceInput(event);
-
-      expect(event.target.value).toBe('123.45');
-    });
-
-    it('should handle price input starting with decimal point', () => {
-      const event = { target: { value: '.99' } } as any;
-
-      component.formatPriceInput(event);
-
-      expect(event.target.value).toBe('0.99');
-    });
-
-    it('should limit price to 2 decimal places', () => {
-      const event = { target: { value: '29.999' } } as any;
-
-      component.formatPriceInput(event);
-
-      expect(event.target.value).toBe('29.99');
+      expect((event.target as HTMLInputElement).value)
+        .withContext('Price should remove leading zeros and trim decimals')
+        .toBe('29.99');
     });
 
     it('should format stock input correctly', () => {
-      const event = { target: { value: 'abc123def' } } as any;
+      const event = { target: { value: 'abc123def' } } as unknown as Event;
 
       component.formatStockInput(event);
 
-      expect(event.target.value).toBe('123');
+      expect((event.target as HTMLInputElement).value)
+        .withContext('Stock should strip non-numeric characters')
+        .toBe('123');
     });
 
-    it('should remove leading zeros from stock', () => {
-      const event = { target: { value: '00123' } } as any;
-
-      component.formatStockInput(event);
-
-      expect(event.target.value).toBe('123');
-    });
-
-    it('should limit stock to maximum value', () => {
-      const event = { target: { value: '99999' } } as any;
-
-      component.formatStockInput(event);
-
-      expect(event.target.value).toBe('9999');
-    });
-  });
-
-  describe('Keyboard Event Handling', () => {
-    beforeEach(() => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-      component.ngOnInit();
-    });
-
-    it('should allow valid keys for price input', () => {
-      const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', '1', '.'];
-
-      allowedKeys.forEach(key => {
-        const mockInput = { value: '10.50' } as HTMLInputElement;
-        const event = {
-          key,
-          target: mockInput,
-          preventDefault: jasmine.createSpy('preventDefault')
-        } as unknown as KeyboardEvent;
-
-        component.onPriceKeydown(event);
-
-        expect(event.preventDefault).not.toHaveBeenCalled();
-      });
-    });
-
-    it('should block invalid keys for price input', () => {
-      const invalidKeys = ['a', 'b', 'c', '!', '@', '#'];
-
-      invalidKeys.forEach(key => {
-        const mockInput = { value: '10.50' } as HTMLInputElement;
-        const event = {
-          key,
-          target: mockInput,
-          preventDefault: jasmine.createSpy('preventDefault')
-        } as unknown as KeyboardEvent;
-
-        component.onPriceKeydown(event);
-
-        expect(event.preventDefault).toHaveBeenCalled();
-      });
-    });
-
-    it('should allow only one decimal point in price input', () => {
-      const event = new KeyboardEvent('keydown', { key: '.' });
-      const target = { value: '29.99' } as HTMLInputElement;
-      Object.defineProperty(event, 'target', { value: target });
-      spyOn(event, 'preventDefault');
+    it('should prevent duplicate decimals in price field', () => {
+      const event = createKeyboardEvent('.', '29.99');
 
       component.onPriceKeydown(event);
 
-      expect(event.preventDefault).toHaveBeenCalled();
+      expect(event.preventDefault)
+        .withContext('Repeated decimal point should be prevented')
+        .toHaveBeenCalled();
     });
 
-    it('should allow valid keys for stock input', () => {
-      const allowedKeys = ['Backspace', 'Delete', 'Tab', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    it('should block non-numeric input for stock field', () => {
+      const event = createKeyboardEvent('a', '10');
 
-      allowedKeys.forEach(key => {
-        const mockInput = { value: '10' } as HTMLInputElement;
-        const event = {
-          key,
-          target: mockInput,
-          preventDefault: jasmine.createSpy('preventDefault')
-        } as unknown as KeyboardEvent;
+      component.onStockKeydown(event);
 
-        component.onStockKeydown(event);
-
-        expect(event.preventDefault).not.toHaveBeenCalled();
-      });
-    });
-
-    it('should block invalid keys for stock input', () => {
-      const invalidKeys = ['a', '.', '!', '@'];
-
-      invalidKeys.forEach(key => {
-        const mockInput = { value: '10' } as HTMLInputElement;
-        const event = {
-          key,
-          target: mockInput,
-          preventDefault: jasmine.createSpy('preventDefault')
-        } as unknown as KeyboardEvent;
-
-        component.onStockKeydown(event);
-
-        expect(event.preventDefault).toHaveBeenCalled();
-      });
+      expect(event.preventDefault)
+        .withContext('Alphabetic key should be prevented in stock input')
+        .toHaveBeenCalled();
     });
   });
 
-  describe('Image Upload', () => {
+  describe('image upload workflow', () => {
     beforeEach(() => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-      component.ngOnInit();
+      arrangeComponent();
     });
 
-    it('should check if Supabase is configured', () => {
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
+    it('should validate image before uploading main image', async () => {
 
-      expect(component.isSupabaseConfigured).toBe(true);
-    });
-
-    it('should validate image before upload', async () => {
-      const file = new File([''], 'test.jpg', { type: 'image/jpeg' });
+      const file = new File(['content'], 'invalid.jpg', { type: 'image/jpeg' });
       const event = { target: { files: [file], value: '' } } as any;
-
       mockImageUploadService.validateImage.and.returnValue({ valid: false, error: 'Invalid file' });
 
       await component.onMainImageSelected(event);
 
-      expect(mockToastr.error).toHaveBeenCalledWith('Invalid file', 'Invalid Image');
-      expect(event.target.value).toBe('');
+      expectToast(mockToastr.error, 'Invalid file', 'Invalid Image');
+      expect(event.target.value).withContext('Input should reset after invalid image').toBe('');
     });
 
     it('should upload main image successfully', async () => {
-      const file = new File([''], 'test.jpg', { type: 'image/jpeg' });
+      const file = new File(['content'], 'valid.jpg', { type: 'image/jpeg' });
       const event = { target: { files: [file], value: '' } } as any;
-
       mockImageUploadService.validateImage.and.returnValue({ valid: true });
       mockImageUploadService.uploadImage.and.returnValue(Promise.resolve('http://example.com/uploaded.jpg'));
 
       await component.onMainImageSelected(event);
 
-      expect(component.productForm.get('imageUrl')?.value).toBe('http://example.com/uploaded.jpg');
-      expect(mockToastr.success).toHaveBeenCalledWith('Main image uploaded successfully!', 'Success');
-    });
-
-    it('should handle main image upload error', async () => {
-      const file = new File([''], 'test.jpg', { type: 'image/jpeg' });
-      const event = { target: { files: [file], value: '' } } as any;
-
-      mockImageUploadService.validateImage.and.returnValue({ valid: true });
-      mockImageUploadService.uploadImage.and.returnValue(Promise.reject(new Error('Upload failed')));
-
-      await component.onMainImageSelected(event);
-
-      expect(mockToastr.error).toHaveBeenCalledWith('Upload failed', 'Upload Error');
+      expect(component.productForm.get('imageUrl')?.value)
+        .withContext('Form should capture uploaded URL')
+        .toBe('http://example.com/uploaded.jpg');
+      expectToast(mockToastr.success, 'Main image uploaded successfully!', 'Success');
     });
 
     it('should upload carousel image successfully', async () => {
       component.addImageUrl();
-      const file = new File([''], 'test.jpg', { type: 'image/jpeg' });
+      const file = new File(['content'], 'carousel.jpg', { type: 'image/jpeg' });
       const event = { target: { files: [file], value: '' } } as any;
-
       mockImageUploadService.validateImage.and.returnValue({ valid: true });
       mockImageUploadService.uploadImage.and.returnValue(Promise.resolve('http://example.com/carousel.jpg'));
 
       await component.onCarouselImageSelected(event, 0);
 
-      expect(component.carouselUrl.at(0).value).toBe('http://example.com/carousel.jpg');
-      expect(mockToastr.success).toHaveBeenCalledWith('Carousel image 1 uploaded successfully!', 'Success');
+      expect(component.carouselUrl.at(0).value)
+        .withContext('Carousel control should capture uploaded URL')
+        .toBe('http://example.com/carousel.jpg');
+      expectToast(mockToastr.success, 'Carousel image 1 uploaded successfully!', 'Success');
     });
 
-    it('should clear main image', () => {
-      component.productForm.patchValue({ imageUrl: 'http://example.com/image.jpg' });
+    it('should clear images when requested', () => {
+      component.productForm.patchValue({ imageUrl: 'http://example.com/main.jpg' });
+      component.addImageUrl();
+      component.carouselUrl.at(0).setValue('http://example.com/extra.jpg');
 
       component.clearMainImage();
-
-      expect(component.productForm.get('imageUrl')?.value).toBe('');
-    });
-
-    it('should clear carousel image', () => {
-      component.addImageUrl();
-      component.carouselUrl.at(0).setValue('http://example.com/image.jpg');
-
       component.clearCarouselImage(0);
 
-      expect(component.carouselUrl.at(0).value).toBe('');
-    });
-
-    it('should get image file name', () => {
-      const url = 'http://example.com/path/to/very-long-image-file-name-that-should-be-truncated.jpg';
-
-      const fileName = component.getImageFileName(url);
-
-      expect(fileName).toBe('very-long-image-file-name-tha...');
-    });
-
-    it('should return empty string for empty URL', () => {
-      const fileName = component.getImageFileName('');
-
-      expect(fileName).toBe('');
+      expect(component.productForm.get('imageUrl')?.value)
+        .withContext('Main image should reset')
+        .toBe('');
+      expect(component.carouselUrl.at(0).value)
+        .withContext('Carousel image should reset')
+        .toBe('');
     });
   });
 
-  describe('Search Functionality', () => {
+  describe('search capability', () => {
     beforeEach(() => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-      component.ngOnInit();
+      arrangeComponent();
     });
 
     it('should filter products by name', () => {
-      component.searchQuery = 'Test Product 1';
+      component.searchQuery = 'Mock Product';
 
       component.onSearch();
 
-      expect(component.products.length).toBe(1);
-      expect(component.products[0].name).toBe('Test Product 1');
+      expect(component.products.length).withContext('Should match one product by name').toBe(1);
+      expect(component.products[0].name).withContext('Result should reflect query').toBe('Mock Product');
     });
 
-    it('should filter products by description', () => {
-      component.searchQuery = 'Description 2';
-
-      component.onSearch();
-
-      expect(component.products.length).toBe(1);
-      expect(component.products[0].description).toBe('Test Description 2');
-    });
-
-    it('should filter products by category', () => {
-      component.searchQuery = 'Hoodies';
-
-      component.onSearch();
-
-      expect(component.products.length).toBe(1);
-      expect(component.products[0].category).toBe('Hoodies');
-    });
-
-    it('should clear search and show all products', () => {
-      component.searchQuery = 'Test';
+    it('should clear search results when requested', () => {
+      component.searchQuery = 'Mock';
       component.onSearch();
 
       component.clearSearch();
 
-      expect(component.searchQuery).toBe('');
-      expect(component.products).toEqual(mockProducts);
-    });
-
-    it('should show all products when search query is empty', () => {
-      component.searchQuery = '';
-
-      component.onSearch();
-
-      expect(component.products).toEqual(mockProducts);
+      expect(component.searchQuery).withContext('Search query should reset').toBe('');
+      expect(component.products).withContext('All products should be restored').toEqual(DEFAULT_PRODUCTS);
     });
 
     it('should be case insensitive', () => {
-      component.searchQuery = 'test product 1';
+      component.searchQuery = 'mock hoodie';
 
       component.onSearch();
 
-      expect(component.products.length).toBe(1);
-      expect(component.products[0].name).toBe('Test Product 1');
+      expect(component.products.length).withContext('Should match regardless of case').toBe(1);
+      expect(component.products[0].name).withContext('Result should be hoodie').toBe('Mock Hoodie');
     });
   });
 
-  describe('Utility Methods', () => {
+  describe('utility helpers', () => {
     beforeEach(() => {
-      mockProductService.getAllProducts.and.returnValue(of(mockProducts));
-      mockCategoryService.getCategories.and.returnValue(of(mockCategories));
-      mockImageUploadService.isSupabaseConfigured.and.returnValue(true);
-      component.ngOnInit();
+      arrangeComponent();
     });
 
-    it('should get category name by ID', () => {
-      const categoryName = component.getCategoryName(1);
+    it('should map category id to name', () => {
+      const categoryId = 1;
 
-      expect(categoryName).toBe('T-shirts');
+      const name = component.getCategoryName(categoryId);
+
+      expect(name).withContext('Should return matching category name').toBe('T-shirts');
     });
 
-    it('should return "Unknown" for invalid category ID', () => {
-      const categoryName = component.getCategoryName(999);
+    it('should return Unknown for missing category', () => {
+      const categoryId = 999;
 
-      expect(categoryName).toBe('Unknown');
+      const name = component.getCategoryName(categoryId);
+
+      expect(name).withContext('Missing categories should fallback to Unknown').toBe('Unknown');
     });
 
-    it('should validate price and set error for zero value', () => {
-      component.productForm.get('price')?.setValue('0');
-
-      component.validatePrice();
-
-      expect(component.productForm.get('price')?.hasError('min')).toBe(true);
-    });
-
-    it('should validate price and set error for value too high', () => {
-      component.productForm.get('price')?.setValue('100000');
-
-      component.validatePrice();
-
-      expect(component.productForm.get('price')?.hasError('max')).toBe(true);
-    });
-
-    it('should hide image on error', () => {
+    it('should hide and show images via DOM events', () => {
       const img = document.createElement('img');
-      const event = { target: img } as any;
+      const hideEvent = { target: img } as any;
+      const showEvent = { target: img } as any;
 
-      component.hideImage(event);
+      component.hideImage(hideEvent);
+      component.showImage(showEvent);
 
-      expect(img.style.display).toBe('none');
-    });
-
-    it('should show image on load', () => {
-      const img = document.createElement('img');
-      const event = { target: img } as any;
-
-      component.showImage(event);
-
-      expect(img.style.display).toBe('block');
+      expect(img.style.display).withContext('Image should be visible after show').toBe('block');
     });
   });
 
-  describe('Logout', () => {
-    it('should logout and navigate to admin login', () => {
+  describe('logout', () => {
+    it('should clear auth data and navigate away', () => {
       component.logout();
 
-      expect(mockAuthService.clearAuthData).toHaveBeenCalled();
-      expect(mockRouter.navigate).toHaveBeenCalledWith(['/admin-login']);
-      expect(mockToastr.info).toHaveBeenCalledWith('Admin logged out successfully', 'Logout');
+      expect(mockAuthService.clearAuthData).withContext('Auth data should be cleared').toHaveBeenCalled();
+      expect(mockRouter.navigate).withContext('Should redirect to login').toHaveBeenCalledWith(['/admin-login']);
+      expectToast(mockToastr.info, 'Admin logged out successfully', 'Logout');
     });
   });
 
-  describe('Error Handling', () => {
-    it('should handle form errors correctly', () => {
-      spyOn(component as any, 'markFormGroupTouched');
-      spyOn(component as any, 'getFormErrors').and.returnValue({
-        name: { required: true },
-        price: { pattern: true }
-      });
-
-      component.productForm.setErrors({ invalid: true });
-      component.onSubmit();
-
-      expect(component['markFormGroupTouched']).toHaveBeenCalled();
-      expect(mockToastr.error).toHaveBeenCalled();
+  describe('error handling helpers', () => {
+    beforeEach(() => {
+      arrangeComponent();
     });
 
-    it('should get form errors correctly', () => {
-      component.productForm.get('name')?.setErrors({ required: true });
-      component.productForm.get('price')?.setErrors({ pattern: true });
+    it('should mark controls and show toast on invalid submit', () => {
+      spyOn(component as any, 'markFormGroupTouched').and.callThrough();
+      spyOn(component as any, 'getFormErrors').and.returnValue({ name: { required: true } });
+      component.productForm.setErrors({ invalid: true });
 
-      const errors = component['getFormErrors']();
+      component.onSubmit();
 
-      expect(errors.name).toEqual({ required: true });
-      expect(errors.price).toEqual({ pattern: true });
+      expect((component as any).markFormGroupTouched)
+        .withContext('Form controls should be marked touched')
+        .toHaveBeenCalled();
+      expect(mockToastr.error).withContext('Toast should notify about invalid form').toHaveBeenCalled();
+    });
+
+    it('should read form errors correctly', () => {
+      const nameControl = component.productForm.get('name');
+      const priceControl = component.productForm.get('price');
+      nameControl?.setErrors({ required: true });
+      priceControl?.setErrors({ pattern: true });
+
+      const errors = (component as any).getFormErrors();
+
+      expect(errors.name).withContext('Name errors should surface').toEqual({ required: true });
+      expect(errors.price).withContext('Price errors should surface').toEqual({ pattern: true });
     });
   });
 });

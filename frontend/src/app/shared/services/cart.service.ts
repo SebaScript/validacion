@@ -42,7 +42,8 @@ export class CartService {
   private loadCart(): void {
     const currentUser = this.authService.getCurrentUser();
     if (!currentUser?.userId) {
-      return throwError(() => new Error('No authenticated user'));
+      console.warn('No authenticated user');
+      return;
     }
 
     this.isLoading.set(true);
@@ -95,7 +96,8 @@ export class CartService {
   }
 
   updateQuantity(itemId: number, quantity: number): Observable<void> {
-    if (!this.cartId()) {
+    const cartId = this.cartId();
+    if (!cartId) {
       return throwError(() => new Error('No cart available'));
     }
 
@@ -105,7 +107,7 @@ export class CartService {
 
     this.isLoading.set(true);
 
-    return from(this.localCartService.updateItemQuantity(this.cartId(), itemId, quantity)).pipe(
+    return from(this.localCartService.updateItemQuantity(cartId, itemId, quantity)).pipe(
       tap(() => {
         this.isLoading.set(false);
         this.loadCart(); // Reload cart to get updated data
@@ -122,14 +124,15 @@ export class CartService {
   }
 
   removeFromCart(itemId: number): Observable<void> {
-    if (!this.cartId()) {
+    const cartId = this.cartId();
+    if (!cartId) {
       return throwError(() => new Error('No cart available'));
     }
 
     this.isLoading.set(true);
 
     try {
-      this.localCartService.removeItem(this.cartId(), itemId);
+      this.localCartService.removeItem(cartId, itemId);
       this.isLoading.set(false);
       this.loadCart(); // Reload cart to get updated data
       this.toastr.success('Item removed from cart', 'Cart Updated');
@@ -143,14 +146,15 @@ export class CartService {
   }
 
   clearCart(): Observable<void> {
-    if (!this.cartId()) {
+    const cartId = this.cartId();
+    if (!cartId) {
       return throwError(() => new Error('No cart available'));
     }
 
     this.isLoading.set(true);
 
     try {
-      this.localCartService.clearCart(this.cartId());
+      this.localCartService.clearCart(cartId);
       this.isLoading.set(false);
       this.cartItems.set([]);
       this.toastr.success('Cart cleared successfully', 'Cart Updated');
@@ -164,11 +168,12 @@ export class CartService {
   }
 
   getCartTotal(): Observable<{ itemCount: number; total: number }> {
-    if (!this.cartId()) {
+    const cartId = this.cartId();
+    if (!cartId) {
       return of({ itemCount: 0, total: 0 });
     }
 
-    const total = this.localCartService.getCartTotal(this.cartId());
+    const total = this.localCartService.getCartTotal(cartId);
     return of(total);
   }
 
