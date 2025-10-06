@@ -21,12 +21,12 @@ export class SignUpComponent implements OnInit {
   isGoogleLoading = false;
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private authService: AuthService,
-    private oauthService: OAuthService,
-    private toastr: ToastrService
-  ) {}
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly oauthService: OAuthService,
+    private readonly toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -109,7 +109,7 @@ export class SignUpComponent implements OnInit {
     }
 
     // Check individual field errors
-    const fieldValidations = [
+    const fieldValidations: Array<{ control: string; messages: Record<string, string> }> = [
       { control: 'name', messages: { required: 'Name is required', minlength: 'Name must be at least 3 characters' } },
       { control: 'email', messages: { required: 'Email is required', email: 'Please enter a valid email address' } },
       { control: 'password', messages: { required: 'Password is required', minlength: 'Password must be at least 6 characters' } },

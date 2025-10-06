@@ -14,7 +14,7 @@ export class ProductCardComponent {
   @Input() price!: number;
   @Input() productId!: number;
 
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
 
   goToDetails() {
     this.router.navigate(['/product', this.productId]);

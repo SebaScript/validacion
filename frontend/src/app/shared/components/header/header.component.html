@@ -17,7 +17,7 @@
         ×
       </button>
       <ul class="search-results" *ngIf="results.length > 0">
-        <li *ngFor="let item of results" (click)="goToProduct(item.id)">
+        <li *ngFor="let item of results" (click)="goToProduct(item.id)" (keydown.enter)="goToProduct(item.id)">
           <img [src]="item.imageUrl" alt="{{ item.name }}" class="thumb" />
           <span class="name">{{ item.name }}</span>
         </li>
@@ -26,13 +26,13 @@
 
     <div class="actions">
       <!-- Cart button -->
-      <div class="action-item cart-icon" (click)="toggleCart()">
+      <div class="action-item cart-icon" (click)="toggleCart()" (keydown.enter)="toggleCart()">
         <i class="material-icons">shopping_cart</i>
         <span class="badge" *ngIf="cartService.totalItems() > 0">{{ cartService.totalItems() }}</span>
       </div>
 
       <!-- Simplified user icon -->
-      <div class="action-item user-icon" (click)="handleUserClick()">
+      <div class="action-item user-icon" (click)="handleUserClick()" (keydown.enter)="handleUserClick()">
         <i class="material-icons">person</i>
       </div>
     </div>

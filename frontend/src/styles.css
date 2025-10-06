@@ -16,6 +16,8 @@
   color: var(--font-color);
   font-family: var(--font-family);
   caret-color: var(--hover-color);
+  forced-color-adjust: none !important;
+  -webkit-forced-color-adjust: none !important;
 }
 
 body {
@@ -249,12 +251,6 @@ input, textarea, select {
   background-clip: border-box !important;
   -webkit-background-clip: border-box !important;
   -moz-background-clip: border-box !important;
-}
-
-/* Override any forced black backgrounds */
-* {
-  forced-color-adjust: none !important;
-  -webkit-forced-color-adjust: none !important;
 }
 
 /* Accessibility contrast override - only when needed */

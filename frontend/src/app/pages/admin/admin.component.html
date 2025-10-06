@@ -177,53 +177,37 @@
 
           <div class="form-group full-width">
             <label for="imageUrl">Main Image</label>
-
-                          <!-- Image Upload Section -->
-              <div class="image-upload-section">
-                <div class="upload-option" *ngIf="isSupabaseConfigured">
-                                    <label class="upload-btn" [class.uploading]="isUploadingMainImage">
-                    <input type="file"
-                           accept="image/*"
-                           (change)="onMainImageSelected($event)"
-                           [disabled]="isUploadingMainImage"
-                           style="display: none;">
-                    <div class="upload-content">
-                      <i class="material-icons" *ngIf="!isUploadingMainImage">cloud_upload</i>
-                      <i class="material-icons spinning" *ngIf="isUploadingMainImage">hourglass_empty</i>
-                      <span *ngIf="!isUploadingMainImage">Upload Image</span>
-                      <span *ngIf="isUploadingMainImage">Uploading...</span>
-                    </div>
-                  </label>
-                  <span class="upload-help">Or enter URL manually below</span>
-                </div>
-
-                <!-- Configuration Warning -->
-                <div class="supabase-warning" *ngIf="!isSupabaseConfigured">
-                  <i class="material-icons">warning</i>
-                  <span>Image upload disabled. Configure Supabase credentials in environment.ts to enable file uploads.</span>
-                </div>
-
-                              <!-- Manual URL Input (hidden when image is loaded) -->
-                <input id="imageUrl"
-                       formControlName="imageUrl"
-                       placeholder="https://example.com/image.jpg"
-                       [class.error]="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched"
-                       [style.display]="productForm.get('imageUrl')?.value ? 'none' : 'block'" />
-
-                <!-- Image Preview with controls -->
-                <div class="image-preview" *ngIf="productForm.get('imageUrl')?.value">
-                  <img [src]="productForm.get('imageUrl')?.value"
-                       alt="Main preview"
-                       (error)="hideImage($event)"
-                       (load)="showImage($event)">
-                </div>
-                  <div class="image-controls">
-                    <span class="image-name">{{ getImageFileName(productForm.get('imageUrl')?.value) }}</span>
-                    <button type="button" class="btn-icon delete" (click)="clearMainImage()" title="Remove image">
-                      <i class="material-icons">delete</i>
-                    </button>
+            <div class="image-upload-section">
+              <div class="upload-option" *ngIf="isSupabaseConfigured">
+                <label class="upload-btn" [class.uploading]="isUploadingMainImage">
+                  <input type="file" accept="image/*" (change)="onMainImageSelected($event)" [disabled]="isUploadingMainImage" style="display: none;">
+                  <div class="upload-content">
+                    <i class="material-icons" *ngIf="!isUploadingMainImage">cloud_upload</i>
+                    <i class="material-icons spinning" *ngIf="isUploadingMainImage">hourglass_empty</i>
+                    <span *ngIf="!isUploadingMainImage">Upload Image</span>
+                    <span *ngIf="isUploadingMainImage">Uploading...</span>
                   </div>
-                </div>
+                </label>
+                <span class="upload-help">Or enter URL manually below</span>
+              </div>
+
+              <div class="supabase-warning" *ngIf="!isSupabaseConfigured">
+                <i class="material-icons">warning</i>
+                <span>Image upload disabled. Configure Supabase credentials in environment.ts to enable file uploads.</span>
+              </div>
+
+              <input id="imageUrl" formControlName="imageUrl" placeholder="https://example.com/image.jpg" [class.error]="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched" [style.display]="productForm.get('imageUrl')?.value ? 'none' : 'block'" />
+
+              <div class="image-preview" *ngIf="productForm.get('imageUrl')?.value">
+                <img [src]="productForm.get('imageUrl')?.value" alt="Main preview" (error)="hideImage($event)" (load)="showImage($event)">
+              </div>
+
+              <div class="image-controls">
+                <span class="image-name">{{ getImageFileName(productForm.get('imageUrl')?.value) }}</span>
+                <button type="button" class="btn-icon delete" (click)="clearMainImage()" title="Remove image">
+                  <i class="material-icons">delete</i>
+                </button>
+              </div>
             </div>
 
             <div class="error-message" *ngIf="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched">
@@ -232,7 +216,7 @@
           </div>
 
           <div class="form-group full-width">
-            <label>Additional Images</label>
+             <h3 class="section-title">Additional Images</h3>
           <div formArrayName="carouselUrl" class="image-urls-container">
             <div *ngFor="let url of carouselUrl.controls; let i = index" class="image-url-input">
 
@@ -299,8 +283,8 @@
             <div class="error-message" *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched">
               <small *ngIf="productForm.get('description')?.errors?.['required']">Product description is required</small>
               <small *ngIf="productForm.get('description')?.errors?.['minlength']">Description must be at least 10 characters</small>
-        </div>
-        </div>
+            </div>
+          </div>
         </div>
 
         <div class="form-actions">

@@ -1,80 +1,77 @@
 <!-- Product detail section -->
 @if (loading()) {
-  <div class="loading">
-    <p>Loading product details...</p>
-  </div>
+<div class="loading">
+  <p>Loading product details...</p>
+</div>
 } @else if (error()) {
-  <div class="error">
-    <p>{{ error() }}</p>
-  </div>
+<div class="error">
+  <p>{{ error() }}</p>
+</div>
 } @else {
-  <div class="product-detail">
-    @if (product()?.carouselUrl?.length || product()?.imageUrl) {
-      <div class="image-section">
-        <div class="main-image">
-          <button class="carousel-arrow left" (click)="changeImage('prev')" *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" aria-label="Anterior">
-            <i class="material-icons">chevron_left</i>
-          </button>
-          <img [src]="getCurrentImageUrl()" alt="Product">
-          <button class="carousel-arrow right" (click)="changeImage('next')" *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" aria-label="Siguiente">
-            <i class="material-icons">chevron_right</i>
-          </button>
-        </div>
-        <!-- Miniaturas -->
-        <div *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" class="thumbnails">
-          <button
-            *ngFor="let img of product()?.carouselUrl; let idx = index"
-            [src]="img"
-            [alt]="'Thumbnail ' + (idx + 1)"
-            class="thumbnail"
-            [class.selected]="currentImageIndex() === idx"
-            (click)="currentImageIndex.set(idx)"
-          >
-          <img [src]="img" [alt]="'Thumbnail ' + (idx + 1)" />
-        </button>
-          
-        </div>
-      </div>
-    }
-    <div class="product-info">
-      <h2>{{ product()?.name }}</h2>
-      <p class="price">${{ product()?.price }}</p>
-      <p class="description">{{ product()?.description }}</p>
-
-      <ul class="details">
-        <li>100% COTTON</li>
-        <li>STYLISH DESIGN</li>
-        <li>LIMITED EDITION</li>
-      </ul>
-
-      <div class="links">
-        <a href (click)="$event.preventDefault(); openModal('size')">SIZE GUIDE</a><a href (click)="$event.preventDefault(); openModal('shipping')">SHIPPING POLICY</a>
-      </div>
-
-      @if ((product()?.stock ?? 0) > 0) {
-        <button class="add-to-cart" (click)="addToCart()">
-          <i class="material-icons">shopping_cart</i>
-          ADD TO CART
-        </button>
-      } @else {
-        <button class="sold-out" disabled>SOLD OUT</button>
-      }
+<div class="product-detail">
+  @if (product()?.carouselUrl?.length || product()?.imageUrl) {
+  <div class="image-section">
+    <div class="main-image">
+      <button class="carousel-arrow left" (click)="changeImage('prev')"
+        *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" aria-label="Anterior">
+        <i class="material-icons">chevron_left</i>
+      </button>
+      <img [src]="getCurrentImageUrl()" alt="Product">
+      <button class="carousel-arrow right" (click)="changeImage('next')"
+        *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" aria-label="Siguiente">
+        <i class="material-icons">chevron_right</i>
+      </button>
+    </div>
+    <!-- Miniaturas -->
+    <div *ngIf="product()?.carouselUrl && product()?.carouselUrl!.length > 1" class="thumbnails">
+      <button *ngFor="let img of product()?.carouselUrl; let idx = index" class="thumbnail"
+        [class.selected]="currentImageIndex() === idx" (click)="currentImageIndex.set(idx)">
+        <img [src]="img" [alt]="'Thumbnail ' + (idx + 1)" />
+      </button>
     </div>
   </div>
+  }
+  <div class="product-info">
+    <h2>{{ product()?.name }}</h2>
+    <p class="price">${{ product()?.price }}</p>
+    <p class="description">{{ product()?.description }}</p>
+
+    <ul class="details">
+      <li>100% COTTON</li>
+      <li>STYLISH DESIGN</li>
+      <li>LIMITED EDITION</li>
+    </ul>
+
+    <div class="links">
+      <a href (click)="$event.preventDefault(); openModal('size')">SIZE GUIDE</a><a href
+        (click)="$event.preventDefault(); openModal('shipping')">SHIPPING POLICY</a>
+    </div>
+
+    @if ((product()?.stock ?? 0) > 0) {
+    <button class="add-to-cart" (click)="addToCart()">
+      <i class="material-icons">shopping_cart</i>
+      ADD TO CART
+    </button>
+    } @else {
+    <button class="sold-out" disabled>SOLD OUT</button>
+    }
+  </div>
+</div>
 }
 
 <!-- Modal -->
 @if (isModalOpen()) {
-  <div class="modal-backdrop" (click)="closeModal()">
-    <div class="modal" (click)="$event.stopPropagation()" tabindex="-1" role="dialog" aria-modal="true" #modalContent>
-      <div class="modal-header">
-        <h3 class="modal-title">{{ modalTitle() }}</h3>
-        <button class="modal-close" (click)="closeModal()">Close</button>
-      </div>
-      <div class="modal-body">
-        <p>{{ modalBody() }}</p>
-      </div>
+<button class="modal-backdrop" (click)="closeModal()" (keydown.enter)="closeModal()"
+  aria-label="Close modal with Enter">
+  <dialog class="modal" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" open
+    #modalContent>
+    <div class="modal-header">
+      <h3 class="modal-title">{{ modalTitle() }}</h3>
+      <button class="modal-close" (click)="closeModal()">Close</button>
     </div>
-  </div>
+    <div class="modal-body">
+      <p>{{ modalBody() }}</p>
+    </div>
+  </dialog>
+</button>
 }
-

@@ -14,7 +14,7 @@ export class ApiService {
   // - CartService (LocalCartService)
   // - AddressService (LocalUserService)
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   // All backend API methods disabled - use LocalStorage services instead
   public get<T>(endpoint: string): Observable<T> {

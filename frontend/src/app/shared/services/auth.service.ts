@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { User, AuthResponse, LoginRequest, RegisterRequest } from '../interfaces/user.interface';
+import { User, LoginRequest, RegisterRequest } from '../interfaces/user.interface';
 import { ToastrService } from 'ngx-toastr';
 import { LocalUserService } from './local-user.service';
 import { BehaviorSubject, Observable, catchError, map, of, tap, throwError, from } from 'rxjs';
@@ -16,9 +16,9 @@ export class AuthService {
   currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(
-    private localUserService: LocalUserService,
-    private router: Router,
-    private toastr: ToastrService
+    private readonly localUserService: LocalUserService,
+    private readonly router: Router,
+    private readonly toastr: ToastrService
   ) {
     // Check if we have a stored token and user
     this.checkLocalStorage();
@@ -138,8 +138,7 @@ export class AuthService {
   // Get current user profile from localStorage
   getProfile(): Observable<User> {
     const currentUser = this.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
-      this.logout();
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 
@@ -157,7 +156,7 @@ export class AuthService {
   // Update user profile
   updateProfile(userData: Partial<User>): Observable<User> {
     const currentUser = this.getCurrentUser();
-    if (!currentUser || !currentUser.userId) {
+    if (!currentUser?.userId) {
       return throwError(() => new Error('No authenticated user'));
     }
 
