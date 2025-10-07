@@ -192,8 +192,6 @@ describe('AdminComponent', () => {
 
   describe('component creation', () => {
     it('should start with the expected default state', () => {
-      // Arrange
-      // Act
       const actualState = {
         products: component.products,
         categories: component.categories,
@@ -204,7 +202,6 @@ describe('AdminComponent', () => {
         carouselLength: component.carouselUrl.length
       };
 
-      // Assert
       expect(component).withContext('Component instance should exist').toBeTruthy();
       expect(actualState.products).withContext('Products should start empty').toEqual([]);
       expect(actualState.categories).withContext('Categories should start empty').toEqual([]);
@@ -514,10 +511,13 @@ describe('AdminComponent', () => {
     });
 
     it('should prepare the form for adding', () => {
+      // Arrange
       component.editProduct(DEFAULT_PRODUCTS[0]);
 
+      // Act
       component.setAddView();
 
+      // Assert
       expect(component.view).withContext('View should be add').toBe('add');
       expect(component.productForm.get('name')?.value).withContext('Form should clear name field').toBe('');
       expect(component.carouselUrl.length).withContext('Carousel array should reset').toBe(0);
@@ -530,40 +530,52 @@ describe('AdminComponent', () => {
     });
 
     it('should format price input correctly', () => {
+      // Arrange
       const event = { target: { value: '0029.999' } } as unknown as Event;
 
+      // Act
       component.formatPriceInput(event);
 
+      // Assert
       expect((event.target as HTMLInputElement).value)
         .withContext('Price should remove leading zeros and trim decimals')
         .toBe('29.99');
     });
 
     it('should format stock input correctly', () => {
+      // Arrange
       const event = { target: { value: 'abc123def' } } as unknown as Event;
 
+      // Act
       component.formatStockInput(event);
 
+      // Assert
       expect((event.target as HTMLInputElement).value)
         .withContext('Stock should strip non-numeric characters')
         .toBe('123');
     });
 
     it('should prevent duplicate decimals in price field', () => {
+      // Arrange
       const event = createKeyboardEvent('.', '29.99');
 
+      // Act
       component.onPriceKeydown(event);
 
+      // Assert
       expect(event.preventDefault)
         .withContext('Repeated decimal point should be prevented')
         .toHaveBeenCalled();
     });
 
     it('should block non-numeric input for stock field', () => {
+      // Arrange
       const event = createKeyboardEvent('a', '10');
 
+      // Act
       component.onStockKeydown(event);
 
+      // Assert
       expect(event.preventDefault)
         .withContext('Alphabetic key should be prevented in stock input')
         .toHaveBeenCalled();
@@ -576,25 +588,30 @@ describe('AdminComponent', () => {
     });
 
     it('should validate image before uploading main image', async () => {
-
+      // Arrange
       const file = new File(['content'], 'invalid.jpg', { type: 'image/jpeg' });
       const event = { target: { files: [file], value: '' } } as any;
       mockImageUploadService.validateImage.and.returnValue({ valid: false, error: 'Invalid file' });
 
+      // Act
       await component.onMainImageSelected(event);
 
+      // Assert
       expectToast(mockToastr.error, 'Invalid file', 'Invalid Image');
       expect(event.target.value).withContext('Input should reset after invalid image').toBe('');
     });
 
     it('should upload main image successfully', async () => {
+      // Arrange
       const file = new File(['content'], 'valid.jpg', { type: 'image/jpeg' });
       const event = { target: { files: [file], value: '' } } as any;
       mockImageUploadService.validateImage.and.returnValue({ valid: true });
       mockImageUploadService.uploadImage.and.returnValue(Promise.resolve('http://example.com/uploaded.jpg'));
 
+      // Act
       await component.onMainImageSelected(event);
 
+      // Assert
       expect(component.productForm.get('imageUrl')?.value)
         .withContext('Form should capture uploaded URL')
         .toBe('http://example.com/uploaded.jpg');
@@ -602,14 +619,17 @@ describe('AdminComponent', () => {
     });
 
     it('should upload carousel image successfully', async () => {
+      // Arrange
       component.addImageUrl();
       const file = new File(['content'], 'carousel.jpg', { type: 'image/jpeg' });
       const event = { target: { files: [file], value: '' } } as any;
       mockImageUploadService.validateImage.and.returnValue({ valid: true });
       mockImageUploadService.uploadImage.and.returnValue(Promise.resolve('http://example.com/carousel.jpg'));
 
+      // Act
       await component.onCarouselImageSelected(event, 0);
 
+      // Assert
       expect(component.carouselUrl.at(0).value)
         .withContext('Carousel control should capture uploaded URL')
         .toBe('http://example.com/carousel.jpg');
@@ -617,13 +637,16 @@ describe('AdminComponent', () => {
     });
 
     it('should clear images when requested', () => {
+      // Arrange
       component.productForm.patchValue({ imageUrl: 'http://example.com/main.jpg' });
       component.addImageUrl();
       component.carouselUrl.at(0).setValue('http://example.com/extra.jpg');
 
+      // Act
       component.clearMainImage();
       component.clearCarouselImage(0);
 
+      // Assert
       expect(component.productForm.get('imageUrl')?.value)
         .withContext('Main image should reset')
         .toBe('');
@@ -639,29 +662,38 @@ describe('AdminComponent', () => {
     });
 
     it('should filter products by name', () => {
+      // Arrange
       component.searchQuery = 'Mock Product';
 
+      // Act
       component.onSearch();
 
+      // Assert
       expect(component.products.length).withContext('Should match one product by name').toBe(1);
       expect(component.products[0].name).withContext('Result should reflect query').toBe('Mock Product');
     });
 
     it('should clear search results when requested', () => {
+      // Arrange
       component.searchQuery = 'Mock';
       component.onSearch();
 
+      // Act
       component.clearSearch();
 
+      // Assert
       expect(component.searchQuery).withContext('Search query should reset').toBe('');
       expect(component.products).withContext('All products should be restored').toEqual(DEFAULT_PRODUCTS);
     });
 
     it('should be case insensitive', () => {
+      // Arrange
       component.searchQuery = 'mock hoodie';
 
+      // Act
       component.onSearch();
 
+      // Assert
       expect(component.products.length).withContext('Should match regardless of case').toBe(1);
       expect(component.products[0].name).withContext('Result should be hoodie').toBe('Mock Hoodie');
     });
@@ -673,37 +705,49 @@ describe('AdminComponent', () => {
     });
 
     it('should map category id to name', () => {
+      // Arrange
       const categoryId = 1;
 
+      // Act
       const name = component.getCategoryName(categoryId);
 
+      // Assert
       expect(name).withContext('Should return matching category name').toBe('T-shirts');
     });
 
     it('should return Unknown for missing category', () => {
+      // Arrange
       const categoryId = 999;
 
+      // Act
       const name = component.getCategoryName(categoryId);
 
+      // Assert
       expect(name).withContext('Missing categories should fallback to Unknown').toBe('Unknown');
     });
 
     it('should hide and show images via DOM events', () => {
+      // Arrange
       const img = document.createElement('img');
       const hideEvent = { target: img } as any;
       const showEvent = { target: img } as any;
 
+      // Act
       component.hideImage(hideEvent);
       component.showImage(showEvent);
 
+      // Assert
       expect(img.style.display).withContext('Image should be visible after show').toBe('block');
     });
   });
 
   describe('logout', () => {
     it('should clear auth data and navigate away', () => {
+      // Arrange
+      // Act
       component.logout();
 
+      // Assert
       expect(mockAuthService.clearAuthData).withContext('Auth data should be cleared').toHaveBeenCalled();
       expect(mockRouter.navigate).withContext('Should redirect to login').toHaveBeenCalledWith(['/admin-login']);
       expectToast(mockToastr.info, 'Admin logged out successfully', 'Logout');
@@ -716,12 +760,15 @@ describe('AdminComponent', () => {
     });
 
     it('should mark controls and show toast on invalid submit', () => {
+      // Arrange
       spyOn(component as any, 'markFormGroupTouched').and.callThrough();
       spyOn(component as any, 'getFormErrors').and.returnValue({ name: { required: true } });
       component.productForm.setErrors({ invalid: true });
 
+      // Act
       component.onSubmit();
 
+      // Assert
       expect((component as any).markFormGroupTouched)
         .withContext('Form controls should be marked touched')
         .toHaveBeenCalled();
@@ -729,13 +776,16 @@ describe('AdminComponent', () => {
     });
 
     it('should read form errors correctly', () => {
+      // Arrange
       const nameControl = component.productForm.get('name');
       const priceControl = component.productForm.get('price');
       nameControl?.setErrors({ required: true });
       priceControl?.setErrors({ pattern: true });
 
+      // Act
       const errors = (component as any).getFormErrors();
 
+      // Assert
       expect(errors.name).withContext('Name errors should surface').toEqual({ required: true });
       expect(errors.price).withContext('Price errors should surface').toEqual({ pattern: true });
     });
