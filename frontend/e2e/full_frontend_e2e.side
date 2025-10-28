@@ -1,0 +1,2464 @@
+{
+  "id": "validacion-full-frontend-e2e",
+  "version": "3.17.0",
+  "name": "Validacion Full Frontend E2E - VALLMERE",
+  "url": "http://localhost:4200",
+  "tests": [
+    {
+      "id": "01-login-success-client",
+      "name": "01 - Auth - Login Success (Client)",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "id=email",
+          "targets": [],
+          "value": "cliente@vallmere.com"
+        },
+        {
+          "id": "c4",
+          "command": "type",
+          "target": "id=password",
+          "targets": [],
+          "value": "cliente123"
+        },
+        {
+          "id": "c5",
+          "command": "click",
+          "target": "css=button.login-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c7",
+          "command": "waitForElementPresent",
+          "target": "css=.toast-success",
+          "targets": [],
+          "value": "3000"
+        },
+        {
+          "id": "c8",
+          "command": "assertElementPresent",
+          "target": "css=.toast-success",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c9",
+          "command": "assertElementPresent",
+          "target": "css=.profile-container",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "02-login-validation-empty",
+      "name": "02 - Auth - Login Validation (Empty Fields)",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=button.login-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.error-message",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "03-login-validation-invalid-email",
+      "name": "03 - Auth - Login Validation (Invalid Email)",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "id=email",
+          "targets": [],
+          "value": "notanemail"
+        },
+        {
+          "id": "c4",
+          "command": "type",
+          "target": "id=password",
+          "targets": [],
+          "value": "test123"
+        },
+        {
+          "id": "c5",
+          "command": "click",
+          "target": "id=email",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "click",
+          "target": "id=password",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c7",
+          "command": "pause",
+          "target": "300",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c8",
+          "command": "assertText",
+          "target": "css=.error-message small",
+          "targets": [],
+          "value": "Please enter a valid email"
+        }
+      ]
+    },
+    {
+      "id": "04-login-failure-wrong-credentials",
+      "name": "04 - Auth - Login Failure (Wrong Credentials)",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "id=email",
+          "targets": [],
+          "value": "wrong@vallmere.com"
+        },
+        {
+          "id": "c4",
+          "command": "type",
+          "target": "id=password",
+          "targets": [],
+          "value": "wrongpass"
+        },
+        {
+          "id": "c5",
+          "command": "click",
+          "target": "css=button.login-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c7",
+          "command": "waitForElementPresent",
+          "target": "css=.toast-error",
+          "targets": [],
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "id": "05-signup-success",
+      "name": "05 - Auth - Signup Success",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/sign-up",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "id=name",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "executeScript",
+          "target": "return 'newuser' + Date.now() + '@vallmere.com'",
+          "targets": [],
+          "value": "uniqueEmail"
+        },
+        {
+          "id": "c4",
+          "command": "type",
+          "target": "id=name",
+          "targets": [],
+          "value": "New User E2E"
+        },
+        {
+          "id": "c5",
+          "command": "type",
+          "target": "id=email",
+          "targets": [],
+          "value": "${uniqueEmail}"
+        },
+        {
+          "id": "c6",
+          "command": "type",
+          "target": "id=password",
+          "targets": [],
+          "value": "password123"
+        },
+        {
+          "id": "c7",
+          "command": "type",
+          "target": "id=rePassword",
+          "targets": [],
+          "value": "password123"
+        },
+        {
+          "id": "c8",
+          "command": "click",
+          "target": "css=button.signup-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c9",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c10",
+          "command": "waitForElementPresent",
+          "target": "css=.toast-success",
+          "targets": [],
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "id": "06-signup-validation-password-mismatch",
+      "name": "06 - Auth - Signup Validation (Password Mismatch)",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/sign-up",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "id=name",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "id=name",
+          "targets": [],
+          "value": "Test User"
+        },
+        {
+          "id": "c4",
+          "command": "type",
+          "target": "id=email",
+          "targets": [],
+          "value": "test@vallmere.com"
+        },
+        {
+          "id": "c5",
+          "command": "type",
+          "target": "id=password",
+          "targets": [],
+          "value": "password123"
+        },
+        {
+          "id": "c6",
+          "command": "type",
+          "target": "id=rePassword",
+          "targets": [],
+          "value": "different123"
+        },
+        {
+          "id": "c7",
+          "command": "click",
+          "target": "css=button.signup-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c8",
+          "command": "pause",
+          "target": "800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c9",
+          "command": "assertText",
+          "target": "css=.error-message small",
+          "targets": [],
+          "value": "Passwords do not match"
+        }
+      ]
+    },
+    {
+      "id": "07-signup-validation-short-name",
+      "name": "07 - Auth - Signup Validation (Short Name)",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/sign-up",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "id=name",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "id=name",
+          "targets": [],
+          "value": "AB"
+        },
+        {
+          "id": "c4",
+          "command": "click",
+          "target": "id=email",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "pause",
+          "target": "300",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertText",
+          "target": "css=.error-message small",
+          "targets": [],
+          "value": "NAME MUST BE AT LEAST 3 CHARACTERS"
+        }
+      ]
+    },
+    {
+      "id": "09-browse-products-landing",
+      "name": "09 - Products - Browse Landing Page",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.product-card",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "assertElementPresent",
+          "target": "css=.product-card",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "assertElementPresent",
+          "target": "css=.product-card .product-image",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.product-card .product-title",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertElementPresent",
+          "target": "css=.product-card .product-price",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "10-product-detail-view",
+      "name": "10 - Product - Detail View & Carousel",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.product-card",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=.product-card:first-child",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "waitForElementVisible",
+          "target": "css=.product-detail",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.product-detail .product-info h2",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertElementPresent",
+          "target": "css=.product-detail .price",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c7",
+          "command": "assertElementPresent",
+          "target": "css=.product-detail .description",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c8",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "15-product-add-to-cart-success",
+      "name": "15 - Product - Add to Cart Success",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/product/5",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "waitForElementPresent",
+          "target": "css=.toast-success",
+          "targets": [],
+          "value": "3000"
+        },
+        {
+          "id": "c6",
+          "command": "assertElementPresent",
+          "target": "css=.badge",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "13-product-sold-out",
+      "name": "13 - Product - Sold Out (Stock = 0)",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/product/99",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "assertElementPresent",
+          "target": "css=.error",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "11-product-modal-size-guide",
+      "name": "11 - Product - Open Size Guide Modal",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/product/5",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.product-detail",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "xpath=//a[contains(text(),'SIZE GUIDE')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.modal",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertText",
+          "target": "css=.modal-title",
+          "targets": [],
+          "value": "Size Guide"
+        },
+        {
+          "id": "c7",
+          "command": "click",
+          "target": "css=.modal-close",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "12-product-modal-shipping",
+      "name": "12 - Product - Open Shipping Policy Modal",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/product/5",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.product-detail",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "xpath=//a[contains(text(),'SHIPPING POLICY')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.modal",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertText",
+          "target": "css=.modal-title",
+          "targets": [],
+          "value": "Shipping & Returns"
+        },
+        {
+          "id": "c7",
+          "command": "click",
+          "target": "css=.modal-close",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "14-cart-empty-state",
+      "name": "14 - Cart - Empty Cart State (Initial)",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "executeScript",
+          "target": "localStorage.clear(); return true;",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c3",
+          "command": "waitForElementVisible",
+          "target": "css=.app-header",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c4",
+          "command": "click",
+          "target": "css=.cart-icon",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "pause",
+          "target": "800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertElementPresent",
+          "target": "css=.empty-cart",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "16-cart-open-from-header",
+      "name": "16 - Cart - Open Cart from Header",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/product/5",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "waitForElementVisible",
+          "target": "css=.app-header",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c7",
+          "command": "click",
+          "target": "css=.cart-icon",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c8",
+          "command": "pause",
+          "target": "800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c9",
+          "command": "assertElementPresent",
+          "target": "css=.cart-container.show",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c10",
+          "command": "assertText",
+          "target": "css=.cart-header h3",
+          "targets": [],
+          "value": "SHOPPING CART"
+        }
+      ]
+    },
+    {
+      "id": "17-cart-update-quantity",
+      "name": "17 - Cart - Update Item Quantity",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/product/5",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "waitForElementVisible",
+          "target": "css=.app-header",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c7",
+          "command": "click",
+          "target": "css=.cart-icon",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c8",
+          "command": "pause",
+          "target": "800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c9",
+          "command": "click",
+          "target": "css=.cart-item:first-child .quantity-btn:last-child",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c10",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c11",
+          "command": "assertElementPresent",
+          "target": "css=.cart-item .quantity",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "18-cart-remove-item",
+      "name": "18 - Cart - Remove Item",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/product/5",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "waitForElementVisible",
+          "target": "css=.app-header",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c7",
+          "command": "click",
+          "target": "css=.cart-icon",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c8",
+          "command": "pause",
+          "target": "800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c9",
+          "command": "click",
+          "target": "css=.cart-item:first-child .remove-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c10",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "19-cart-clear-all",
+      "name": "19 - Cart - Clear All Items & Verify Empty",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/product/5",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=button.add-to-cart",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "waitForElementVisible",
+          "target": "css=.app-header",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c7",
+          "command": "click",
+          "target": "css=.cart-icon",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c8",
+          "command": "pause",
+          "target": "800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c9",
+          "command": "click",
+          "target": "css=.clear-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c10",
+          "command": "webdriverChooseOkOnVisibleConfirmation",
+          "target": "",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c11",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c12",
+          "command": "assertElementPresent",
+          "target": "css=.empty-cart",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "20-profile-view-info",
+      "name": "20 - Profile - View User Info",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/profile",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.profile-container",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "assertElementPresent",
+          "target": "css=.user-details h1",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "assertElementPresent",
+          "target": "css=.email",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.role-badge",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "21-profile-edit-mode",
+      "name": "21 - Profile - Edit Mode Toggle",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/profile",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.profile-container",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "xpath=//button[contains(text(),'Edit Profile')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.profile-form",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertElementPresent",
+          "target": "id=name",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "22-profile-update-name",
+      "name": "22 - Profile - Update Name",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/profile",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.profile-container",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "xpath=//button[contains(text(),'Edit Profile')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "click",
+          "target": "id=name",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "sendKeys",
+          "target": "id=name",
+          "targets": [],
+          "value": "${KEY_CTRL+a}"
+        },
+        {
+          "id": "c7",
+          "command": "type",
+          "target": "id=name",
+          "targets": [],
+          "value": "Updated User Name"
+        },
+        {
+          "id": "c8",
+          "command": "submit",
+          "target": "css=.profile-form",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c9",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c10",
+          "command": "waitForElementPresent",
+          "target": "css=.toast-success",
+          "targets": [],
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "id": "23-profile-add-address-modal",
+      "name": "23 - Profile - Add Address Modal",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/profile",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.profile-container",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "xpath=//button[contains(text(),'Add Address')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.address-form",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "24-profile-logout",
+      "name": "24 - Profile - Logout",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/profile",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.profile-container",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=.logout-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "waitForElementPresent",
+          "target": "css=.toast-success",
+          "targets": [],
+          "value": "3000"
+        },
+        {
+          "id": "c6",
+          "command": "assertElementPresent",
+          "target": "css=.login-container",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "25-admin-login-success",
+      "name": "25 - Admin - Login Success",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin-login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "id=email",
+          "targets": [],
+          "value": "admin@vallmere.com"
+        },
+        {
+          "id": "c4",
+          "command": "type",
+          "target": "id=password",
+          "targets": [],
+          "value": "admin123"
+        },
+        {
+          "id": "c5",
+          "command": "click",
+          "target": "css=button.admin-login-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c7",
+          "command": "waitForElementVisible",
+          "target": "css=.admin-panel",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c8",
+          "command": "assertElementPresent",
+          "target": "css=.admin-sidebar",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "26-admin-login-validation",
+      "name": "26 - Admin - Login Validation",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin-login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "id=email",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "id=email",
+          "targets": [],
+          "value": "a@a.a"
+        },
+        {
+          "id": "c4",
+          "command": "type",
+          "target": "id=password",
+          "targets": [],
+          "value": "aaaaaaaaa"
+        },
+        {
+          "id": "c5",
+          "command": "click",
+          "target": "css=button.admin-login-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c7",
+          "command": "waitForElementPresent",
+          "target": "css=.toast-error",
+          "targets": [],
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "id": "27-admin-view-products",
+      "name": "27 - Admin - View Products List",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.admin-panel",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "xpath=//button[contains(.,'View Products')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.admin-table-container table",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertElementPresent",
+          "target": "css=table thead",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "28-admin-search-products",
+      "name": "28 - Admin - Search Products",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.admin-panel",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "css=.search-input",
+          "targets": [],
+          "value": "leather"
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.search-results-info",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "29-admin-add-product-view",
+      "name": "29 - Admin - Navigate to Add Product",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.admin-panel",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "xpath=//button[contains(.,'Add Product')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.admin-form",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertElementPresent",
+          "target": "id=name",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "30-admin-add-product-validation",
+      "name": "30 - Admin - Add Product Validation",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.admin-panel",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "xpath=//button[contains(.,'Add Product')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "pause",
+          "target": "800",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c7",
+          "command": "waitForElementPresent",
+          "target": "css=.toast-error",
+          "targets": [],
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "id": "31-admin-edit-product",
+      "name": "31 - Admin - Edit Product Complete",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.admin-panel",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=.btn-icon.edit:first-of-type",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.admin-form",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertText",
+          "target": "css=.content-title",
+          "targets": [],
+          "value": "EDIT PRODUCT"
+        },
+        {
+          "id": "c7",
+          "command": "click",
+          "target": "id=name",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c8",
+          "command": "sendKeys",
+          "target": "id=name",
+          "targets": [],
+          "value": "${KEY_CTRL+a}"
+        },
+        {
+          "id": "c9",
+          "command": "type",
+          "target": "id=name",
+          "targets": [],
+          "value": "Edited Product E2E Test"
+        },
+        {
+          "id": "c10",
+          "command": "click",
+          "target": "id=price",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c11",
+          "command": "sendKeys",
+          "target": "id=price",
+          "targets": [],
+          "value": "${KEY_CTRL+a}"
+        },
+        {
+          "id": "c12",
+          "command": "type",
+          "target": "id=price",
+          "targets": [],
+          "value": "99.99"
+        },
+        {
+          "id": "c13",
+          "command": "click",
+          "target": "id=description",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c14",
+          "command": "sendKeys",
+          "target": "id=description",
+          "targets": [],
+          "value": "${KEY_CTRL+a}"
+        },
+        {
+          "id": "c15",
+          "command": "type",
+          "target": "id=description",
+          "targets": [],
+          "value": "This is an edited product description for E2E testing purposes."
+        },
+        {
+          "id": "c16",
+          "command": "click",
+          "target": "id=stock",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c17",
+          "command": "sendKeys",
+          "target": "id=stock",
+          "targets": [],
+          "value": "${KEY_CTRL+a}"
+        },
+        {
+          "id": "c18",
+          "command": "type",
+          "target": "id=stock",
+          "targets": [],
+          "value": "50"
+        },
+        {
+          "id": "c19",
+          "command": "select",
+          "target": "id=categoryId",
+          "targets": [],
+          "value": "label=Hoodies"
+        },
+        {
+          "id": "c20",
+          "command": "click",
+          "target": "css=.delete",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c21",
+          "command": "click",
+          "target": "id=imageUrl",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c22",
+          "command": "type",
+          "target": "id=imageUrl",
+          "targets": [],
+          "value": "https://ciconceptstore.com/cdn/shop/files/IMG-0285.png?v=1708465078&width=600"
+        },
+        {
+          "id": "c23",
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c24",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c25",
+          "command": "waitForElementPresent",
+          "target": "css=.toast-success",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c26",
+          "command": "waitForElementVisible",
+          "target": "css=.admin-table-container",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c27",
+          "command": "assertText",
+          "target": "xpath=//table//tbody//tr[1]//td[2]",
+          "targets": [],
+          "value": "EDITED PRODUCT E2E TEST"
+        }
+      ]
+    },
+    {
+      "id": "32-admin-delete-product-confirm",
+      "name": "32 - Admin - Delete Product",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.admin-panel",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=table tr:first-of-type td div .btn-icon.delete",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "webdriverChooseOkOnVisibleConfirmation",
+          "target": "",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "33-admin-logout",
+      "name": "33 - Admin - Logout",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.admin-panel",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=.logout-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.admin-login-container",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "34-header-search-products",
+      "name": "34 - Header - Search Products",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.app-header",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "css=.search-container input",
+          "targets": [],
+          "value": "leather"
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.search-results",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "assertElementPresent",
+          "target": "css=.search-results li",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "35-header-search-click-result",
+      "name": "35 - Header - Click Search Result",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.app-header",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "type",
+          "target": "css=.search-container input",
+          "targets": [],
+          "value": "leather"
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "click",
+          "target": "css=.search-results li:first-child",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c6",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c7",
+          "command": "assertElementPresent",
+          "target": "css=.product-detail",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "36-back-to-home-from-login",
+      "name": "36 - Navigation - Back to Home",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/login",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.back-home-btn",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "css=.back-home-btn",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertElementPresent",
+          "target": "css=.product-card",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "37-unauthorized-access-admin",
+      "name": "37 - Guards - Unauthorized Admin Access",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/admin",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c3",
+          "command": "assertElementPresent",
+          "target": "css=.admin-login-container",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "38-unauthorized-access-profile",
+      "name": "38 - Guards - Unauthorized Profile Access",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/profile",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "pause",
+          "target": "1500",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c3",
+          "command": "assertElementPresent",
+          "target": "css=.login-container",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "39-category-filter-products",
+      "name": "39 - Category - Filter Products",
+      "commands": [
+        {
+          "id": "c1",
+          "command": "open",
+          "target": "/",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c2",
+          "command": "waitForElementVisible",
+          "target": "css=.sidebar-nav",
+          "targets": [],
+          "value": "5000"
+        },
+        {
+          "id": "c3",
+          "command": "click",
+          "target": "xpath=//a[contains(text(),'Hoodies')]",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c4",
+          "command": "pause",
+          "target": "1000",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c5",
+          "command": "assertText",
+          "target": "css=.product-title",
+          "targets": [],
+          "value": "COZY PULLOVER HOODIE"
+        }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "suite-all",
+      "name": "All E2E Tests",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 600,
+      "tests": [
+        {
+          "id": "01-login-success-client"
+        },
+        {
+          "id": "02-login-validation-empty"
+        },
+        {
+          "id": "03-login-validation-invalid-email"
+        },
+        {
+          "id": "04-login-failure-wrong-credentials"
+        },
+        {
+          "id": "05-signup-success"
+        },
+        {
+          "id": "06-signup-validation-password-mismatch"
+        },
+        {
+          "id": "07-signup-validation-short-name"
+        },
+        {
+          "id": "09-browse-products-landing"
+        },
+        {
+          "id": "10-product-detail-view"
+        },
+        {
+          "id": "14-product-add-to-cart-success"
+        },
+        {
+          "id": "13-product-sold-out"
+        },
+        {
+          "id": "11-product-modal-size-guide"
+        },
+        {
+          "id": "12-product-modal-shipping"
+        },
+        {
+          "id": "15-cart-empty-state"
+        },
+        {
+          "id": "16-cart-open-from-header"
+        },
+        {
+          "id": "17-cart-update-quantity"
+        },
+        {
+          "id": "18-cart-remove-item"
+        },
+        {
+          "id": "19-cart-clear-all"
+        },
+        {
+          "id": "20-profile-view-info"
+        },
+        {
+          "id": "21-profile-edit-mode"
+        },
+        {
+          "id": "22-profile-update-name"
+        },
+        {
+          "id": "23-profile-add-address-modal"
+        },
+        {
+          "id": "24-profile-logout"
+        },
+        {
+          "id": "25-admin-login-success"
+        },
+        {
+          "id": "26-admin-login-validation"
+        },
+        {
+          "id": "27-admin-view-products"
+        },
+        {
+          "id": "28-admin-search-products"
+        },
+        {
+          "id": "29-admin-add-product-view"
+        },
+        {
+          "id": "30-admin-add-product-validation"
+        },
+        {
+          "id": "31-admin-edit-product"
+        },
+        {
+          "id": "32-admin-delete-product-confirm"
+        },
+        {
+          "id": "33-admin-logout"
+        },
+        {
+          "id": "34-header-search-products"
+        },
+        {
+          "id": "35-header-search-click-result"
+        },
+        {
+          "id": "36-header-user-icon-logged-in"
+        },
+        {
+          "id": "37-back-to-home-from-login"
+        },
+        {
+          "id": "38-unauthorized-access-admin"
+        },
+        {
+          "id": "39-unauthorized-access-profile"
+        }
+      ]
+    },
+    {
+      "id": "suite-auth",
+      "name": "Authentication Tests",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        {
+          "id": "01-login-success-client"
+        },
+        {
+          "id": "02-login-validation-empty"
+        },
+        {
+          "id": "03-login-validation-invalid-email"
+        },
+        {
+          "id": "04-login-failure-wrong-credentials"
+        },
+        {
+          "id": "05-signup-success"
+        },
+        {
+          "id": "06-signup-validation-password-mismatch"
+        },
+        {
+          "id": "07-signup-validation-short-name"
+        },
+        {
+          "id": "24-profile-logout"
+        }
+      ]
+    },
+    {
+      "id": "suite-products",
+      "name": "Products & Cart Tests",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        {
+          "id": "09-browse-products-landing"
+        },
+        {
+          "id": "10-product-detail-view"
+        },
+        {
+          "id": "14-product-add-to-cart-success"
+        },
+        {
+          "id": "13-product-sold-out"
+        },
+        {
+          "id": "11-product-modal-size-guide"
+        },
+        {
+          "id": "12-product-modal-shipping"
+        },
+        {
+          "id": "15-cart-empty-state"
+        },
+        {
+          "id": "16-cart-open-from-header"
+        },
+        {
+          "id": "17-cart-update-quantity"
+        },
+        {
+          "id": "18-cart-remove-item"
+        },
+        {
+          "id": "19-cart-clear-all"
+        }
+      ]
+    },
+    {
+      "id": "suite-profile",
+      "name": "Profile Tests",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        {
+          "id": "20-profile-view-info"
+        },
+        {
+          "id": "21-profile-edit-mode"
+        },
+        {
+          "id": "22-profile-update-name"
+        },
+        {
+          "id": "23-profile-add-address-modal"
+        },
+        {
+          "id": "24-profile-logout"
+        }
+      ]
+    },
+    {
+      "id": "suite-admin",
+      "name": "Admin Tests",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        {
+          "id": "25-admin-login-success"
+        },
+        {
+          "id": "26-admin-login-validation"
+        },
+        {
+          "id": "27-admin-view-products"
+        },
+        {
+          "id": "28-admin-search-products"
+        },
+        {
+          "id": "29-admin-add-product-view"
+        },
+        {
+          "id": "30-admin-add-product-validation"
+        },
+        {
+          "id": "31-admin-edit-product"
+        },
+        {
+          "id": "32-admin-delete-product-confirm"
+        },
+        {
+          "id": "33-admin-logout"
+        }
+      ]
+    },
+    {
+      "id": "suite-navigation",
+      "name": "Navigation & Header Tests",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        {
+          "id": "34-header-search-products"
+        },
+        {
+          "id": "35-header-search-click-result"
+        },
+        {
+          "id": "36-header-user-icon-logged-in"
+        },
+        {
+          "id": "37-back-to-home-from-login"
+        }
+      ]
+    },
+    {
+      "id": "suite-guards",
+      "name": "Guards & Security Tests",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        {
+          "id": "38-unauthorized-access-admin"
+        },
+        {
+          "id": "39-unauthorized-access-profile"
+        }
+      ]
+    }
+  ]
+}
