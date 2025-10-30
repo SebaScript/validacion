@@ -8,7 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:coverage": "ng test --code-coverage --watch=false --browsers=ChromeHeadless",
-    "test:coverage:watch": "ng test --code-coverage"
+    "test:coverage:watch": "ng test --code-coverage",
+    "test:e2e": "cd e2e/cucumber && cucumber-js \"features/**/*.feature\" --require \"features/support/*.js\" --require \"features/step_definitions/*.js\" --format progress --format json:report/cucumber_report.json && node generate-report.js",
+    "test:e2e:progress": "cd e2e/cucumber && cucumber-js \"features/**/*.feature\" --require \"features/support/*.js\" --require \"features/step_definitions/*.js\" --format progress",
+    "test:e2e:report": "cd e2e/cucumber && node generate-report.js"
   },
   "private": true,
   "dependencies": {
@@ -33,14 +36,17 @@
     "@angular-devkit/build-angular": "^19.2.0",
     "@angular/cli": "^19.2.0",
     "@angular/compiler-cli": "^19.2.0",
+    "@cucumber/cucumber": "^8.10.0",
     "@types/jasmine": "~5.1.0",
     "@types/toastr": "^2.1.43",
+    "cucumber-html-reporter": "^7.2.0",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "playwright": "^1.56.1",
     "typescript": "~5.7.2"
   }
 }

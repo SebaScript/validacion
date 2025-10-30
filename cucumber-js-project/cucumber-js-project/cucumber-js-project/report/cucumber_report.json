@@ -1,0 +1,986 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "formulario-text-box-(escenarios-adicionales);verificar-campo-de-email",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Verificar campo de email",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 497996500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10939528899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "el usuario verifica si el campo \"userEmail\" está presente",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37201200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "el campo debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7030099
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 65510999
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "formulario-text-box-(escenarios-adicionales);enviar-solo-nombre",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Enviar solo nombre",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 466791900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3288226000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "el usuario escribe \"Gabriel Ramírez\" en el campo \"userName\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 49779900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "hace clic en el botón de enviar",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 99013100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "debe ver los datos enviados en pantalla",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:47"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 17232599
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 54486000
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "formulario-text-box-(escenarios-adicionales);enviar-nombre-y-una-dirección",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Enviar nombre y una dirección",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 473207100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3185468199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "el usuario escribe \"Gabriel Ramírez\" en el campo \"userName\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29917199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "el usuario escribe \"Av. Principal 789\" en el campo \"currentAddress\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 14915499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "hace clic en el botón de enviar",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 130358299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "debe ver los datos enviados en pantalla",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:47"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7106100
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 62882400
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "formulario-text-box-(escenarios-adicionales);verificar-visibilidad-de-múltiples-campos",
+        "keyword": "Scenario",
+        "line": 25,
+        "name": "Verificar visibilidad de múltiples campos",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 451998200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 26,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3727115600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 27,
+            "name": "el usuario verifica si el campo \"userName\" está presente",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 90265400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 28,
+            "name": "el campo debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41360000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 29,
+            "name": "el usuario verifica si el campo \"currentAddress\" está presente",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 54433899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 30,
+            "name": "el campo debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 38127300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 31,
+            "name": "el usuario verifica si el campo \"permanentAddress\" está presente",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48128899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 32,
+            "name": "el campo debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 30329200
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 102908500
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "formulario-text-box-(escenarios-adicionales);enviar-nombre-incorrecto-(debe-fallar)",
+        "keyword": "Scenario",
+        "line": 36,
+        "name": "Enviar nombre incorrecto (debe fallar)",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 578592499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 37,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3244691100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 38,
+            "name": "el usuario escribe \"Nombre Incorrecto\" en el campo \"userName\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 88108800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "hace clic en el botón de enviar",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 333273800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 40,
+            "name": "debe ver los datos enviados en pantalla",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:47"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 120746500,
+              "error_message": "AssertionError [ERR_ASSERTION]: No se encontró el nombre en: \"Name:Nombre Incorrecto\"\n    + expected - actual\n\n    -false\n    +true\n\n    at World.<anonymous> (D:\\Proyectos de Desarrollo\\Proyectos de Pruebas-20250901\\cucumber-js-project\\cucumber-js-project\\features\\step_definitions\\steps.js:50:10)\n    at runNextTicks (node:internal/process/task_queues:60:5)\n    at process.processImmediate (node:internal/timers:454:9)"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 84402899
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "formulario-text-box-(escenarios-adicionales);escenario-marcado-para-omitir",
+        "keyword": "Scenario",
+        "line": 44,
+        "name": "Escenario marcado para omitir",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 536952100
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "failed",
+              "duration": 109999,
+              "error_message": "TypeError: this.skip is not a function\n    at World.<anonymous> (D:\\Proyectos de Desarrollo\\Proyectos de Pruebas-20250901\\cucumber-js-project\\cucumber-js-project\\features\\support\\hooks.js:14:8)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 45,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 46,
+            "name": "el usuario verifica si el campo \"userName\" está presente",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:20"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 47,
+            "name": "el campo debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:24"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 106975699
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@skip",
+            "line": 43
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "formulario-text-box-(escenarios-adicionales)",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Formulario Text Box (escenarios adicionales)",
+    "tags": [],
+    "uri": "features\\form_textbox.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "web-interactions;buscar-un-objeto-en-una-web",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Buscar un objeto en una web",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 453491300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4110001400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "el usuario verifica si el campo \"userName\" está presente",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22093399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "el campo debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7329400
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 65740400
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "web-interactions;escribir-y-enviar-texto",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Escribir y enviar texto",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 495705200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3755621500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "el usuario escribe \"Gabriel Ramírez\" en el campo \"userName\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48373599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "hace clic en el botón de enviar",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 184648800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "debe ver los datos enviados en pantalla",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:47"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8343600
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 67068299
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "web-interactions;verificar-dos-campos-visibles",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Verificar dos campos visibles",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 451593700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13320930699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "el usuario verifica si el campo \"userName\" está presente",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 27441600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "el campo debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6387399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "el usuario verifica si el campo \"userEmail\" está presente",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6030900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "el campo debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3388299
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87048499
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "web-interactions;enviar-con-nombre-y-email",
+        "keyword": "Scenario",
+        "line": 25,
+        "name": "Enviar con nombre y email",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 396894999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 26,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4358803899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 27,
+            "name": "el usuario escribe \"Gabriel Ramírez\" en el campo \"userName\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 34112500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "el usuario escribe \"gabriel@test.com\" en el campo \"userEmail\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15546200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "hace clic en el botón de enviar",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 198625799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 30,
+            "name": "debe ver los datos enviados en pantalla",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:47"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12133500
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 71854299
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "web-interactions;completar-nombre,-email-y-direcciones-y-enviar",
+        "keyword": "Scenario",
+        "line": 33,
+        "name": "Completar nombre, email y direcciones y enviar",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 436598299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 34,
+            "name": "el usuario abre la página \"https://demoqa.com/text-box\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3180203099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 35,
+            "name": "el usuario escribe \"Gabriel Ramírez\" en el campo \"userName\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 28024099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 36,
+            "name": "el usuario escribe \"gabriel@test.com\" en el campo \"userEmail\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9114500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 37,
+            "name": "el usuario escribe \"Calle 123\" en el campo \"currentAddress\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9434400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 38,
+            "name": "el usuario escribe \"Calle 456\" en el campo \"permanentAddress\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 47375299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "hace clic en el botón de enviar",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 217573600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 40,
+            "name": "debe ver los datos enviados en pantalla",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:47"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 17351300
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 65976199
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "web-interactions",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Web interactions",
+    "tags": [],
+    "uri": "features\\search.feature"
+  }
+]

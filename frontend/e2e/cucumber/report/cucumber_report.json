@@ -1,0 +1,1858 @@
+[
+  {
+    "description": "  Como usuario del sistema\n  Quiero poder iniciar sesión y registrarme\n  Para acceder a las funcionalidades de la aplicación",
+    "elements": [
+      {
+        "description": "",
+        "id": "autenticación-de-usuarios;login-exitoso-con-credenciales-de-cliente-válidas",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Login exitoso con credenciales de cliente válidas",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 210881000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/login\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 885259100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "escribe \"cliente@vallmere.com\" en el campo \"#email\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:65"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 49538299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "escribe \"cliente123\" en el campo \"#password\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:65"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9341300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "hace clic en el botón \"button.login-btn\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:73"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 133823399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "espera 2 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2012387500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "debe estar en la página \"/profile\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1673400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "debe ver su información de perfil",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:152"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3969399
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 64608599
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "autenticación-de-usuarios;verificar-elementos-del-formulario-de-login",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "Verificar elementos del formulario de login",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 212119600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 16,
+            "name": "el usuario abre la aplicación en \"/login\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1378583499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "el elemento \"#email\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 47414499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "el elemento \"#password\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10949500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "el elemento \"button.login-btn\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7868500
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 73678600
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "autenticación-de-usuarios;login-con-credenciales-incorrectas",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "Login con credenciales incorrectas",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 229347700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "el usuario abre la aplicación en \"/login\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1111026299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "escribe \"usuario@noexiste.com\" en el campo \"#email\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:65"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 34900099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "escribe \"passwordincorrecto\" en el campo \"#password\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:65"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8525599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "hace clic en el botón \"button.login-btn\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:73"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 87565900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 26,
+            "name": "espera 2 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2013436400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "debe estar en la página \"/login\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2343600
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 153433300
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "autenticación-de-usuarios;verificar-que-el-formulario-de-registro-está-visible",
+        "keyword": "Scenario",
+        "line": 29,
+        "name": "Verificar que el formulario de registro está visible",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 132458799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 30,
+            "name": "el usuario abre la aplicación en \"/sign-up\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 936752100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 31,
+            "name": "el elemento \"#name\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 36324000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "el elemento \"#email\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7572199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 33,
+            "name": "el elemento \"#password\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6552999
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 137562199
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "autenticación-de-usuarios",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Autenticación de Usuarios",
+    "tags": [],
+    "uri": "features\\01_authentication.feature"
+  },
+  {
+    "description": "  Como administrador del sistema\n  Quiero poder iniciar sesión en el panel de administración\n  Para gestionar productos, categorías y usuarios",
+    "elements": [
+      {
+        "description": "",
+        "id": "autenticación-de-administradores;navegación-directa-a-admin-sin-autenticación",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Navegación directa a admin sin autenticación",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 127557399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/admin\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1569244800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "espera 1 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1010986900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "la URL debe contener \"/admin\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1873600
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 68081900
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "autenticación-de-administradores",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Autenticación de Administradores",
+    "tags": [],
+    "uri": "features\\02_admin_authentication.feature"
+  },
+  {
+    "description": "  Como usuario autenticado\n  Quiero ver y editar mi perfil\n  Para mantener mi información actualizada",
+    "elements": [
+      {
+        "description": "",
+        "id": "perfil-de-usuario;ver-información-del-perfil-después-del-login",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "Ver información del perfil después del login",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 132559999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/login\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 907935000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "inicia sesión con email \"cliente@vallmere.com\" y contraseña \"cliente123\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:100"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 105193500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "espera 2 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2005547799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "debe estar en la página \"/profile\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 239399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "debe ver su información de perfil",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:152"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2961699
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 76313499
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "perfil-de-usuario;verificar-que-el-contenedor-de-perfil-está-visible",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "Verificar que el contenedor de perfil está visible",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 137222899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/login\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1066429600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "inicia sesión con email \"cliente@vallmere.com\" y contraseña \"cliente123\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:100"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 102492499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "espera 2 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2009204999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 16,
+            "name": "el usuario navega a \"/profile\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 684132100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "el elemento \".profile-container\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 70184999
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 94157900
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "perfil-de-usuario",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Perfil de Usuario",
+    "tags": [],
+    "uri": "features\\03_profile.feature"
+  },
+  {
+    "description": "  Como usuario de la aplicación\n  Quiero ver y buscar productos\n  Para encontrar lo que necesito comprar",
+    "elements": [
+      {
+        "description": "",
+        "id": "productos-y-catálogo;visualizar-la-página-de-landing",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Visualizar la página de landing",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 138949500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1143266599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "el elemento \".hero-section, .main-content, .landing\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 38478199
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 436367999
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "productos-y-catálogo;verificar-que-hay-productos-en-la-página-principal",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Verificar que hay productos en la página principal",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 148158299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1076556300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "espera 1 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1014819500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "debe ver una lista de productos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:207"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22458000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 83571200
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "productos-y-catálogo;navegar-a-la-página-de-productos",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "Navegar a la página de productos",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 162529099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 16,
+            "name": "el usuario abre la aplicación en \"/product\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 886802200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "espera 1 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1009717500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "debe ver una lista de productos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:207"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 18223599
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 76603499
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "productos-y-catálogo;verificar-elementos-de-una-tarjeta-de-producto",
+        "keyword": "Scenario",
+        "line": 20,
+        "name": "Verificar elementos de una tarjeta de producto",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 155150800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 21,
+            "name": "el usuario abre la aplicación en \"/product\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1038211900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "espera 1 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1003751500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 23,
+            "name": "el elemento \".product-card\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 35514499
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 151370499
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "productos-y-catálogo;verificar-que-el-header-está-presente",
+        "keyword": "Scenario",
+        "line": 25,
+        "name": "Verificar que el header está presente",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 138469999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 26,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 839712599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "el elemento \"app-header, header, .header\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 39924600
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 322803100
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "productos-y-catálogo",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Productos y Catálogo",
+    "tags": [],
+    "uri": "features\\04_products.feature"
+  },
+  {
+    "description": "  Como usuario de la aplicación\n  Quiero agregar productos al carrito\n  Para poder comprarlos posteriormente",
+    "elements": [
+      {
+        "description": "",
+        "id": "carrito-de-compras;verificar-que-el-icono-del-carrito-está-visible",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Verificar que el icono del carrito está visible",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 143304899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 854571000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "el elemento \".cart-icon, .cart, app-cart\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 38728800
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 152679700
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "carrito-de-compras;abrir-el-modal-del-carrito",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Abrir el modal del carrito",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 159340199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1022634099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "hace clic en el elemento \".cart-icon, .cart\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:78"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 376143799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "espera 1 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1001682700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "el elemento \".cart-modal, .cart-sidebar, app-cart\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 10004976799,
+              "error_message": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator('.cart-modal, .cart-sidebar, app-cart') to be visible\n    25 × locator resolved to hidden <app-cart _nghost-ng-c1230532139=\"\" ng-reflect-is-open=\"false\" _ngcontent-ng-c4204099741=\"\">…</app-cart>\n\n    at World.<anonymous> (C:\\Users\\Blaze\\Desktop\\validacion\\validacion\\frontend\\e2e\\cucumber\\features\\step_definitions\\steps.js:46:35)"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 70255799
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "carrito-de-compras;carrito-vacío-muestra-mensaje-apropiado-(puede-fallar)",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "Carrito vacío muestra mensaje apropiado (puede fallar)",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 186531600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1624072000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "hace clic en el elemento \".cart-icon\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:78"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 117432899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "espera 1 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1002096199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "debe ver el texto \"vacío\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:55"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 4423800,
+              "error_message": "AssertionError [ERR_ASSERTION]: No se encontró el texto \"vacío\"\n    + expected - actual\n\n    -false\n    +true\n\n    at World.<anonymous> (C:\\Users\\Blaze\\Desktop\\validacion\\validacion\\frontend\\e2e\\cucumber\\features\\step_definitions\\steps.js:57:10)"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 150210100
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "carrito-de-compras",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Carrito de Compras",
+    "tags": [],
+    "uri": "features\\05_cart.feature"
+  },
+  {
+    "description": "  Como usuario con productos en el carrito\n  Quiero completar el proceso de compra\n  Para recibir mis productos",
+    "elements": [
+      {
+        "description": "",
+        "id": "proceso-de-checkout;acceder-a-la-página-de-checkout-(redirige-si-no-hay-productos)",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "Acceder a la página de checkout (redirige si no hay productos)",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 136968399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/login\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1091146700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "inicia sesión con email \"cliente@vallmere.com\" y contraseña \"cliente123\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:100"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116891999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "espera 2 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2010804200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "el usuario navega a \"/checkout\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 721829099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "espera 1 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1003929899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "la URL debe contener \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 243299
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 66564200
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "proceso-de-checkout;verificar-que-el-formulario-de-checkout-está-visible-(puede-fallar)",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "Verificar que el formulario de checkout está visible (puede fallar)",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 129768600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/login\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1057668999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "inicia sesión con email \"cliente@vallmere.com\" y contraseña \"cliente123\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:100"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 99468299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "espera 2 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2016365299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "el usuario navega a \"/checkout\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 693733899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "debe ver el formulario de checkout",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:193"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 10713199,
+              "error_message": "AssertionError [ERR_ASSERTION]: No se encontró el formulario de checkout\n    + expected - actual\n\n    -false\n    +true\n\n    at World.<anonymous> (C:\\Users\\Blaze\\Desktop\\validacion\\validacion\\frontend\\e2e\\cucumber\\features\\step_definitions\\steps.js:195:10)\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:459:9)\n    at process.callbackTrampoline (node:internal/async_hooks:130:17)"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 71709299
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "proceso-de-checkout",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Proceso de Checkout",
+    "tags": [],
+    "uri": "features\\06_checkout.feature"
+  },
+  {
+    "description": "  Como usuario de la aplicación\n  Quiero navegar entre diferentes páginas\n  Para acceder a todas las funcionalidades",
+    "elements": [
+      {
+        "description": "",
+        "id": "navegación-general;verificar-logo-en-el-header",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Verificar logo en el header",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 131190500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1654298999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "el elemento \".logo, .brand, img[alt*='logo']\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 36367500
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 141320299
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "navegación-general;navegar-al-perfil-sin-autenticación-redirige-al-login",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Navegar al perfil sin autenticación redirige al login",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 136253600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "el usuario abre la aplicación en \"/profile\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1319668799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "espera 2 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2003903900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "la URL debe contener \"/login\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 814400
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 66194400
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "navegación-general;hacer-scroll-al-inicio-de-la-página",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "Hacer scroll al inicio de la página",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 145475699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 16,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 830251499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "hace scroll al final de la página",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:230"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4243399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "espera 500 milisegundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 502000299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "hace scroll al inicio de la página",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:234"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1892700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "el elemento \"header\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 33052100
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 65265699
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "navegación-general;verificar-responsive-design---header-en-varias-páginas",
+        "keyword": "Scenario",
+        "line": 22,
+        "name": "Verificar responsive design - header en varias páginas",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 125984100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 23,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1550132500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 24,
+            "name": "el elemento \"header\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 36029700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "el usuario navega a \"/product\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1219519800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "el elemento \"header\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22606100
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 146490099
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "navegación-general",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Navegación General",
+    "tags": [],
+    "uri": "features\\07_navigation.feature"
+  },
+  {
+    "description": "  Como usuario de la aplicación\n  Quiero ver mensajes de error apropiados\n  Para corregir mis errores en los formularios",
+    "elements": [
+      {
+        "description": "",
+        "id": "validaciones-y-manejo-de-errores;navegación-a-ruta-inexistente-redirige-a-home",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Navegación a ruta inexistente redirige a home",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 143184100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "el usuario abre la aplicación en \"/pagina-que-no-existe\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1047413399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "espera 1 segundos",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1006564899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "la URL debe contener \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 249099
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 52265900
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "validaciones-y-manejo-de-errores;este-escenario-será-omitido",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Este escenario será omitido",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 134231100
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "skipped",
+              "duration": 85800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 13,
+            "name": "el usuario abre la aplicación en \"/\"",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:5"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "el elemento \".elemento-inexistente\" debe estar visible",
+            "match": {
+              "location": "features\\step_definitions\\steps.js:45"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 70294799
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@skip",
+            "line": 11
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "validaciones-y-manejo-de-errores",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Validaciones y Manejo de Errores",
+    "tags": [],
+    "uri": "features\\08_validation_errors.feature"
+  }
+]

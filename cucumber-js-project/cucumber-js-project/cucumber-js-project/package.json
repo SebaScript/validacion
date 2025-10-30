@@ -1,0 +1,19 @@
+{
+  "name": "cucumber-js-project",
+  "version": "1.0.0",
+  "description": "CucumberJS with Playwright example",
+  "main": "index.js",
+  "scripts": {
+     "test": "cucumber-js \"features/**/*.feature\" --require \"features/support/*.js\" --require \"features/step_definitions/*.js\" --format progress",
+    "test:json": "cucumber-js \"features/**/*.feature\" --require \"features/support/*.js\" --require \"features/step_definitions/*.js\" --format json:report/cucumber_report.json",
+    "report": "node generate-report.js"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "8.10.0",
+    "cucumber-html-reporter": "7.2.0",
+    "playwright": "^1.43.1"
+  },
+  "overrides": {
+    "@cucumber/cucumber": "8.10.0"
+  }
+}
