@@ -11,7 +11,8 @@
     "test:coverage:watch": "ng test --code-coverage",
     "test:e2e": "cd e2e/cucumber && cucumber-js \"features/**/*.feature\" --require \"features/support/*.js\" --require \"features/step_definitions/*.js\" --format progress --format json:report/cucumber_report.json && node generate-report.js",
     "test:e2e:progress": "cd e2e/cucumber && cucumber-js \"features/**/*.feature\" --require \"features/support/*.js\" --require \"features/step_definitions/*.js\" --format progress",
-    "test:e2e:report": "cd e2e/cucumber && node generate-report.js"
+    "test:e2e:report": "cd e2e/cucumber && node generate-report.js",
+    "test:serenity": "start-server-and-test start http://localhost:4200 'npx @cucumber/cucumber --config e2e/cucumber/cucumber.js && node e2e/cucumber/generate-report.js'"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +38,13 @@
     "@angular/cli": "^19.2.0",
     "@angular/compiler-cli": "^19.2.0",
     "@cucumber/cucumber": "^8.10.0",
+    "@serenity-js/assertions": "^3.35.2",
+    "@serenity-js/console-reporter": "^3.35.2",
+    "@serenity-js/core": "^3.35.2",
+    "@serenity-js/cucumber": "^3.35.2",
+    "@serenity-js/playwright": "^3.35.2",
+    "@serenity-js/serenity-bdd": "^3.35.2",
+    "@serenity-js/web": "^3.35.2",
     "@types/jasmine": "~5.1.0",
     "@types/toastr": "^2.1.43",
     "cucumber-html-reporter": "^7.2.0",
@@ -47,6 +55,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "playwright": "^1.56.1",
+    "start-server-and-test": "^2.1.2",
     "typescript": "~5.7.2"
   }
 }
