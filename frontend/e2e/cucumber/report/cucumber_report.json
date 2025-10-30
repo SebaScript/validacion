@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 210881000
+              "duration": 302022500
             }
           },
           {
@@ -23,11 +23,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/login\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 885259100
+              "duration": 898883899
             }
           },
           {
@@ -36,11 +36,11 @@
             "line": 8,
             "name": "escribe \"cliente@vallmere.com\" en el campo \"#email\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:65"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:62"
             },
             "result": {
               "status": "passed",
-              "duration": 49538299
+              "duration": 56096399
             }
           },
           {
@@ -49,11 +49,11 @@
             "line": 9,
             "name": "escribe \"cliente123\" en el campo \"#password\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:65"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:62"
             },
             "result": {
               "status": "passed",
-              "duration": 9341300
+              "duration": 16302799
             }
           },
           {
@@ -62,11 +62,11 @@
             "line": 10,
             "name": "hace clic en el botón \"button.login-btn\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:73"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:70"
             },
             "result": {
               "status": "passed",
-              "duration": 133823399
+              "duration": 261765699
             }
           },
           {
@@ -75,11 +75,11 @@
             "line": 11,
             "name": "espera 2 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 2012387500
+              "duration": 2004732699
             }
           },
           {
@@ -88,11 +88,11 @@
             "line": 12,
             "name": "debe estar en la página \"/profile\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:22"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:21"
             },
             "result": {
               "status": "passed",
-              "duration": 1673400
+              "duration": 1740299
             }
           },
           {
@@ -101,11 +101,11 @@
             "line": 13,
             "name": "debe ver su información de perfil",
             "match": {
-              "location": "features\\step_definitions\\steps.js:152"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:139"
             },
             "result": {
               "status": "passed",
-              "duration": 3969399
+              "duration": 5039200
             }
           },
           {
@@ -113,7 +113,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 64608599
+              "duration": 108412900
             }
           }
         ],
@@ -132,7 +132,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 212119600
+              "duration": 146855300
             }
           },
           {
@@ -141,11 +141,11 @@
             "line": 16,
             "name": "el usuario abre la aplicación en \"/login\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1378583499
+              "duration": 846476899
             }
           },
           {
@@ -154,11 +154,11 @@
             "line": 17,
             "name": "el elemento \"#email\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 47414499
+              "duration": 56686399
             }
           },
           {
@@ -167,11 +167,11 @@
             "line": 18,
             "name": "el elemento \"#password\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 10949500
+              "duration": 10027799
             }
           },
           {
@@ -180,11 +180,11 @@
             "line": 19,
             "name": "el elemento \"button.login-btn\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 7868500
+              "duration": 7172199
             }
           },
           {
@@ -192,7 +192,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 73678600
+              "duration": 56360699
             }
           }
         ],
@@ -211,7 +211,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 229347700
+              "duration": 142165100
             }
           },
           {
@@ -220,11 +220,11 @@
             "line": 22,
             "name": "el usuario abre la aplicación en \"/login\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1111026299
+              "duration": 882876500
             }
           },
           {
@@ -233,11 +233,11 @@
             "line": 23,
             "name": "escribe \"usuario@noexiste.com\" en el campo \"#email\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:65"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:62"
             },
             "result": {
               "status": "passed",
-              "duration": 34900099
+              "duration": 30349100
             }
           },
           {
@@ -246,11 +246,11 @@
             "line": 24,
             "name": "escribe \"passwordincorrecto\" en el campo \"#password\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:65"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:62"
             },
             "result": {
               "status": "passed",
-              "duration": 8525599
+              "duration": 7537699
             }
           },
           {
@@ -259,11 +259,11 @@
             "line": 25,
             "name": "hace clic en el botón \"button.login-btn\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:73"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:70"
             },
             "result": {
               "status": "passed",
-              "duration": 87565900
+              "duration": 88976200
             }
           },
           {
@@ -272,11 +272,11 @@
             "line": 26,
             "name": "espera 2 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 2013436400
+              "duration": 2016746599
             }
           },
           {
@@ -285,11 +285,11 @@
             "line": 27,
             "name": "debe estar en la página \"/login\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:22"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:21"
             },
             "result": {
               "status": "passed",
-              "duration": 2343600
+              "duration": 566699
             }
           },
           {
@@ -297,7 +297,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 153433300
+              "duration": 73270200
             }
           }
         ],
@@ -316,7 +316,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 132458799
+              "duration": 127423699
             }
           },
           {
@@ -325,11 +325,11 @@
             "line": 30,
             "name": "el usuario abre la aplicación en \"/sign-up\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 936752100
+              "duration": 927055599
             }
           },
           {
@@ -338,11 +338,11 @@
             "line": 31,
             "name": "el elemento \"#name\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 36324000
+              "duration": 41176600
             }
           },
           {
@@ -351,11 +351,11 @@
             "line": 32,
             "name": "el elemento \"#email\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 7572199
+              "duration": 5291600
             }
           },
           {
@@ -364,11 +364,11 @@
             "line": 33,
             "name": "el elemento \"#password\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 6552999
+              "duration": 6472799
             }
           },
           {
@@ -376,7 +376,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 137562199
+              "duration": 55786200
             }
           }
         ],
@@ -389,7 +389,7 @@
     "keyword": "Feature",
     "name": "Autenticación de Usuarios",
     "tags": [],
-    "uri": "features\\01_authentication.feature"
+    "uri": "e2e\\cucumber\\features\\01_authentication.feature"
   },
   {
     "description": "  Como administrador del sistema\n  Quiero poder iniciar sesión en el panel de administración\n  Para gestionar productos, categorías y usuarios",
@@ -406,7 +406,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 127557399
+              "duration": 119938599
             }
           },
           {
@@ -415,11 +415,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/admin\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1569244800
+              "duration": 856913800
             }
           },
           {
@@ -428,11 +428,11 @@
             "line": 8,
             "name": "espera 1 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 1010986900
+              "duration": 1014379399
             }
           },
           {
@@ -441,11 +441,11 @@
             "line": 9,
             "name": "la URL debe contener \"/admin\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:17"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:16"
             },
             "result": {
               "status": "passed",
-              "duration": 1873600
+              "duration": 2217200
             }
           },
           {
@@ -453,7 +453,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 68081900
+              "duration": 59061600
             }
           }
         ],
@@ -466,7 +466,7 @@
     "keyword": "Feature",
     "name": "Autenticación de Administradores",
     "tags": [],
-    "uri": "features\\02_admin_authentication.feature"
+    "uri": "e2e\\cucumber\\features\\02_admin_authentication.feature"
   },
   {
     "description": "  Como usuario autenticado\n  Quiero ver y editar mi perfil\n  Para mantener mi información actualizada",
@@ -483,7 +483,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 132559999
+              "duration": 128008799
             }
           },
           {
@@ -492,11 +492,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/login\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 907935000
+              "duration": 848898100
             }
           },
           {
@@ -505,11 +505,11 @@
             "line": 8,
             "name": "inicia sesión con email \"cliente@vallmere.com\" y contraseña \"cliente123\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:100"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:95"
             },
             "result": {
               "status": "passed",
-              "duration": 105193500
+              "duration": 131386500
             }
           },
           {
@@ -518,11 +518,11 @@
             "line": 9,
             "name": "espera 2 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 2005547799
+              "duration": 2011384599
             }
           },
           {
@@ -531,11 +531,11 @@
             "line": 12,
             "name": "debe estar en la página \"/profile\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:22"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:21"
             },
             "result": {
               "status": "passed",
-              "duration": 239399
+              "duration": 242999
             }
           },
           {
@@ -544,11 +544,11 @@
             "line": 13,
             "name": "debe ver su información de perfil",
             "match": {
-              "location": "features\\step_definitions\\steps.js:152"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:139"
             },
             "result": {
               "status": "passed",
-              "duration": 2961699
+              "duration": 3442699
             }
           },
           {
@@ -556,7 +556,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 76313499
+              "duration": 67918100
             }
           }
         ],
@@ -575,7 +575,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 137222899
+              "duration": 125202099
             }
           },
           {
@@ -584,11 +584,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/login\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1066429600
+              "duration": 911962199
             }
           },
           {
@@ -597,11 +597,11 @@
             "line": 8,
             "name": "inicia sesión con email \"cliente@vallmere.com\" y contraseña \"cliente123\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:100"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:95"
             },
             "result": {
               "status": "passed",
-              "duration": 102492499
+              "duration": 108276600
             }
           },
           {
@@ -610,11 +610,11 @@
             "line": 9,
             "name": "espera 2 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 2009204999
+              "duration": 2009321199
             }
           },
           {
@@ -623,11 +623,11 @@
             "line": 16,
             "name": "el usuario navega a \"/profile\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:11"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:10"
             },
             "result": {
               "status": "passed",
-              "duration": 684132100
+              "duration": 760109300
             }
           },
           {
@@ -636,11 +636,11 @@
             "line": 17,
             "name": "el elemento \".profile-container\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 70184999
+              "duration": 32912899
             }
           },
           {
@@ -648,7 +648,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 94157900
+              "duration": 64530500
             }
           }
         ],
@@ -661,7 +661,7 @@
     "keyword": "Feature",
     "name": "Perfil de Usuario",
     "tags": [],
-    "uri": "features\\03_profile.feature"
+    "uri": "e2e\\cucumber\\features\\03_profile.feature"
   },
   {
     "description": "  Como usuario de la aplicación\n  Quiero ver y buscar productos\n  Para encontrar lo que necesito comprar",
@@ -678,7 +678,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 138949500
+              "duration": 135175999
             }
           },
           {
@@ -687,11 +687,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1143266599
+              "duration": 863560499
             }
           },
           {
@@ -700,11 +700,11 @@
             "line": 8,
             "name": "el elemento \".hero-section, .main-content, .landing\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 38478199
+              "duration": 45451499
             }
           },
           {
@@ -712,7 +712,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 436367999
+              "duration": 332859499
             }
           }
         ],
@@ -731,7 +731,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 148158299
+              "duration": 140039600
             }
           },
           {
@@ -740,11 +740,11 @@
             "line": 11,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1076556300
+              "duration": 858736399
             }
           },
           {
@@ -753,11 +753,11 @@
             "line": 12,
             "name": "espera 1 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 1014819500
+              "duration": 1012722999
             }
           },
           {
@@ -766,11 +766,11 @@
             "line": 13,
             "name": "debe ver una lista de productos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:207"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:184"
             },
             "result": {
               "status": "passed",
-              "duration": 22458000
+              "duration": 26549800
             }
           },
           {
@@ -778,7 +778,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 83571200
+              "duration": 72251000
             }
           }
         ],
@@ -797,7 +797,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 162529099
+              "duration": 137525600
             }
           },
           {
@@ -806,11 +806,11 @@
             "line": 16,
             "name": "el usuario abre la aplicación en \"/product\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 886802200
+              "duration": 854080799
             }
           },
           {
@@ -819,11 +819,11 @@
             "line": 17,
             "name": "espera 1 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 1009717500
+              "duration": 1005036799
             }
           },
           {
@@ -832,11 +832,11 @@
             "line": 18,
             "name": "debe ver una lista de productos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:207"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:184"
             },
             "result": {
               "status": "passed",
-              "duration": 18223599
+              "duration": 17866099
             }
           },
           {
@@ -844,7 +844,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 76603499
+              "duration": 67492100
             }
           }
         ],
@@ -863,7 +863,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 155150800
+              "duration": 133860499
             }
           },
           {
@@ -872,11 +872,11 @@
             "line": 21,
             "name": "el usuario abre la aplicación en \"/product\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1038211900
+              "duration": 908059400
             }
           },
           {
@@ -885,11 +885,11 @@
             "line": 22,
             "name": "espera 1 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 1003751500
+              "duration": 1013532599
             }
           },
           {
@@ -898,11 +898,11 @@
             "line": 23,
             "name": "el elemento \".product-card\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 35514499
+              "duration": 38656699
             }
           },
           {
@@ -910,7 +910,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 151370499
+              "duration": 64895800
             }
           }
         ],
@@ -929,7 +929,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 138469999
+              "duration": 131099700
             }
           },
           {
@@ -938,11 +938,11 @@
             "line": 26,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 839712599
+              "duration": 826642100
             }
           },
           {
@@ -951,11 +951,11 @@
             "line": 27,
             "name": "el elemento \"app-header, header, .header\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 39924600
+              "duration": 54221499
             }
           },
           {
@@ -963,7 +963,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 322803100
+              "duration": 320295899
             }
           }
         ],
@@ -976,7 +976,7 @@
     "keyword": "Feature",
     "name": "Productos y Catálogo",
     "tags": [],
-    "uri": "features\\04_products.feature"
+    "uri": "e2e\\cucumber\\features\\04_products.feature"
   },
   {
     "description": "  Como usuario de la aplicación\n  Quiero agregar productos al carrito\n  Para poder comprarlos posteriormente",
@@ -993,7 +993,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 143304899
+              "duration": 133876299
             }
           },
           {
@@ -1002,11 +1002,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 854571000
+              "duration": 897556100
             }
           },
           {
@@ -1015,11 +1015,11 @@
             "line": 8,
             "name": "el elemento \".cart-icon, .cart, app-cart\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 38728800
+              "duration": 49104800
             }
           },
           {
@@ -1027,7 +1027,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 152679700
+              "duration": 136755100
             }
           }
         ],
@@ -1046,7 +1046,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 159340199
+              "duration": 163510999
             }
           },
           {
@@ -1055,11 +1055,11 @@
             "line": 11,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1022634099
+              "duration": 856365600
             }
           },
           {
@@ -1068,11 +1068,11 @@
             "line": 12,
             "name": "hace clic en el elemento \".cart-icon, .cart\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:78"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:75"
             },
             "result": {
               "status": "passed",
-              "duration": 376143799
+              "duration": 117671500
             }
           },
           {
@@ -1081,11 +1081,11 @@
             "line": 13,
             "name": "espera 1 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 1001682700
+              "duration": 1009229699
             }
           },
           {
@@ -1094,12 +1094,12 @@
             "line": 14,
             "name": "el elemento \".cart-modal, .cart-sidebar, app-cart\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "failed",
-              "duration": 10004976799,
-              "error_message": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator('.cart-modal, .cart-sidebar, app-cart') to be visible\n    25 × locator resolved to hidden <app-cart _nghost-ng-c1230532139=\"\" ng-reflect-is-open=\"false\" _ngcontent-ng-c4204099741=\"\">…</app-cart>\n\n    at World.<anonymous> (C:\\Users\\Blaze\\Desktop\\validacion\\validacion\\frontend\\e2e\\cucumber\\features\\step_definitions\\steps.js:46:35)"
+              "duration": 10004538699,
+              "error_message": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cart-modal, .cart-sidebar, app-cart') to be visible\u001b[22m\n\u001b[2m    24 × locator resolved to hidden <app-cart _nghost-ng-c1230532139=\"\" ng-reflect-is-open=\"false\" _ngcontent-ng-c4204099741=\"\">…</app-cart>\u001b[22m\n\n    at World.<anonymous> (C:\\Users\\Bas\\Desktop\\vallmere\\validacion\\frontend\\e2e\\cucumber\\features\\step_definitions\\steps.js:45:35)"
             }
           },
           {
@@ -1107,7 +1107,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 70255799
+              "duration": 79279900
             }
           }
         ],
@@ -1126,7 +1126,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 186531600
+              "duration": 138908000
             }
           },
           {
@@ -1135,11 +1135,11 @@
             "line": 17,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1624072000
+              "duration": 869413500
             }
           },
           {
@@ -1148,11 +1148,11 @@
             "line": 18,
             "name": "hace clic en el elemento \".cart-icon\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:78"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:75"
             },
             "result": {
               "status": "passed",
-              "duration": 117432899
+              "duration": 190268799
             }
           },
           {
@@ -1161,11 +1161,11 @@
             "line": 19,
             "name": "espera 1 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 1002096199
+              "duration": 1004145600
             }
           },
           {
@@ -1174,12 +1174,12 @@
             "line": 20,
             "name": "debe ver el texto \"vacío\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:55"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:54"
             },
             "result": {
               "status": "failed",
-              "duration": 4423800,
-              "error_message": "AssertionError [ERR_ASSERTION]: No se encontró el texto \"vacío\"\n    + expected - actual\n\n    -false\n    +true\n\n    at World.<anonymous> (C:\\Users\\Blaze\\Desktop\\validacion\\validacion\\frontend\\e2e\\cucumber\\features\\step_definitions\\steps.js:57:10)"
+              "duration": 7109400,
+              "error_message": "AssertionError [ERR_ASSERTION]: No se encontró el texto \"vacío\"\n    + expected - actual\n\n    -false\n    +true\n\n    at World.<anonymous> (C:\\Users\\Bas\\Desktop\\vallmere\\validacion\\frontend\\e2e\\cucumber\\features\\step_definitions\\steps.js:56:10)"
             }
           },
           {
@@ -1187,7 +1187,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 150210100
+              "duration": 73345800
             }
           }
         ],
@@ -1200,7 +1200,7 @@
     "keyword": "Feature",
     "name": "Carrito de Compras",
     "tags": [],
-    "uri": "features\\05_cart.feature"
+    "uri": "e2e\\cucumber\\features\\05_cart.feature"
   },
   {
     "description": "  Como usuario con productos en el carrito\n  Quiero completar el proceso de compra\n  Para recibir mis productos",
@@ -1217,7 +1217,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 136968399
+              "duration": 137111199
             }
           },
           {
@@ -1226,11 +1226,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/login\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1091146700
+              "duration": 1181936900
             }
           },
           {
@@ -1239,11 +1239,11 @@
             "line": 8,
             "name": "inicia sesión con email \"cliente@vallmere.com\" y contraseña \"cliente123\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:100"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:95"
             },
             "result": {
               "status": "passed",
-              "duration": 116891999
+              "duration": 107338499
             }
           },
           {
@@ -1252,11 +1252,11 @@
             "line": 9,
             "name": "espera 2 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 2010804200
+              "duration": 2009567499
             }
           },
           {
@@ -1265,11 +1265,11 @@
             "line": 12,
             "name": "el usuario navega a \"/checkout\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:11"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:10"
             },
             "result": {
               "status": "passed",
-              "duration": 721829099
+              "duration": 781619399
             }
           },
           {
@@ -1278,11 +1278,11 @@
             "line": 13,
             "name": "espera 1 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 1003929899
+              "duration": 1007229999
             }
           },
           {
@@ -1291,11 +1291,11 @@
             "line": 14,
             "name": "la URL debe contener \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:17"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:16"
             },
             "result": {
               "status": "passed",
-              "duration": 243299
+              "duration": 513599
             }
           },
           {
@@ -1303,7 +1303,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 66564200
+              "duration": 74629399
             }
           }
         ],
@@ -1322,7 +1322,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 129768600
+              "duration": 132458200
             }
           },
           {
@@ -1331,11 +1331,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/login\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1057668999
+              "duration": 1141370399
             }
           },
           {
@@ -1344,11 +1344,11 @@
             "line": 8,
             "name": "inicia sesión con email \"cliente@vallmere.com\" y contraseña \"cliente123\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:100"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:95"
             },
             "result": {
               "status": "passed",
-              "duration": 99468299
+              "duration": 105595399
             }
           },
           {
@@ -1357,11 +1357,11 @@
             "line": 9,
             "name": "espera 2 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 2016365299
+              "duration": 2010242299
             }
           },
           {
@@ -1370,11 +1370,11 @@
             "line": 17,
             "name": "el usuario navega a \"/checkout\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:11"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:10"
             },
             "result": {
               "status": "passed",
-              "duration": 693733899
+              "duration": 745517599
             }
           },
           {
@@ -1383,12 +1383,12 @@
             "line": 18,
             "name": "debe ver el formulario de checkout",
             "match": {
-              "location": "features\\step_definitions\\steps.js:193"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:172"
             },
             "result": {
               "status": "failed",
-              "duration": 10713199,
-              "error_message": "AssertionError [ERR_ASSERTION]: No se encontró el formulario de checkout\n    + expected - actual\n\n    -false\n    +true\n\n    at World.<anonymous> (C:\\Users\\Blaze\\Desktop\\validacion\\validacion\\frontend\\e2e\\cucumber\\features\\step_definitions\\steps.js:195:10)\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:459:9)\n    at process.callbackTrampoline (node:internal/async_hooks:130:17)"
+              "duration": 63394599,
+              "error_message": "AssertionError [ERR_ASSERTION]: No se encontró el formulario de checkout\n    + expected - actual\n\n    -false\n    +true\n\n    at World.<anonymous> (C:\\Users\\Bas\\Desktop\\vallmere\\validacion\\frontend\\e2e\\cucumber\\features\\step_definitions\\steps.js:174:10)"
             }
           },
           {
@@ -1396,7 +1396,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 71709299
+              "duration": 71225899
             }
           }
         ],
@@ -1409,7 +1409,7 @@
     "keyword": "Feature",
     "name": "Proceso de Checkout",
     "tags": [],
-    "uri": "features\\06_checkout.feature"
+    "uri": "e2e\\cucumber\\features\\06_checkout.feature"
   },
   {
     "description": "  Como usuario de la aplicación\n  Quiero navegar entre diferentes páginas\n  Para acceder a todas las funcionalidades",
@@ -1426,7 +1426,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 131190500
+              "duration": 147817600
             }
           },
           {
@@ -1435,11 +1435,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1654298999
+              "duration": 850172899
             }
           },
           {
@@ -1448,11 +1448,11 @@
             "line": 8,
             "name": "el elemento \".logo, .brand, img[alt*='logo']\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 36367500
+              "duration": 41089599
             }
           },
           {
@@ -1460,7 +1460,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 141320299
+              "duration": 65737900
             }
           }
         ],
@@ -1479,7 +1479,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 136253600
+              "duration": 129360400
             }
           },
           {
@@ -1488,11 +1488,11 @@
             "line": 11,
             "name": "el usuario abre la aplicación en \"/profile\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1319668799
+              "duration": 914697999
             }
           },
           {
@@ -1501,11 +1501,11 @@
             "line": 12,
             "name": "espera 2 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 2003903900
+              "duration": 2014650499
             }
           },
           {
@@ -1514,11 +1514,11 @@
             "line": 13,
             "name": "la URL debe contener \"/login\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:17"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:16"
             },
             "result": {
               "status": "passed",
-              "duration": 814400
+              "duration": 262999
             }
           },
           {
@@ -1526,7 +1526,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 66194400
+              "duration": 54535199
             }
           }
         ],
@@ -1545,7 +1545,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 145475699
+              "duration": 132331500
             }
           },
           {
@@ -1554,11 +1554,11 @@
             "line": 16,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 830251499
+              "duration": 863134899
             }
           },
           {
@@ -1567,11 +1567,11 @@
             "line": 17,
             "name": "hace scroll al final de la página",
             "match": {
-              "location": "features\\step_definitions\\steps.js:230"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:201"
             },
             "result": {
               "status": "passed",
-              "duration": 4243399
+              "duration": 8215400
             }
           },
           {
@@ -1580,11 +1580,11 @@
             "line": 18,
             "name": "espera 500 milisegundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:95"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:92"
             },
             "result": {
               "status": "passed",
-              "duration": 502000299
+              "duration": 503857599
             }
           },
           {
@@ -1593,11 +1593,11 @@
             "line": 19,
             "name": "hace scroll al inicio de la página",
             "match": {
-              "location": "features\\step_definitions\\steps.js:234"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:205"
             },
             "result": {
               "status": "passed",
-              "duration": 1892700
+              "duration": 2799599
             }
           },
           {
@@ -1606,11 +1606,11 @@
             "line": 20,
             "name": "el elemento \"header\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 33052100
+              "duration": 40342299
             }
           },
           {
@@ -1618,7 +1618,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 65265699
+              "duration": 68142099
             }
           }
         ],
@@ -1637,7 +1637,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 125984100
+              "duration": 133085899
             }
           },
           {
@@ -1646,11 +1646,11 @@
             "line": 23,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1550132500
+              "duration": 858988799
             }
           },
           {
@@ -1659,11 +1659,11 @@
             "line": 24,
             "name": "el elemento \"header\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 36029700
+              "duration": 78646899
             }
           },
           {
@@ -1672,11 +1672,11 @@
             "line": 25,
             "name": "el usuario navega a \"/product\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:11"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:10"
             },
             "result": {
               "status": "passed",
-              "duration": 1219519800
+              "duration": 873924399
             }
           },
           {
@@ -1685,11 +1685,11 @@
             "line": 26,
             "name": "el elemento \"header\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "passed",
-              "duration": 22606100
+              "duration": 26970499
             }
           },
           {
@@ -1697,7 +1697,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 146490099
+              "duration": 70597100
             }
           }
         ],
@@ -1710,7 +1710,7 @@
     "keyword": "Feature",
     "name": "Navegación General",
     "tags": [],
-    "uri": "features\\07_navigation.feature"
+    "uri": "e2e\\cucumber\\features\\07_navigation.feature"
   },
   {
     "description": "  Como usuario de la aplicación\n  Quiero ver mensajes de error apropiados\n  Para corregir mis errores en los formularios",
@@ -1727,7 +1727,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 143184100
+              "duration": 142103000
             }
           },
           {
@@ -1736,11 +1736,11 @@
             "line": 7,
             "name": "el usuario abre la aplicación en \"/pagina-que-no-existe\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 1047413399
+              "duration": 865149199
             }
           },
           {
@@ -1749,11 +1749,11 @@
             "line": 8,
             "name": "espera 1 segundos",
             "match": {
-              "location": "features\\step_definitions\\steps.js:91"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:88"
             },
             "result": {
               "status": "passed",
-              "duration": 1006564899
+              "duration": 1003552499
             }
           },
           {
@@ -1762,11 +1762,11 @@
             "line": 9,
             "name": "la URL debe contener \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:17"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:16"
             },
             "result": {
               "status": "passed",
-              "duration": 249099
+              "duration": 270800
             }
           },
           {
@@ -1774,7 +1774,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 52265900
+              "duration": 65768899
             }
           }
         ],
@@ -1793,7 +1793,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 134231100
+              "duration": 135965300
             }
           },
           {
@@ -1801,7 +1801,7 @@
             "hidden": true,
             "result": {
               "status": "skipped",
-              "duration": 85800
+              "duration": 104299
             }
           },
           {
@@ -1810,7 +1810,7 @@
             "line": 13,
             "name": "el usuario abre la aplicación en \"/\"",
             "match": {
-              "location": "features\\step_definitions\\steps.js:5"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:4"
             },
             "result": {
               "status": "skipped",
@@ -1823,7 +1823,7 @@
             "line": 14,
             "name": "el elemento \".elemento-inexistente\" debe estar visible",
             "match": {
-              "location": "features\\step_definitions\\steps.js:45"
+              "location": "e2e\\cucumber\\features\\step_definitions\\steps.js:44"
             },
             "result": {
               "status": "skipped",
@@ -1835,7 +1835,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 70294799
+              "duration": 34531299
             }
           }
         ],
@@ -1853,6 +1853,6 @@
     "keyword": "Feature",
     "name": "Validaciones y Manejo de Errores",
     "tags": [],
-    "uri": "features\\08_validation_errors.feature"
+    "uri": "e2e\\cucumber\\features\\08_validation_errors.feature"
   }
 ]
